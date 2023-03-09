@@ -71,4 +71,29 @@ public final class Constants {
 	public static final boolean kRotatingBaseInvert = false;
 	public static final double kSpeedLimitFactor = 1;
   }
+  public static final class ArmUpConstants {
+	public static final int kArmUpPort = 6;
+	public static final boolean kArmUpInvert = false;
+	public static final double kSpeedLimitFactor = 1;
+  }
+  public static final class ArmExtendConstants {
+	public static final int kArmExtendPort = 7;
+	public static final boolean kArmExtendInvert = false;
+	public static final double kSpeedLimitFactor = 1;
+  }
+  public static final class ArmGrabConstants {
+	public static final int kArmGrabPort = 8;
+	public static final boolean kArmGrabInvert = false;
+	public static final double kSpeedLimitFactor = 1;
+  }
+  public static final class WristRotationConstants {
+	public static final int kWristRotationPort = 9;
+	public static final boolean kWristRotationInvert = false;
+	public static final double kSpeedLimitFactor = 1;
+  }
+  public static final class LinearActuatorConstants {
+	public static final int kLinearActuatorPort = 10;
+	public static final boolean kLinearActuatorInvert = false;
+	public static final double kSpeedLimitFactor = 1;
+  }
 }
