@@ -4,14 +4,14 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import frc.robot.Constants.LinearMovementConstants;
+import frc.robot.Constants.LinearActuatorConstants;
 
-public class LinearMovementSubsystem extends SubsystemBase {
-  private final CANSparkMax m_baseMotor = new CANSparkMax(LinearMovementConstants.kLinearMovementPort, MotorType.kBrushless);
+public class LinearActuatorSubsystem extends SubsystemBase {
+  private final CANSparkMax m_baseMotor = new CANSparkMax(LinearActuatorConstants.kLinearActuatorPort, MotorType.kBrushless);
 
-  public LinearMovementSubsystem() {
+  public LinearActuatorSubsystem() {
     m_baseMotor.restoreFactoryDefaults();
-    m_baseMotor.setInverted(LinearMovementConstants.kLinearMovementInvert);
+    m_baseMotor.setInverted(LinearActuatorConstants.kLinearActuatorInvert);
   }
     public void periodic() {
     }
