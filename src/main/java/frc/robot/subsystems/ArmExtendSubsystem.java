@@ -18,5 +18,8 @@ public class ArmExtendSubsystem extends SubsystemBase {
     public void setSpeed(double speed) {
         m_baseMotor.set(speed);
     }
+    public void setDirection(double direction) {
+      m_baseMotor.set(direction);
+  }
 
 }
