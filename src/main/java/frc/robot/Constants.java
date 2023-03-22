@@ -75,6 +75,7 @@ public final class Constants {
 	public static final int kArmUpPort = 6;
 	public static final boolean kArmUpInvert = false;
 	public static final double kSpeedLimitFactor = 1;
+	public static final int kPIDSlot = 0;
   }
   public static final class ArmExtendConstants {
 	public static final int kArmExtendPort = 7;

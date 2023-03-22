@@ -24,5 +24,8 @@ public class ArmUpSubsystem extends SubsystemBase {
     public void setSpeed(double speed) {
         m_baseMotor.set(speed);
     }
+    public void setLevel(double level) {
+      m_pidController.setReference(level, ControlType.kPosition, ArmUpConstants.kPIDSlot);
+    }
 
 }
