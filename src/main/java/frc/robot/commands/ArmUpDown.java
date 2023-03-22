@@ -17,7 +17,6 @@ public class ArmUpDown extends CommandBase {
 
     public void initialize() {
         m_ArmUpSubsystem.setSpeed(m_speed);
-        m_ArmUpSubsystem.setDirection(m_direction);
     }
 
     public void end(boolean interrupted) {
