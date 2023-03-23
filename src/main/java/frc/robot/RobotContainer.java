@@ -48,6 +48,6 @@ public class RobotContainer {
       new ArcadeDriveCommand(m_driveSubsystem, () -> -m_driverController.getRawAxis(Axis.kLeftY),
           () -> (m_driverController.getRawAxis(Axis.kLeftTrigger) + 1) / 2,
           () -> (m_driverController.getRawAxis(Axis.kRightTrigger) + 1) / 2));
-  
   }
+  
 }
