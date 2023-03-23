@@ -10,7 +10,7 @@ import frc.robot.commands.ArcadeDriveCommand;
 import frc.robot.commands.ArmUpDownCommand;
 import frc.robot.commands.WristRotateCommand;
 import frc.robot.subsystems.ArmExtendSubsystem;
-import frc.robot.subsystems.ArmGrabSubsystem;
+import frc.robot.subsystems.SuctionSubsystem;
 import frc.robot.subsystems.ArmUpSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.LinearActuatorSubsystem;
@@ -31,7 +31,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
 	private final ArmExtendSubsystem m_armExtendSubsystem = new ArmExtendSubsystem(); 
-  private final ArmGrabSubsystem m_armGrabSubsystem = new ArmGrabSubsystem(); 
+  private final SuctionSubsystem m_armGrabSubsystem = new SuctionSubsystem(); 
   private final ArmUpSubsystem m_armUpSubsystem = new ArmUpSubsystem(); 
   private final DriveSubsystem m_driveSubsystem = new DriveSubsystem();
   private final LinearActuatorSubsystem m_linearActuatorSubsystem = new LinearActuatorSubsystem(); 

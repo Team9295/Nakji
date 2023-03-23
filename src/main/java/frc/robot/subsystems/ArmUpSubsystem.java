@@ -10,19 +10,19 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import frc.robot.Constants.ArmUpConstants;
 
 public class ArmUpSubsystem extends SubsystemBase {
-  private final CANSparkMax m_baseMotor = new CANSparkMax(ArmUpConstants.kArmUpPort, MotorType.kBrushless);
+  private final CANSparkMax m_shoulderMotor = new CANSparkMax(ArmUpConstants.kArmUpPort, MotorType.kBrushless);
 
-  private final RelativeEncoder m_encoder = m_baseMotor.getEncoder();
-  private final SparkMaxPIDController m_pidController = m_baseMotor.getPIDController();
+  private final RelativeEncoder m_encoder = m_shoulderMotor.getEncoder();
+  private final SparkMaxPIDController m_pidController = m_shoulderMotor.getPIDController();
 
   public ArmUpSubsystem() {
-    m_baseMotor.restoreFactoryDefaults();
-    m_baseMotor.setInverted(ArmUpConstants.kArmUpInvert);
+    m_shoulderMotor.restoreFactoryDefaults();
+    m_shoulderMotor.setInverted(ArmUpConstants.kArmUpInvert);
   }
     public void periodic() {
     }
     public void setSpeed(double speed) {
-        m_baseMotor.set(speed);
+        m_shoulderMotor.set(speed);
     }
     public void setLevel(double level) {
       m_pidController.setReference(level, ControlType.kPosition, ArmUpConstants.kPIDSlot);

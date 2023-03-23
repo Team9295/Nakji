@@ -10,19 +10,19 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import frc.robot.Constants.LinearActuatorConstants;
 
 public class LinearActuatorSubsystem extends SubsystemBase {
-  private final CANSparkMax m_baseMotor = new CANSparkMax(LinearActuatorConstants.kLinearActuatorPort, MotorType.kBrushless);
+  private final CANSparkMax m_pitchMotor = new CANSparkMax(LinearActuatorConstants.kLinearActuatorPort, MotorType.kBrushless);
 
-  private final RelativeEncoder m_encoder = m_baseMotor.getEncoder();
-  private final SparkMaxPIDController m_pidController = m_baseMotor.getPIDController();
+  private final RelativeEncoder m_encoder = m_pitchMotor.getEncoder();
+  private final SparkMaxPIDController m_pidController = m_pitchMotor.getPIDController();
 
   public LinearActuatorSubsystem() {
-    m_baseMotor.restoreFactoryDefaults();
-    m_baseMotor.setInverted(LinearActuatorConstants.kLinearActuatorInvert);
+    m_pitchMotor.restoreFactoryDefaults();
+    m_pitchMotor.setInverted(LinearActuatorConstants.kLinearActuatorInvert);
   }
     public void periodic() {
     }
     public void setSpeed(double speed) {
-        m_baseMotor.set(speed);
+        m_pitchMotor.set(speed);
     }
 
 }
