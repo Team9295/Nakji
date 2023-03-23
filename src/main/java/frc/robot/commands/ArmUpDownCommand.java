@@ -12,7 +12,6 @@ public class ArmUpDownCommand extends CommandBase {
         m_speed = speed;
         addRequirements(m_ArmUpSubsystem);
     }
-
     public void initialize() {
         m_ArmUpSubsystem.setSpeed(m_speed);
     }

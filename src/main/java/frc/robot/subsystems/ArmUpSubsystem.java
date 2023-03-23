@@ -20,9 +20,11 @@ public class ArmUpSubsystem extends SubsystemBase {
     m_shoulderMotor.setInverted(ArmUpConstants.kArmUpInvert);
   }
     public void periodic() {
+      System.out.println("ARM RUNNING");
     }
     public void setSpeed(double speed) {
         m_shoulderMotor.set(speed);
+        System.out.println("ARM SPEED IS "+speed);
     }
     public void setLevel(double level) {
       m_pidController.setReference(level, ControlType.kPosition, ArmUpConstants.kPIDSlot);
