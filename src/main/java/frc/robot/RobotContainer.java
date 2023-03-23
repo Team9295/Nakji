@@ -4,11 +4,21 @@
 
 package frc.robot;
 
+import frc.robot.Constants.ArmExtendConstants;
 import frc.robot.Constants.ControllerConstants;
 import frc.robot.commands.ArcadeDriveCommand;
+import frc.robot.commands.ArmUpDownCommand;
+import frc.robot.commands.WristRotateCommand;
+import frc.robot.subsystems.ArmExtendSubsystem;
+import frc.robot.subsystems.ArmGrabSubsystem;
+import frc.robot.subsystems.ArmUpSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.LinearActuatorSubsystem;
+import frc.robot.subsystems.RotatingBaseSubsystem;
+import frc.robot.subsystems.WristRotationSubsystem;
 import frc.robot.Constants.ControllerConstants.Axis;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 
@@ -20,13 +30,21 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-	private final DriveSubsystem m_driveSubsystem = new DriveSubsystem();
+	private final ArmExtendSubsystem m_armExtendSubsystem = new ArmExtendSubsystem(); 
+  private final ArmGrabSubsystem m_armGrabSubsystem = new ArmGrabSubsystem(); 
+  private final ArmUpSubsystem m_armUpSubsystem = new ArmUpSubsystem(); 
+  private final DriveSubsystem m_driveSubsystem = new DriveSubsystem();
+  private final LinearActuatorSubsystem m_linearActuatorSubsystem = new LinearActuatorSubsystem(); 
+  private final RotatingBaseSubsystem m_rotatingBaseSubsystem = new RotatingBaseSubsystem(); 
+  private final WristRotationSubsystem m_wristRotationSubsystem = new WristRotationSubsystem(); 
 
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
       new CommandXboxController(ControllerConstants.kDriverControllerPort);
 
+  private final CommandXboxController m_operatorController = 
+      new CommandXboxController(ControllerConstants.kOperatorControllerPort); 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
@@ -48,6 +66,11 @@ public class RobotContainer {
       new ArcadeDriveCommand(m_driveSubsystem, () -> -m_driverController.getRawAxis(Axis.kLeftY),
           () -> (m_driverController.getRawAxis(Axis.kLeftTrigger) + 1) / 2,
           () -> (m_driverController.getRawAxis(Axis.kRightTrigger) + 1) / 2));
-  
+
+    m_armUpSubsystem.setDefaultCommand(
+      new ArmUpDownCommand(m_armUpSubsystem, m_operatorController.getRawAxis(Axis.kLeftY)));
   }
+
+
+
 }
