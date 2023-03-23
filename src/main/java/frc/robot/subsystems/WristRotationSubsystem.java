@@ -10,19 +10,19 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import frc.robot.Constants.WristRotationConstants;
 
 public class WristRotationSubsystem extends SubsystemBase {
-  private final CANSparkMax m_baseMotor = new CANSparkMax(WristRotationConstants.kWristRotationPort, MotorType.kBrushless);
+  private final CANSparkMax m_wristMotor = new CANSparkMax(WristRotationConstants.kWristRotationPort, MotorType.kBrushless);
 
-  private final RelativeEncoder m_encoder = m_baseMotor.getEncoder();
-  private final SparkMaxPIDController m_pidController = m_baseMotor.getPIDController();
+  private final RelativeEncoder m_encoder = m_wristMotor.getEncoder();
+  private final SparkMaxPIDController m_pidController = m_wristMotor.getPIDController();
 
   public WristRotationSubsystem() {
-    m_baseMotor.restoreFactoryDefaults();
-    m_baseMotor.setInverted(WristRotationConstants.kWristRotationInvert);
+    m_wristMotor.restoreFactoryDefaults();
+    m_wristMotor.setInverted(WristRotationConstants.kWristRotationInvert);
   }
     public void periodic() {
     }
     public void setSpeed(double speed) {
-        m_baseMotor.set(speed);
+        m_wristMotor.set(speed);
     }
 
 }
