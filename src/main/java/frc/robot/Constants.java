@@ -16,7 +16,7 @@ public final class Constants {
   public static class ControllerConstants {
     public static final int kDriverControllerPort = 0;
     public static final int kOperatorControllerPort = 1;
-		public static final double kDeadzone = 0.1;
+		public static final double kDeadzone = .05;
 		public static final double kTriggerDeadzone = .05;
 
 		public static final class Axis {
@@ -65,14 +65,15 @@ public final class Constants {
   //TODO: add constants for other subsystems (sparkmax - port, invert, percentoutput)
 
   public static final class RotatingBaseConstants {
-	public static final int kRotatingBasePort = 5;
+	public static final int kRotatingBasePort = 8;
 	public static final boolean kRotatingBaseInvert = false;
-	public static final double kSpeedLimitFactor = 1;
+	public static final double kSpeedLimitFactor = .4;
+
   }
   public static final class ArmUpConstants {
-	public static final int kArmUpPort = 8;
+	public static final int kArmUpPort = 9;
 	public static final boolean kArmUpInvert = false;
-	public static final double kSpeedLimitFactor = 1;
+	public static final double kSpeedLimitFactor = .3;
 	public static final int kPIDSlot = 0;
   }
   public static final class ArmExtendConstants {
@@ -87,7 +88,7 @@ public final class Constants {
 	public static final double kSpeedLimitFactor = 1;
   }
   public static final class WristRotationConstants {
-	public static final int kWristRotationPort = 9;
+	public static final int kWristRotationPort = 5;
 	public static final boolean kWristRotationInvert = false;
 	public static final double kSpeedLimitFactor = 1;
   }

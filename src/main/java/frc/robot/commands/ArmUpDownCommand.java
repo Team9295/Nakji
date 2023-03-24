@@ -3,6 +3,8 @@ package frc.robot.commands;
 import java.util.function.Supplier;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants.ArmUpConstants;
+import frc.robot.Constants.ControllerConstants;
 import frc.robot.subsystems.ArmUpSubsystem;
 
 public class ArmUpDownCommand extends CommandBase {
@@ -16,7 +18,9 @@ public class ArmUpDownCommand extends CommandBase {
     }
     public void execute() {
         System.out.println("COMMAND RUNNING");
-        m_ArmUpSubsystem.setSpeed(m_speed.get());
+        double speed = Math.abs(m_speed.get()) > ControllerConstants.kDeadzone
+        ? m_speed.get() : 0; 
+        m_ArmUpSubsystem.setSpeed(speed*ArmUpConstants.kSpeedLimitFactor);
     }
 
     public void end(boolean interrupted) {

@@ -6,8 +6,10 @@ package frc.robot;
 
 import frc.robot.Constants.ArmExtendConstants;
 import frc.robot.Constants.ControllerConstants;
+import frc.robot.Constants.RotatingBaseConstants;
 import frc.robot.commands.ArcadeDriveCommand;
 import frc.robot.commands.ArmUpDownCommand;
+import frc.robot.commands.BaseSpeedCommand;
 import frc.robot.commands.WristRotateCommand;
 import frc.robot.subsystems.ArmExtendSubsystem;
 import frc.robot.subsystems.SuctionSubsystem;
@@ -70,9 +72,10 @@ public class RobotContainer {
           () -> (m_driverController.getRawAxis(Axis.kRightTrigger) + 1) / 2));
 
     m_armUpSubsystem.setDefaultCommand(
-      new ArmUpDownCommand(m_armUpSubsystem, () -> m_operatorController.getRawAxis(Axis.kLeftY)));
-      
-    new JoystickButton(m_driverController, Button.kX).whileTrue(new ArmUpDownCommand(m_armUpSubsystem,  () -> .5));
+      new ArmUpDownCommand(m_armUpSubsystem, () -> m_operatorController.getRawAxis(Axis.kRightY)));
+      new JoystickButton(m_operatorController, Button.kLeftBumper).whileTrue(new BaseSpeedCommand(m_rotatingBaseSubsystem, RotatingBaseConstants.kSpeedLimitFactor)); 
+      new JoystickButton(m_operatorController, Button.kRightBumper).whileTrue(new BaseSpeedCommand(m_rotatingBaseSubsystem, -RotatingBaseConstants.kSpeedLimitFactor));
+
   }
 
 

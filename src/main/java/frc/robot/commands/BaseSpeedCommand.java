@@ -1,6 +1,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants.RotatingBaseConstants;
 import frc.robot.subsystems.RotatingBaseSubsystem;
 
 public class BaseSpeedCommand extends CommandBase {
@@ -13,8 +14,8 @@ public class BaseSpeedCommand extends CommandBase {
         addRequirements(m_RotatingBaseSubsystem);
     }
 
-    public void initialize() {
-        m_RotatingBaseSubsystem.setSpeed(m_speed);
+    public void execute() {
+        m_RotatingBaseSubsystem.setSpeed(m_speed*RotatingBaseConstants.kSpeedLimitFactor);
     }
 
     public void end(boolean interrupted) {
