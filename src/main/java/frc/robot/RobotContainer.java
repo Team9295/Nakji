@@ -6,11 +6,18 @@ package frc.robot;
 
 import frc.robot.Constants.ArmExtendConstants;
 import frc.robot.Constants.ControllerConstants;
+import frc.robot.Constants.LinearActuatorConstants;
 import frc.robot.Constants.RotatingBaseConstants;
+import frc.robot.Constants.WristRotationConstants;
 import frc.robot.commands.ArcadeDriveCommand;
+import frc.robot.commands.ArmOutInCommand;
 import frc.robot.commands.ArmUpDownCommand;
+import frc.robot.commands.ArmUpLevelCommand;
 import frc.robot.commands.BaseSpeedCommand;
+import frc.robot.commands.ExtendLevelCommand;
+import frc.robot.commands.Suction; 
 import frc.robot.commands.WristRotateCommand;
+import frc.robot.commands.WristBendCommand;
 import frc.robot.subsystems.ArmExtendSubsystem;
 import frc.robot.subsystems.SuctionSubsystem;
 import frc.robot.subsystems.ArmUpSubsystem;
@@ -20,9 +27,11 @@ import frc.robot.subsystems.RotatingBaseSubsystem;
 import frc.robot.subsystems.WristRotationSubsystem;
 import frc.robot.Constants.ControllerConstants.Axis;
 import frc.robot.Constants.ControllerConstants.Button;
+import frc.robot.Constants.ControllerConstants.DPad;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 
@@ -73,8 +82,17 @@ public class RobotContainer {
 
     m_armUpSubsystem.setDefaultCommand(
       new ArmUpDownCommand(m_armUpSubsystem, () -> m_operatorController.getRawAxis(Axis.kRightY)));
+      
       new JoystickButton(m_operatorController, Button.kLeftBumper).whileTrue(new BaseSpeedCommand(m_rotatingBaseSubsystem, RotatingBaseConstants.kSpeedLimitFactor)); 
       new JoystickButton(m_operatorController, Button.kRightBumper).whileTrue(new BaseSpeedCommand(m_rotatingBaseSubsystem, -RotatingBaseConstants.kSpeedLimitFactor));
+     
+      new JoystickButton(m_operatorController, Button.kLeftMenu).whileTrue(new WristRotateCommand(m_wristRotationSubsystem, WristRotationConstants.kSpeedLimitFactor)); 
+      new JoystickButton(m_operatorController, Button.kRightMenu).whileTrue(new WristRotateCommand(m_wristRotationSubsystem, -WristRotationConstants.kSpeedLimitFactor)); 
+      
+      new POVButton(m_operatorController, DPad.kUp).whileTrue(new WristBendCommand(m_linearActuatorSubsystem, 1));
+      new POVButton(m_operatorController, DPad.kDown).whileTrue(new WristBendCommand(m_linearActuatorSubsystem, -1));
+      
+      
 
   }
 

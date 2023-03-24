@@ -5,19 +5,22 @@ import frc.robot.subsystems.LinearActuatorSubsystem;
 
 public class WristBendCommand extends CommandBase{
     private final LinearActuatorSubsystem m_LinearActuatorSubsystem;
-    private final double m_speed; 
+    private final int m_direction;
 
-    public WristBendCommand(LinearActuatorSubsystem linearActuatorSubsystem, double speed) {
+    public WristBendCommand(LinearActuatorSubsystem linearActuatorSubsystem, int direction) {
         m_LinearActuatorSubsystem = linearActuatorSubsystem; 
-        m_speed = speed;
+        m_direction = direction;
         addRequirements(m_LinearActuatorSubsystem);
     }
 
     public void initialize() {
-        m_LinearActuatorSubsystem.setSpeed(m_speed);
+        double position = m_LinearActuatorSubsystem.getPosition(); 
+        while(position <= 1 && position >= 0){
+            position += .1*m_direction;
+            m_LinearActuatorSubsystem.setPosition(position);
+        }
+        //m_LinearActuatorSubsystem.setPosition(m_speed);
     }
 
-    public void end(boolean interrupted) {
-        m_LinearActuatorSubsystem.setSpeed(0);
-    }
+    public void end(boolean interrupted) {}
 }

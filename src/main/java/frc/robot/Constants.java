@@ -90,11 +90,12 @@ public final class Constants {
   public static final class WristRotationConstants {
 	public static final int kWristRotationPort = 5;
 	public static final boolean kWristRotationInvert = false;
-	public static final double kSpeedLimitFactor = 1;
+	public static final double kSpeedLimitFactor = .2;
   }
   public static final class LinearActuatorConstants {
-	public static final int kLinearActuatorPort = 10;
+	public static final int kLinearActuatorChannel = 9;
 	public static final boolean kLinearActuatorInvert = false;
-	public static final double kSpeedLimitFactor = 1;
+	public static final int kForwardDirection = 1;
+	public static final int kBackwardDirection = -1;
   }
 }

@@ -22,7 +22,7 @@ public class WristRotationSubsystem extends SubsystemBase {
     public void periodic() {
     }
     public void setSpeed(double speed) {
-        m_wristMotor.set(speed);
+        m_wristMotor.set(speed*WristRotationConstants.kSpeedLimitFactor);
     }
 
 }
