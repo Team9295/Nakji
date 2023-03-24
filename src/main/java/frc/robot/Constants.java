@@ -29,18 +29,16 @@ public final class Constants {
 		}
 
 		public static final class Button {
-			public static final int kSquare = 1;
-			public static final int kX = 2;
-			public static final int kCircle = 3;
-			public static final int kTriangle = 4;
+			public static final int kA = 1;
+			public static final int kB = 2;
+			public static final int kX = 3;
+			public static final int kY = 4;
 			public static final int kLeftBumper = 5;
 			public static final int kRightBumper = 6;
-			public static final int kShare = 9;
-			public static final int kOptions = 10;
-			public static final int kLeftStick = 11;
-			public static final int kRightStick = 12;
-			public static final int kPS = 13;
-			public static final int kTrackpad = 14;
+			public static final int kLeftMenu = 7; 
+			public static final int kRightMenu = 8; 
+			public static final int kLeftTriggerButton = 9;
+			public static final int kRightTriggerButton = 10;
 		}
 
 		public static final class DPad {
