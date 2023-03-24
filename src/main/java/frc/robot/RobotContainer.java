@@ -17,6 +17,8 @@ import frc.robot.subsystems.LinearActuatorSubsystem;
 import frc.robot.subsystems.RotatingBaseSubsystem;
 import frc.robot.subsystems.WristRotationSubsystem;
 import frc.robot.Constants.ControllerConstants.Axis;
+import frc.robot.Constants.ControllerConstants.Button;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -40,11 +42,11 @@ public class RobotContainer {
 
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
-  private final CommandXboxController m_driverController =
-      new CommandXboxController(ControllerConstants.kDriverControllerPort);
+  private final Joystick m_driverController =
+      new Joystick(ControllerConstants.kDriverControllerPort);
 
-  private final CommandXboxController m_operatorController = 
-      new CommandXboxController(ControllerConstants.kOperatorControllerPort); 
+  private final Joystick m_operatorController = 
+      new Joystick(ControllerConstants.kOperatorControllerPort); 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
@@ -68,7 +70,9 @@ public class RobotContainer {
           () -> (m_driverController.getRawAxis(Axis.kRightTrigger) + 1) / 2));
 
     m_armUpSubsystem.setDefaultCommand(
-      new ArmUpDownCommand(m_armUpSubsystem, m_operatorController.getRawAxis(Axis.kLeftY)));
+      new ArmUpDownCommand(m_armUpSubsystem, () -> m_operatorController.getRawAxis(Axis.kLeftY)));
+      
+    new JoystickButton(m_driverController, Button.kX).whileTrue(new ArmUpDownCommand(m_armUpSubsystem,  () -> .5));
   }
 
 
