@@ -12,11 +12,11 @@ import frc.robot.Constants.WristRotationConstants;
 import frc.robot.commands.ArcadeDriveCommand;
 import frc.robot.commands.ArmOutInCommand;
 import frc.robot.commands.ArmUpDownCommand;
-import frc.robot.commands.ArmUpLevelCommand;
 import frc.robot.commands.BaseSpeedCommand;
-import frc.robot.commands.ExtendLevelCommand;
 import frc.robot.commands.Suction; 
 import frc.robot.commands.WristRotateCommand;
+import frc.robot.commands.PresetCommands.ArmUpLevelCommand;
+import frc.robot.commands.PresetCommands.ExtendLevelCommand;
 import frc.robot.commands.WristBendCommand;
 import frc.robot.subsystems.ArmExtendSubsystem;
 import frc.robot.subsystems.SuctionSubsystem;
@@ -75,23 +75,39 @@ public class RobotContainer {
    */
   private void configureBindings() {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
+    //driver controls: drive and steer
     m_driveSubsystem.setDefaultCommand(
       new ArcadeDriveCommand(m_driveSubsystem, () -> -m_driverController.getRawAxis(Axis.kLeftY),
           () -> (m_driverController.getRawAxis(Axis.kLeftTrigger) + 1) / 2,
           () -> (m_driverController.getRawAxis(Axis.kRightTrigger) + 1) / 2));
 
+    //operator controls
+    //move shoulder up and down
     m_armUpSubsystem.setDefaultCommand(
       new ArmUpDownCommand(m_armUpSubsystem, () -> m_operatorController.getRawAxis(Axis.kRightY)));
-      
+      //arm extend arm retract
+    m_armExtendSubsystem.setDefaultCommand(
+      //for some reason issue here don't know why, might need execute in command?
+      new ArmOutInCommand(m_armExtendSubsystem, () -> m_operatorConroller.getRawAxis(Axis.kLeftY))); 
+      //turn base left turn base right
       new JoystickButton(m_operatorController, Button.kLeftBumper).whileTrue(new BaseSpeedCommand(m_rotatingBaseSubsystem, RotatingBaseConstants.kSpeedLimitFactor)); 
       new JoystickButton(m_operatorController, Button.kRightBumper).whileTrue(new BaseSpeedCommand(m_rotatingBaseSubsystem, -RotatingBaseConstants.kSpeedLimitFactor));
-     
+      //rotate wrist left rotate wrist right  
       new JoystickButton(m_operatorController, Button.kLeftMenu).whileTrue(new WristRotateCommand(m_wristRotationSubsystem, WristRotationConstants.kSpeedLimitFactor)); 
       new JoystickButton(m_operatorController, Button.kRightMenu).whileTrue(new WristRotateCommand(m_wristRotationSubsystem, -WristRotationConstants.kSpeedLimitFactor)); 
-      
+      //bend wrist up bend wrist down
       new POVButton(m_operatorController, DPad.kUp).whileTrue(new WristBendCommand(m_linearActuatorSubsystem, 1));
       new POVButton(m_operatorController, DPad.kDown).whileTrue(new WristBendCommand(m_linearActuatorSubsystem, -1));
       
+      //TODO: add the presets for a,x,and y levels
+      /*
+       * somethiing like this? (using kPIDSlot as placeholder will add constants for specific levels): 
+       * 
+       * new JoystickButton(m_operatorConroller, Button.kA).whileTrue(new ExtendLevelCommand(m_armExtendSubsystem, ArmExtendConstants.kPIDslot) && new ArmUpLevelCommand(m_armUpSubsystem, ArmUpContants.kPIDSlot)); 
+       * new JoystickButton(m_operatorConroller, Button.kX).whileTrue(new ExtendLevelCommand(m_armExtendSubsystem, ArmExtendConstants.kPIDslot) && new ArmUpLevelCommand(m_armUpSubsystem, ArmUpContants.kPIDSlot));
+       * new JoystickButton(m_operatorConroller, Button.kY).whileTrue(new ExtendLevelCommand(m_armExtendSubsystem, ArmExtendConstants.kPIDslot) && new ArmUpLevelCommand(m_armUpSubsystem, ArmUpContants.kPIDSlot));
+       * 
+       */
       
 
   }
