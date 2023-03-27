@@ -88,7 +88,7 @@ public class RobotContainer {
       //arm extend arm retract
     m_armExtendSubsystem.setDefaultCommand(
       //for some reason issue here don't know why, might need execute in command?
-      new ArmOutInCommand(m_armExtendSubsystem, () -> m_operatorConroller.getRawAxis(Axis.kLeftY))); 
+      new ArmOutInCommand(m_armExtendSubsystem, () -> m_operatorController.getRawAxis(Axis.kLeftY))); 
       //turn base left turn base right
       new JoystickButton(m_operatorController, Button.kLeftBumper).whileTrue(new BaseSpeedCommand(m_rotatingBaseSubsystem, RotatingBaseConstants.kSpeedLimitFactor)); 
       new JoystickButton(m_operatorController, Button.kRightBumper).whileTrue(new BaseSpeedCommand(m_rotatingBaseSubsystem, -RotatingBaseConstants.kSpeedLimitFactor));
