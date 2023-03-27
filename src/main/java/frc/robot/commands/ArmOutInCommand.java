@@ -1,27 +1,25 @@
 package frc.robot.commands;
 
+import java.util.function.Supplier;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ArmExtendSubsystem;
 
 public class ArmOutInCommand extends CommandBase {
     private final ArmExtendSubsystem m_ArmExtendSubsystem;
-    private final double m_speed;
-    private final double m_direction; 
+    private final Supplier<Double> m_speed;
 
-    public ArmOutInCommand(ArmExtendSubsystem armExtendSubsystem, double speed, double direction) {
+    public ArmOutInCommand(ArmExtendSubsystem armExtendSubsystem, Supplier<Double> speed) {
         m_ArmExtendSubsystem = armExtendSubsystem;
         m_speed = speed;
-        m_direction = direction;
         addRequirements(m_ArmExtendSubsystem);
     }
 
     public void initialize() {
-        m_ArmExtendSubsystem.setSpeed(m_speed);
-        m_ArmExtendSubsystem.setDirection(m_direction); 
+        m_ArmExtendSubsystem.setSpeed(m_speed.get());
     }
 
     public void end(boolean interrupted) {
         m_ArmExtendSubsystem.setSpeed(0);
-        m_ArmExtendSubsystem.setDirection(0);
     }
 }

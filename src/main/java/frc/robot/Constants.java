@@ -65,25 +65,25 @@ public final class Constants {
   //TODO: add constants for other subsystems (sparkmax - port, invert, percentoutput)
 
   public static final class RotatingBaseConstants {
-	public static final int kRotatingBasePort = 8;
+	public static final int kRotatingBasePort = 7;
 	public static final boolean kRotatingBaseInvert = false;
 	public static final double kSpeedLimitFactor = .4;
 
   }
   public static final class ArmUpConstants {
-	public static final int kArmUpPort = 9;
+	public static final int kArmUpPort = 8;
 	public static final boolean kArmUpInvert = false;
 	public static final double kSpeedLimitFactor = .3;
 	public static final int kPIDSlot = 0;
   }
   public static final class ArmExtendConstants {
-	public static final int kArmExtendPort = 7;
+	public static final int kArmExtendPort = 6;
 	public static final boolean kArmExtendInvert = false;
 	public static final double kSpeedLimitFactor = 1;
 	public static final int kPIDslot = 0; 
   }
   public static final class SuctionConstants {
-	public static final int kSuctionPort = 6;
+	public static final int kSuctionPort = 10;
 	public static final boolean kSuctionInvert = false;
 	public static final double kSpeedLimitFactor = 1;
   }
