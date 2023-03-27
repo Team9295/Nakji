@@ -74,7 +74,6 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
     //driver controls: drive and steer
     m_driveSubsystem.setDefaultCommand(
       new ArcadeDriveCommand(m_driveSubsystem, () -> -m_driverController.getRawAxis(Axis.kLeftY),
@@ -99,7 +98,7 @@ public class RobotContainer {
       new POVButton(m_operatorController, DPad.kUp).whileTrue(new WristBendCommand(m_linearActuatorSubsystem, 1));
       new POVButton(m_operatorController, DPad.kDown).whileTrue(new WristBendCommand(m_linearActuatorSubsystem, -1));
       
-      //TODO: add the presets for a,x,and y levels
+      //TODO: add the presets for a,x,and y levels -- create armToPosition command (command group?)
       /*
        * somethiing like this? (using kPIDSlot as placeholder will add constants for specific levels): 
        * 
