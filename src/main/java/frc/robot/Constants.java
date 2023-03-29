@@ -84,6 +84,7 @@ public final class Constants {
   }
   public static final class SuctionConstants {
 	public static final int kSuctionPort = 10;
+	public static final int kSuctionRelayPort = 0;
 	public static final boolean kSuctionInvert = false;
 	public static final double kSuctionSpeed = 1;
   }

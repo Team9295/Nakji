@@ -8,10 +8,11 @@ import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.ControlType;
 
 import frc.robot.Constants.SuctionConstants;
+import edu.wpi.first.wpilibj.Relay;
 
 public class SuctionSubsystem extends SubsystemBase {
-  private final CANSparkMax m_suckMotor = new CANSparkMax(SuctionConstants.kSuctionPort, MotorType.kBrushless);
-
+  private final CANSparkMax m_suckMotor = new CANSparkMax (SuctionConstants.kSuctionPort, MotorType.kBrushless);
+  private final Relay m_relay = new Relay (SuctionConstants.kSuctionRelayPort);
   private final RelativeEncoder m_encoder = m_suckMotor.getEncoder();
   private final SparkMaxPIDController m_pidController = m_suckMotor.getPIDController();
 
@@ -24,5 +25,10 @@ public class SuctionSubsystem extends SubsystemBase {
     public void setSpeed(double speed) {
         m_suckMotor.set(speed);
     }
-
+  public void openValve() {
+    m_relay.set(Relay.Value.kForward);
+  }
+  public void closeValve() {
+    m_relay.set(Relay.Value.kOff);
+  }
 }
