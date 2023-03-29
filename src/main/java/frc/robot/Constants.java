@@ -65,7 +65,7 @@ public final class Constants {
   //TODO: add constants for other subsystems (sparkmax - port, invert, percentoutput)
 
   public static final class RotatingBaseConstants {
-	public static final int kRotatingBasePort = 7;
+	public static final int kRotatingBasePort = 5;
 	public static final boolean kRotatingBaseInvert = false;
 	public static final double kSpeedLimitFactor = .4;
 
@@ -88,7 +88,7 @@ public final class Constants {
 	public static final double kSpeedLimitFactor = 1;
   }
   public static final class WristRotationConstants {
-	public static final int kWristRotationPort = 5;
+	public static final int kWristRotationPort = 7;
 	public static final boolean kWristRotationInvert = false;
 	public static final double kSpeedLimitFactor = .2;
   }
