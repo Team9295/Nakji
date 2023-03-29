@@ -13,10 +13,8 @@ import frc.robot.commands.ArcadeDriveCommand;
 import frc.robot.commands.ArmOutInCommand;
 import frc.robot.commands.ArmUpDownCommand;
 import frc.robot.commands.BaseSpeedCommand;
-import frc.robot.commands.Suction; 
+import frc.robot.commands.SuctionCommand; 
 import frc.robot.commands.WristRotateCommand;
-import frc.robot.commands.PresetCommands.ArmUpLevelCommand;
-import frc.robot.commands.PresetCommands.ExtendLevelCommand;
 import frc.robot.commands.WristBendCommand;
 import frc.robot.subsystems.ArmExtendSubsystem;
 import frc.robot.subsystems.SuctionSubsystem;
@@ -50,7 +48,7 @@ public class RobotContainer {
   private final LinearActuatorSubsystem m_linearActuatorSubsystem = new LinearActuatorSubsystem(); 
   private final RotatingBaseSubsystem m_rotatingBaseSubsystem = new RotatingBaseSubsystem(); 
   private final WristRotationSubsystem m_wristRotationSubsystem = new WristRotationSubsystem(); 
-
+  private final SuctionSubsystem m_suctionSubsystem = new SuctionSubsystem();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final Joystick m_driverController =
@@ -79,7 +77,7 @@ public class RobotContainer {
       new ArcadeDriveCommand(m_driveSubsystem, () -> -m_driverController.getRawAxis(Axis.kLeftY),
           () -> (m_driverController.getRawAxis(Axis.kLeftTrigger) + 1) / 2,
           () -> (m_driverController.getRawAxis(Axis.kRightTrigger) + 1) / 2));
-
+    new POVButton(m_driverController, DPad.kLeft).whileTrue(new SuctionCommand(m_suctionSubsystem));
     //operator controls
     //move shoulder up and down
     m_armUpSubsystem.setDefaultCommand(
