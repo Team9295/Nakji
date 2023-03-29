@@ -1,14 +1,11 @@
 package frc.robot.commands;
 
-import javax.swing.text.Position;
-
-import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ArmUpSubsystem;
 
 public class ArmUpPositionCommand extends CommandBase{
     private final ArmUpSubsystem m_armUpSubsystem;
-    private final double Position;
+    private final double m_Position;
 
     public ArmUpPositionCommand(ArmUpSubsystem armUpSubsystem, double Position) {
         m_armUpSubsystem = armUpSubsystem;

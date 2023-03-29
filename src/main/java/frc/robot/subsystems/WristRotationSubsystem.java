@@ -18,11 +18,21 @@ public class WristRotationSubsystem extends SubsystemBase {
   public WristRotationSubsystem() {
     m_wristMotor.restoreFactoryDefaults();
     m_wristMotor.setInverted(WristRotationConstants.kWristRotationInvert);
+
   }
     public void periodic() {
     }
     public void setSpeed(double speed) {
         m_wristMotor.set(speed*WristRotationConstants.kSpeedLimitFactor);
     }
+
+    public void setPosition(double position) {
+      m_wristMotor.set(position);
+    }
+    public double getPosition(){
+     return m_wristMotor.get(); 
+    }
+
+    
 
 }

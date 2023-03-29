@@ -30,4 +30,11 @@ public class ArmUpSubsystem extends SubsystemBase {
       m_pidController.setReference(level, ControlType.kPosition, ArmUpConstants.kPIDSlot);
     }
 
+    public void setPosition(double position) {
+      m_shoulderMotor.set(position);
+    }
+    public double getPosition(){
+     return m_shoulderMotor.get(); 
+    }
+
 }
