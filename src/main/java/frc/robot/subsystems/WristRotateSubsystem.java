@@ -10,22 +10,22 @@ import com.revrobotics.SparkMaxRelativeEncoder;
 import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.SparkMaxRelativeEncoder.Type;
-import frc.robot.Constants.WristRotationConstants;
+import frc.robot.Constants.WristRotateConstants;
 
-public class WristRotationSubsystem extends SubsystemBase {
-  private final CANSparkMax m_wristMotor = new CANSparkMax(WristRotationConstants.kWristRotationPort, MotorType.kBrushed);
+public class WristRotateSubsystem extends SubsystemBase {
+  private final CANSparkMax m_wristMotor = new CANSparkMax(WristRotateConstants.kWristRotatePort, MotorType.kBrushed);
   private final RelativeEncoder m_encoder = m_wristMotor.getEncoder(Type.kQuadrature, 1680);
   private final SparkMaxPIDController m_pidController = m_wristMotor.getPIDController();
 
-  public WristRotationSubsystem() {
+  public WristRotateSubsystem() {
     m_wristMotor.restoreFactoryDefaults();
-    m_wristMotor.setInverted(WristRotationConstants.kWristRotationInvert);
+    m_wristMotor.setInverted(WristRotateConstants.kWristRotateInvert);
 
   }
     public void periodic() {
     }
     public void setSpeed(double speed) {
-        m_wristMotor.set(speed*WristRotationConstants.kSpeedLimitFactor);
+        m_wristMotor.set(speed*WristRotateConstants.kSpeedLimitFactor);
     }
 
     public void setPosition(double position) {

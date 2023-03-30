@@ -70,15 +70,15 @@ public final class Constants {
 	public static final double kSpeedLimitFactor = .4;
 
   }
-  public static final class ArmUpConstants {
-	public static final int kArmUpPort = 8;
-	public static final boolean kArmUpInvert = true;
+  public static final class ShoulderConstants {
+	public static final int kShoulderPort = 8;
+	public static final boolean kShoulderInvert = true;
 	public static final double kSpeedLimitFactor = .3;
 	public static final int kPIDSlot = 0;
   }
-  public static final class ArmExtendConstants {
-	public static final int kArmExtendPort = 6;
-	public static final boolean kArmExtendInvert = false;
+  public static final class TelescopeConstants {
+	public static final int kTelescopePort = 6;
+	public static final boolean kTelescopeInvert = false;
 	public static final double kSpeedLimitFactor = 1;
 	public static final int kPIDslot = 0; 
   }
@@ -94,9 +94,9 @@ public final class Constants {
 	public static final boolean kSuctionInvert = false;
 	public static final double kSuctionSpeed = .5;
   }
-  public static final class WristRotationConstants {
-	public static final int kWristRotationPort = 7;
-	public static final boolean kWristRotationInvert = false;
+  public static final class WristRotateConstants {
+	public static final int kWristRotatePort = 7;
+	public static final boolean kWristRotateInvert = false;
 	public static final double kSpeedLimitFactor = 1;
   }
   public static final class LinearActuatorConstants {

@@ -1,23 +1,23 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.WristRotationSubsystem;
+import frc.robot.subsystems.WristRotateSubsystem;
 
 public class WristRotateCommand extends CommandBase{
-    private final WristRotationSubsystem m_WristRotationSubsystem;
+    private final WristRotateSubsystem m_WristRotateSubsystem;
     private final double m_speed;
     
-    public WristRotateCommand(WristRotationSubsystem wristRotationSubsystem, double speed) {
-        m_WristRotationSubsystem = wristRotationSubsystem; 
+    public WristRotateCommand(WristRotateSubsystem wristRotateSubsystem, double speed) {
+        m_WristRotateSubsystem = wristRotateSubsystem; 
         m_speed = speed; 
-        addRequirements(m_WristRotationSubsystem);
+        addRequirements(m_WristRotateSubsystem);
     }
 
     public void initialize() {
-        m_WristRotationSubsystem.setSpeed(m_speed);
+        m_WristRotateSubsystem.setSpeed(m_speed);
     }
 
     public void end(boolean interrupted) {
-        m_WristRotationSubsystem.setSpeed(0); 
+        m_WristRotateSubsystem.setSpeed(0); 
     }
 }

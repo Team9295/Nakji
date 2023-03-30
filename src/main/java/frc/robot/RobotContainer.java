@@ -4,34 +4,27 @@
 
 package frc.robot;
 
-import frc.robot.Constants.ArmExtendConstants;
+import frc.robot.Constants.TelescopeConstants;
 import frc.robot.Constants.ControllerConstants;
 import frc.robot.Constants.LinearActuatorConstants;
 import frc.robot.Constants.RotatingBaseConstants;
-import frc.robot.Constants.WristRotationConstants;
+import frc.robot.Constants.WristRotateConstants;
 import frc.robot.commands.autonomous.autoBalance;
 import frc.robot.commands.autonomous.simple;
 import frc.robot.commands.ArcadeDriveCommand;
-import frc.robot.commands.ArmOutInCommand;
-import frc.robot.commands.ArmUpDownCommand;
-import frc.robot.commands.BaseSpeedCommand;
+import frc.robot.commands.TelescopeSpeedCommand;
+import frc.robot.commands.ShoulderSpeedCommand;
+import frc.robot.commands.TurretSpeedCommand;
 import frc.robot.commands.SuctionCommand; 
 import frc.robot.commands.WristRotateCommand;
 import frc.robot.commands.WristBendCommand;
-import frc.robot.commands.PresetCommands.ArmExtendPositionCommand;
-import frc.robot.commands.PresetCommands.ArmUpLevelCommand;
-import frc.robot.commands.PresetCommands.ArmUpPositionCommand;
-import frc.robot.commands.PresetCommands.ExtendLevelCommand;
-import frc.robot.commands.PresetCommands.LinearActuatorPositionCommand;
-import frc.robot.commands.PresetCommands.SuctionPositionCommand;
-import frc.robot.commands.PresetCommands.WristRotationPositionCommand;
-import frc.robot.subsystems.ArmExtendSubsystem;
+import frc.robot.subsystems.TelescopeSubsystem;
 import frc.robot.subsystems.SuctionSubsystem;
-import frc.robot.subsystems.ArmUpSubsystem;
+import frc.robot.subsystems.ShoulderSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.LinearActuatorSubsystem;
-import frc.robot.subsystems.RotatingBaseSubsystem;
-import frc.robot.subsystems.WristRotationSubsystem;
+import frc.robot.subsystems.TurretSubsystem;
+import frc.robot.subsystems.WristRotateSubsystem;
 import frc.robot.Constants.ControllerConstants.Axis;
 import frc.robot.Constants.ControllerConstants.Button;
 import frc.robot.Constants.ControllerConstants.DPad;
@@ -50,12 +43,12 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-	private final ArmExtendSubsystem m_armExtendSubsystem = new ArmExtendSubsystem(); 
-  private final ArmUpSubsystem m_armUpSubsystem = new ArmUpSubsystem(); 
+	private final TelescopeSubsystem m_telescopeSubsystem = new TelescopeSubsystem(); 
+  private final ShoulderSubsystem m_shoulderSubsystem = new ShoulderSubsystem(); 
   private final DriveSubsystem m_driveSubsystem = new DriveSubsystem();
   private final LinearActuatorSubsystem m_linearActuatorSubsystem = new LinearActuatorSubsystem(); 
-  private final RotatingBaseSubsystem m_rotatingBaseSubsystem = new RotatingBaseSubsystem(); 
-  private final WristRotationSubsystem m_wristRotationSubsystem = new WristRotationSubsystem(); 
+  private final TurretSubsystem m_turretSubsystem = new TurretSubsystem(); 
+  private final WristRotateSubsystem m_wristRotateSubsystem = new WristRotateSubsystem(); 
   private final SuctionSubsystem m_suctionSubsystem = new SuctionSubsystem();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
@@ -88,17 +81,17 @@ public class RobotContainer {
     new POVButton(m_driverController, DPad.kLeft).toggleOnTrue(new SuctionCommand(m_suctionSubsystem));
     //operator controls
     //move shoulder up and down
-    m_armUpSubsystem.setDefaultCommand(
-      new ArmUpDownCommand(m_armUpSubsystem, () -> m_operatorController.getRawAxis(Axis.kRightY)));
+    m_shoulderSubsystem.setDefaultCommand(
+      new ShoulderSpeedCommand(m_shoulderSubsystem, () -> m_operatorController.getRawAxis(Axis.kRightY)));
       //arm extend arm retract
-    m_armExtendSubsystem.setDefaultCommand(
-      new ArmOutInCommand(m_armExtendSubsystem, () -> m_operatorController.getRawAxis(Axis.kLeftY))); 
+    m_telescopeSubsystem.setDefaultCommand(
+      new TelescopeSpeedCommand(m_telescopeSubsystem, () -> m_operatorController.getRawAxis(Axis.kLeftY))); 
       //turn base left turn base right
-      new JoystickButton(m_operatorController, Button.kLeftBumper).whileTrue(new BaseSpeedCommand(m_rotatingBaseSubsystem, RotatingBaseConstants.kSpeedLimitFactor)); 
-      new JoystickButton(m_operatorController, Button.kRightBumper).whileTrue(new BaseSpeedCommand(m_rotatingBaseSubsystem, -RotatingBaseConstants.kSpeedLimitFactor));
+      new JoystickButton(m_operatorController, Button.kLeftBumper).whileTrue(new TurretSpeedCommand(m_turretSubsystem, RotatingBaseConstants.kSpeedLimitFactor)); 
+      new JoystickButton(m_operatorController, Button.kRightBumper).whileTrue(new TurretSpeedCommand(m_turretSubsystem, -RotatingBaseConstants.kSpeedLimitFactor));
       //rotate wrist left rotate wrist right  
-      new JoystickButton(m_operatorController, Button.kLeftMenu).whileTrue(new WristRotateCommand(m_wristRotationSubsystem, WristRotationConstants.kSpeedLimitFactor)); 
-      new JoystickButton(m_operatorController, Button.kRightMenu).whileTrue(new WristRotateCommand(m_wristRotationSubsystem, -WristRotationConstants.kSpeedLimitFactor)); 
+      new JoystickButton(m_operatorController, Button.kLeftMenu).whileTrue(new WristRotateCommand(m_wristRotateSubsystem, WristRotateConstants.kSpeedLimitFactor)); 
+      new JoystickButton(m_operatorController, Button.kRightMenu).whileTrue(new WristRotateCommand(m_wristRotateSubsystem, -WristRotateConstants.kSpeedLimitFactor)); 
       //bend wrist up bend wrist down
       new POVButton(m_operatorController, DPad.kUp).whileTrue(new WristBendCommand(m_linearActuatorSubsystem, 1));
       new POVButton(m_operatorController, DPad.kDown).whileTrue(new WristBendCommand(m_linearActuatorSubsystem, -1));
@@ -107,9 +100,9 @@ public class RobotContainer {
       /*
        * somethiing like this? (using kPIDSlot as placeholder will add constants for specific levels): 
        * 
-       * new JoystickButton(m_operatorConroller, Button.kA).whileTrue(new ExtendLevelCommand(m_armExtendSubsystem, ArmExtendConstants.kPIDslot) && new ArmUpLevelCommand(m_armUpSubsystem, ArmUpContants.kPIDSlot)); 
-       * new JoystickButton(m_operatorConroller, Button.kX).whileTrue(new ExtendLevelCommand(m_armExtendSubsystem, ArmExtendConstants.kPIDslot) && new ArmUpLevelCommand(m_armUpSubsystem, ArmUpContants.kPIDSlot));
-       * new JoystickButton(m_operatorConroller, Button.kY).whileTrue(new ExtendLevelCommand(m_armExtendSubsystem, ArmExtendConstants.kPIDslot) && new ArmUpLevelCommand(m_armUpSubsystem, ArmUpContants.kPIDSlot));
+       * new JoystickButton(m_operatorConroller, Button.kA).whileTrue(new ExtendLevelCommand(m_telescopeSubsystem, ArmExtendConstants.kPIDslot) && new ArmUpLevelCommand(m_shoulderSubsystem, ArmUpContants.kPIDSlot)); 
+       * new JoystickButton(m_operatorConroller, Button.kX).whileTrue(new ExtendLevelCommand(m_telescopeSubsystem, ArmExtendConstants.kPIDslot) && new ArmUpLevelCommand(m_shoulderSubsystem, ArmUpContants.kPIDSlot));
+       * new JoystickButton(m_operatorConroller, Button.kY).whileTrue(new ExtendLevelCommand(m_telescopeSubsystem, ArmExtendConstants.kPIDslot) && new ArmUpLevelCommand(m_shoulderSubsystem, ArmUpContants.kPIDSlot));
        * 
        */
       
