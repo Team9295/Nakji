@@ -5,16 +5,16 @@ import frc.robot.subsystems.ShoulderSubsystem;
 
 public class ShoulderPositionCommand extends CommandBase{
     private final ShoulderSubsystem m_shoulderSubsystem;
-    private final double m_Position;
+    private final double m_position;
 
-    public ShoulderPositionCommand(ShoulderSubsystem shoulderSubsystem, double Position) {
+    public ShoulderPositionCommand(ShoulderSubsystem shoulderSubsystem, double position) {
         m_shoulderSubsystem = shoulderSubsystem;
-        m_Position = Position;
+        m_position = position;
         addRequirements(m_shoulderSubsystem);
     }
 
     public void execute() {
-        m_shoulderSubsystem.setPosition(m_Position);
+        m_shoulderSubsystem.setPosition(m_position);
     }
 
     public void end(boolean interrupted) {

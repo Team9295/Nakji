@@ -6,7 +6,7 @@ package frc.robot;
 
 import frc.robot.Constants.TelescopeConstants;
 import frc.robot.Constants.ControllerConstants;
-import frc.robot.Constants.LinearActuatorConstants;
+import frc.robot.Constants.WristBendConstants;
 import frc.robot.Constants.RotatingBaseConstants;
 import frc.robot.Constants.WristRotateConstants;
 import frc.robot.commands.autonomous.autoBalance;
@@ -22,7 +22,7 @@ import frc.robot.subsystems.TelescopeSubsystem;
 import frc.robot.subsystems.SuctionSubsystem;
 import frc.robot.subsystems.ShoulderSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.LinearActuatorSubsystem;
+import frc.robot.subsystems.WristBendSubsystem;
 import frc.robot.subsystems.TurretSubsystem;
 import frc.robot.subsystems.WristRotateSubsystem;
 import frc.robot.Constants.ControllerConstants.Axis;
@@ -46,7 +46,7 @@ public class RobotContainer {
 	private final TelescopeSubsystem m_telescopeSubsystem = new TelescopeSubsystem(); 
   private final ShoulderSubsystem m_shoulderSubsystem = new ShoulderSubsystem(); 
   private final DriveSubsystem m_driveSubsystem = new DriveSubsystem();
-  private final LinearActuatorSubsystem m_linearActuatorSubsystem = new LinearActuatorSubsystem(); 
+  private final WristBendSubsystem m_wristBendSubsystem = new WristBendSubsystem(); 
   private final TurretSubsystem m_turretSubsystem = new TurretSubsystem(); 
   private final WristRotateSubsystem m_wristRotateSubsystem = new WristRotateSubsystem(); 
   private final SuctionSubsystem m_suctionSubsystem = new SuctionSubsystem();
@@ -93,8 +93,8 @@ public class RobotContainer {
       new JoystickButton(m_operatorController, Button.kLeftMenu).whileTrue(new WristRotateCommand(m_wristRotateSubsystem, WristRotateConstants.kSpeedLimitFactor)); 
       new JoystickButton(m_operatorController, Button.kRightMenu).whileTrue(new WristRotateCommand(m_wristRotateSubsystem, -WristRotateConstants.kSpeedLimitFactor)); 
       //bend wrist up bend wrist down
-      new POVButton(m_operatorController, DPad.kUp).whileTrue(new WristBendCommand(m_linearActuatorSubsystem, 1));
-      new POVButton(m_operatorController, DPad.kDown).whileTrue(new WristBendCommand(m_linearActuatorSubsystem, -1));
+      new POVButton(m_operatorController, DPad.kUp).whileTrue(new WristBendCommand(m_wristBendSubsystem, 1));
+      new POVButton(m_operatorController, DPad.kDown).whileTrue(new WristBendCommand(m_wristBendSubsystem, -1));
       
       //TODO: add the presets for a,x,and y levels -- create armToPosition command (command group?)
       /*

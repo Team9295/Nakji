@@ -1,25 +1,25 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.LinearActuatorSubsystem;
+import frc.robot.subsystems.WristBendSubsystem;
 
 public class WristBendCommand extends CommandBase{
-    private final LinearActuatorSubsystem m_LinearActuatorSubsystem;
+    private final WristBendSubsystem m_wristBendSubsystem;
     private final int m_direction;
 
-    public WristBendCommand(LinearActuatorSubsystem linearActuatorSubsystem, int direction) {
-        m_LinearActuatorSubsystem = linearActuatorSubsystem; 
+    public WristBendCommand(WristBendSubsystem wristBendSubsystem, int direction) {
+        m_wristBendSubsystem = wristBendSubsystem; 
         m_direction = direction;
-        addRequirements(m_LinearActuatorSubsystem);
+        addRequirements(m_wristBendSubsystem);
     }
 
     public void initialize() {
-        double position = m_LinearActuatorSubsystem.getPosition(); 
+        double position = m_wristBendSubsystem.getPosition(); 
         while(position <= 1 && position >= 0){
             position += .1*m_direction;
-            m_LinearActuatorSubsystem.setPosition(position);
+            m_wristBendSubsystem.setPosition(position);
         }
-        //m_LinearActuatorSubsystem.setPosition(m_speed);
+        //m_wristBendSubsystem.setPosition(m_speed);
     }
 
     public void end(boolean interrupted) {}

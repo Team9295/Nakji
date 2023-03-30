@@ -99,9 +99,9 @@ public final class Constants {
 	public static final boolean kWristRotateInvert = false;
 	public static final double kSpeedLimitFactor = 1;
   }
-  public static final class LinearActuatorConstants {
-	public static final int kLinearActuatorChannel = 9;
-	public static final boolean kLinearActuatorInvert = false;
+  public static final class WristBendConstants {
+	public static final int kWristBendChannel = 9;
+	public static final boolean kWristBendInvert = false;
 	public static final int kForwardDirection = 1;
 	public static final int kBackwardDirection = -1;
   }

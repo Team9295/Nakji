@@ -5,16 +5,16 @@ import frc.robot.subsystems.WristRotateSubsystem;
 
 public class WristRotatePositionCommand extends CommandBase{
     private final WristRotateSubsystem m_wristRotationSubsystem;
-    private final double m_Position;
+    private final double m_position;
 
-    public WristRotatePositionCommand(WristRotateSubsystem wristRotationSubsystem, double Position) {
+    public WristRotatePositionCommand(WristRotateSubsystem wristRotationSubsystem, double position) {
         m_wristRotationSubsystem = wristRotationSubsystem;
-        m_Position = Position;
+        m_position = position;
         addRequirements(m_wristRotationSubsystem);
     }
 
     public void execute() {
-        m_wristRotationSubsystem.setPosition(m_Position);
+        m_wristRotationSubsystem.setPosition(m_position);
     }
 
     public void end(boolean interrupted) {
