@@ -82,6 +82,12 @@ public final class Constants {
 	public static final double kSpeedLimitFactor = 1;
 	public static final int kPIDslot = 0; 
   }
+  public static final class ParkConstants {
+	public static final int kParkPort = 11; 
+	public static final int kParkRelayPort = 0; 
+	public static final boolean kParkInvert = false; 
+	public static final double kParkSpeed = 1; 
+  }
   public static final class SuctionConstants {
 	public static final int kSuctionPort = 10;
 	public static final int kSuctionRelayPort = 0;
