@@ -1,18 +1,20 @@
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.EncoderType;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
+import com.revrobotics.SparkMaxRelativeEncoder;
 import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
+import com.revrobotics.SparkMaxRelativeEncoder.Type;
 import frc.robot.Constants.WristRotationConstants;
 
 public class WristRotationSubsystem extends SubsystemBase {
-  private final CANSparkMax m_wristMotor = new CANSparkMax(WristRotationConstants.kWristRotationPort, MotorType.kBrushless);
-
-  private final RelativeEncoder m_encoder = m_wristMotor.getEncoder();
+  private final CANSparkMax m_wristMotor = new CANSparkMax(WristRotationConstants.kWristRotationPort, MotorType.kBrushed);
+  private final RelativeEncoder m_encoder = m_wristMotor.getEncoder(Type.kQuadrature, 1680);
   private final SparkMaxPIDController m_pidController = m_wristMotor.getPIDController();
 
   public WristRotationSubsystem() {

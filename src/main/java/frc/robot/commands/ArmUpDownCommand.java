@@ -17,7 +17,6 @@ public class ArmUpDownCommand extends CommandBase {
         addRequirements(m_ArmUpSubsystem);
     }
     public void execute() {
-        System.out.println("COMMAND RUNNING");
         double speed = Math.abs(m_speed.get()) > ControllerConstants.kDeadzone
         ? m_speed.get() : 0; 
         m_ArmUpSubsystem.setSpeed(speed*ArmUpConstants.kSpeedLimitFactor);

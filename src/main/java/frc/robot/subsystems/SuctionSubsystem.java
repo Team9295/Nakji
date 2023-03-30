@@ -11,9 +11,8 @@ import frc.robot.Constants.SuctionConstants;
 import edu.wpi.first.wpilibj.Relay;
 
 public class SuctionSubsystem extends SubsystemBase {
-  private final CANSparkMax m_suckMotor = new CANSparkMax (SuctionConstants.kSuctionPort, MotorType.kBrushless);
-  private final Relay m_relay = new Relay (SuctionConstants.kSuctionRelayPort);
-  private final RelativeEncoder m_encoder = m_suckMotor.getEncoder();
+  private final CANSparkMax m_suckMotor = new CANSparkMax(SuctionConstants.kSuctionPort, MotorType.kBrushed);
+  private final Relay m_relay = new Relay(SuctionConstants.kSuctionRelayPort);
   private final SparkMaxPIDController m_pidController = m_suckMotor.getPIDController();
 
   public SuctionSubsystem() {

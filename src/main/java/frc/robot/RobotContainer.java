@@ -42,7 +42,6 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
 	private final ArmExtendSubsystem m_armExtendSubsystem = new ArmExtendSubsystem(); 
-  private final SuctionSubsystem m_armGrabSubsystem = new SuctionSubsystem(); 
   private final ArmUpSubsystem m_armUpSubsystem = new ArmUpSubsystem(); 
   private final DriveSubsystem m_driveSubsystem = new DriveSubsystem();
   private final LinearActuatorSubsystem m_linearActuatorSubsystem = new LinearActuatorSubsystem(); 
@@ -74,17 +73,16 @@ public class RobotContainer {
   private void configureBindings() {
     //driver controls: drive and steer
     m_driveSubsystem.setDefaultCommand(
-      new ArcadeDriveCommand(m_driveSubsystem, () -> -m_driverController.getRawAxis(Axis.kLeftY),
+      new ArcadeDriveCommand(m_driveSubsystem, () -> -m_driverController.getRawAxis(Axis.kRightY),
           () -> (m_driverController.getRawAxis(Axis.kLeftTrigger) + 1) / 2,
           () -> (m_driverController.getRawAxis(Axis.kRightTrigger) + 1) / 2));
-    new POVButton(m_driverController, DPad.kLeft).whileTrue(new SuctionCommand(m_suctionSubsystem));
+    new POVButton(m_driverController, DPad.kLeft).toggleOnTrue(new SuctionCommand(m_suctionSubsystem));
     //operator controls
     //move shoulder up and down
     m_armUpSubsystem.setDefaultCommand(
       new ArmUpDownCommand(m_armUpSubsystem, () -> m_operatorController.getRawAxis(Axis.kRightY)));
       //arm extend arm retract
     m_armExtendSubsystem.setDefaultCommand(
-      //for some reason issue here don't know why, might need execute in command?
       new ArmOutInCommand(m_armExtendSubsystem, () -> m_operatorController.getRawAxis(Axis.kLeftY))); 
       //turn base left turn base right
       new JoystickButton(m_operatorController, Button.kLeftBumper).whileTrue(new BaseSpeedCommand(m_rotatingBaseSubsystem, RotatingBaseConstants.kSpeedLimitFactor)); 

@@ -26,8 +26,8 @@ public class DriveSubsystem extends SubsystemBase {
     }
 
     public void arcadeDrive(double straight, double left, double right) {
-      tankDrive(DriveConstants.kSpeedLimitFactor * (straight - left + right),
-              DriveConstants.kSpeedLimitFactor * (straight + left - right));
+      tankDrive(DriveConstants.kSpeedLimitFactor * (straight + left - right),
+              DriveConstants.kSpeedLimitFactor * (straight - left + right));
     }
 
   /**

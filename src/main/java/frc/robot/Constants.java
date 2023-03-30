@@ -16,7 +16,7 @@ public final class Constants {
   public static class ControllerConstants {
     public static final int kDriverControllerPort = 0;
     public static final int kOperatorControllerPort = 1;
-		public static final double kDeadzone = .05;
+		public static final double kDeadzone = .1;
 		public static final double kTriggerDeadzone = .05;
 
 		public static final class Axis {
@@ -59,20 +59,20 @@ public final class Constants {
 		public static final int kFollowerRightPort = 4; // right motor 4
 		public static final boolean kFollowerRightOppose = false;
 
-		public static final double kSpeedLimitFactor = .5;
-		public static final double kTurningMultiplier = .5;
+		public static final double kSpeedLimitFactor = .7;
+		public static final double kTurningMultiplier = .7;
   }
   //TODO: add constants for other subsystems (sparkmax - port, invert, percentoutput)
 
   public static final class RotatingBaseConstants {
 	public static final int kRotatingBasePort = 5;
-	public static final boolean kRotatingBaseInvert = false;
+	public static final boolean kRotatingBaseInvert = true;
 	public static final double kSpeedLimitFactor = .4;
 
   }
   public static final class ArmUpConstants {
 	public static final int kArmUpPort = 8;
-	public static final boolean kArmUpInvert = false;
+	public static final boolean kArmUpInvert = true;
 	public static final double kSpeedLimitFactor = .3;
 	public static final int kPIDSlot = 0;
   }
@@ -83,15 +83,15 @@ public final class Constants {
 	public static final int kPIDslot = 0; 
   }
   public static final class SuctionConstants {
-	public static final int kSuctionPort = 10;
+	public static final int kSuctionPort = 9;
 	public static final int kSuctionRelayPort = 0;
 	public static final boolean kSuctionInvert = false;
-	public static final double kSuctionSpeed = 1;
+	public static final double kSuctionSpeed = .5;
   }
   public static final class WristRotationConstants {
 	public static final int kWristRotationPort = 7;
 	public static final boolean kWristRotationInvert = false;
-	public static final double kSpeedLimitFactor = .2;
+	public static final double kSpeedLimitFactor = 1;
   }
   public static final class LinearActuatorConstants {
 	public static final int kLinearActuatorChannel = 9;
