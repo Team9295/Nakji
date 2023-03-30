@@ -29,7 +29,12 @@ public class ArmUpSubsystem extends SubsystemBase {
     public void setLevel(double level) {
       m_pidController.setReference(level, ControlType.kPosition, ArmUpConstants.kPIDSlot);
     }
-    public double getPosition() {
-      return m_encoder.getPosition();
-  }
+
+    public void setPosition(double position) {
+      m_encoder.setPosition(position);
+    }
+    public double getPosition(){
+     return m_encoder.getPosition(); 
+    }
+
 }

@@ -30,4 +30,11 @@ public class SuctionSubsystem extends SubsystemBase {
   public void closeValve() {
     m_relay.set(Relay.Value.kOff);
   }
+
+  public void setPosition(double position) {
+    m_suckMotor.set(position);
+  }
+  public double getPosition(){
+   return m_suckMotor.get(); 
+  }
 }

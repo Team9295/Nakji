@@ -12,6 +12,9 @@ public class LinearActuatorSubsystem extends SubsystemBase {
   }
     public void periodic() {
     }
+    public void setSpeed(double speed) {
+      m_pitchMotor.set(speed);
+    }
     public void setPosition(double position) {
         m_pitchMotor.set(position);
     }
