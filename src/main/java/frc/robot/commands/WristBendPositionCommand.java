@@ -14,10 +14,9 @@ public class WristBendPositionCommand extends CommandBase {
     }
 
     public void execute() {
-        m_wristBendSubsystem.setPosition(m_position);
+        m_wristBendSubsystem.setPosition(m_position); //position 0 to 1
     }
 
     public void end(boolean interrupted) {
-        m_wristBendSubsystem.setSpeed(0);
     }
 }

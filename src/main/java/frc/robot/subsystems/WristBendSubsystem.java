@@ -5,21 +5,18 @@ import edu.wpi.first.wpilibj.Servo;
 import frc.robot.Constants.WristBendConstants;
 
 public class WristBendSubsystem extends SubsystemBase {
-  private final Servo m_pitchMotor = new Servo(WristBendConstants.kWristBendChannel);
+  private final Servo m_motor = new Servo(WristBendConstants.kWristBendChannel);
 
   public WristBendSubsystem() {
-    m_pitchMotor.setBounds(1.95, 0, 1.5, 0, 1.05);
+    m_motor.setBounds(1.95, 0, 1.5, 0, 1.05);
   }
     public void periodic() {
     }
-    public void setSpeed(double speed) {
-      m_pitchMotor.set(speed);
-    }
     public void setPosition(double position) {
-        m_pitchMotor.set(position);
+        m_motor.set(position);
     }
     public double getPosition(){
-      return m_pitchMotor.get(); 
+      return m_motor.get(); 
     }
 
 }

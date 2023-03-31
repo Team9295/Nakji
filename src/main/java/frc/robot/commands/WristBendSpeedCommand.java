@@ -3,11 +3,11 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.WristBendSubsystem;
 
-public class WristBendCommand extends CommandBase{
+public class WristBendSpeedCommand extends CommandBase{
     private final WristBendSubsystem m_wristBendSubsystem;
     private final int m_direction;
 
-    public WristBendCommand(WristBendSubsystem wristBendSubsystem, int direction) {
+    public WristBendSpeedCommand(WristBendSubsystem wristBendSubsystem, int direction) {
         m_wristBendSubsystem = wristBendSubsystem; 
         m_direction = direction;
         addRequirements(m_wristBendSubsystem);
@@ -19,7 +19,6 @@ public class WristBendCommand extends CommandBase{
             position += .1*m_direction;
             m_wristBendSubsystem.setPosition(position);
         }
-        //m_wristBendSubsystem.setPosition(m_speed);
     }
 
     public void end(boolean interrupted) {}

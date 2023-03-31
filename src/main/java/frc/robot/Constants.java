@@ -53,7 +53,7 @@ public final class Constants {
 		public static final boolean kMasterLeftInvert = true;
 		public static final int kFollowerLeftPort = 2; // left motor 2
 		public static final boolean kFollowerLeftOppose = true;
-
+		public static final double kFineTurningSpeed = 0.1;
 		public static final int kMasterRightPort = 3; // right motor 3
 		public static final boolean kMasterRightInvert = false;
 		public static final int kFollowerRightPort = 4; // right motor 4
@@ -62,25 +62,42 @@ public final class Constants {
 		public static final double kSpeedLimitFactor = .7;
 		public static final double kTurningMultiplier = .7;
   }
-  //TODO: add constants for other subsystems (sparkmax - port, invert, percentoutput)
 
-  public static final class RotatingBaseConstants {
-	public static final int kRotatingBasePort = 5;
-	public static final boolean kRotatingBaseInvert = true;
+  public static final class TurretConstants {
+	public static final int kTurretPort = 5;
+	public static final boolean kTurretInvert = true;
 	public static final double kSpeedLimitFactor = .4;
-
+	public static final int kPIDSlot = 0;
+	public static final double kP = .01;
+	public static final double kI = 0;
+	public static final double kD = 0;
+	public static final double kFF = 0;
+	public static final double kIz = 0;
+	public static final double kMaxPosition = 8;
   }
   public static final class ShoulderConstants {
 	public static final int kShoulderPort = 8;
 	public static final boolean kShoulderInvert = true;
-	public static final double kSpeedLimitFactor = .3;
+	public static final double kSpeedLimitFactor = .5;
 	public static final int kPIDSlot = 0;
+	public static final double kP = .01;
+	public static final double kI = 0.00005;
+	public static final double kD = 0.00001249999968422344;// 0.000_03;
+	public static final double kIz = .1;
+	public static final double kFF = 0.00008040000102482736;// 0.000_193;
+	public static final double kMaxPosition = 55;
   }
   public static final class TelescopeConstants {
 	public static final int kTelescopePort = 6;
 	public static final boolean kTelescopeInvert = false;
 	public static final double kSpeedLimitFactor = 1;
-	public static final int kPIDslot = 0; 
+	public static final int kPIDSlot = 0; 
+	public static final double kP = .09;
+	public static final double kI = 0;
+	public static final double kD = 0;
+	public static final double kFF = 0;
+	public static final double kIz = 0;
+	public static final double kMaxPosition = 190;
   }
   public static final class ParkConstants {
 	public static final int kParkPort = 11; 
@@ -98,6 +115,13 @@ public final class Constants {
 	public static final int kWristRotatePort = 7;
 	public static final boolean kWristRotateInvert = false;
 	public static final double kSpeedLimitFactor = 1;
+	public static final int kPIDSlot = 0; 
+	public static final double kP = .1;
+	public static final double kI = 0;
+	public static final double kD = 0;
+	public static final double kFF = 0;
+	public static final double kIz = 0;
+	public static final double kMaxPosition = 50;
   }
   public static final class WristBendConstants {
 	public static final int kWristBendChannel = 9;

@@ -1,24 +1,24 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants.RotatingBaseConstants;
+import frc.robot.Constants.TurretConstants;
 import frc.robot.subsystems.TurretSubsystem;
 
 public class TurretSpeedCommand extends CommandBase {
-    private final TurretSubsystem m_RotatingBaseSubsystem;
+    private final TurretSubsystem m_TurretSubsystem;
     private final double m_speed;
 
-    public TurretSpeedCommand(TurretSubsystem rotatingBaseSubsystem, double speed) {
-        m_RotatingBaseSubsystem = rotatingBaseSubsystem;
+    public TurretSpeedCommand(TurretSubsystem turretSubsystem, double speed) {
+        m_TurretSubsystem = turretSubsystem;
         m_speed = speed;
-        addRequirements(m_RotatingBaseSubsystem);
+        addRequirements(m_TurretSubsystem);
     }
 
     public void execute() {
-        m_RotatingBaseSubsystem.setSpeed(m_speed*RotatingBaseConstants.kSpeedLimitFactor);
+        m_TurretSubsystem.setSpeed(m_speed*TurretConstants.kSpeedLimitFactor);
     }
 
     public void end(boolean interrupted) {
-        m_RotatingBaseSubsystem.setSpeed(0);
+        m_TurretSubsystem.setSpeed(0);
     }
 }
