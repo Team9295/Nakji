@@ -91,12 +91,12 @@ public class RobotContainer {
       new ArcadeDriveCommand(m_driveSubsystem, () -> -m_driverController.getRawAxis(Axis.kRightY),
           () -> (m_driverController.getRawAxis(Axis.kLeftTrigger) + 1) / 2,
           () -> (m_driverController.getRawAxis(Axis.kRightTrigger) + 1) / 2));
-
-    new JoystickButton(m_driverController, Button.kRightBumper).onTrue(new ArcadeDriveCommand(m_driveSubsystem,
+    //TODO: faulty bumper onTrue acting as toggleOnTrue
+    new JoystickButton(m_driverController, Button.kRightBumper).whileTrue(new ArcadeDriveCommand(m_driveSubsystem,
       () -> 0.0, () -> -DriveConstants.kFineTurningSpeed,
       () -> DriveConstants.kFineTurningSpeed));
-
-    new JoystickButton(m_driverController, Button.kLeftBumper).onTrue(new ArcadeDriveCommand(m_driveSubsystem,
+    //TODO: faulty bumper onTrue acting as toggleOnTrue
+    new JoystickButton(m_driverController, Button.kLeftBumper).whileTrue(new ArcadeDriveCommand(m_driveSubsystem,
       () -> 0.0, () -> DriveConstants.kFineTurningSpeed,
       () -> -DriveConstants.kFineTurningSpeed));
     new POVButton(m_driverController, DPad.kLeft).toggleOnTrue(new SuctionCommand(m_suctionSubsystem));
