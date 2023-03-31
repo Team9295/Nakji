@@ -39,8 +39,8 @@ public class ArcadeDriveCommand extends CommandBase {
 		double speedRight = Math.abs(m_speedRight.get()) > ControllerConstants.kTriggerDeadzone ? m_speedRight.get()
 				: 0;
 		if (speedStraight != 0) {
-			speedLeft *= DriveConstants.kTurningMultiplier;
-			speedRight *= DriveConstants.kTurningMultiplier;
+			speedLeft = Math.pow(speedLeft * DriveConstants.kTurningMultiplier, DriveConstants.kTurningPowerMultiplier);
+			speedRight = Math.pow(speedRight * DriveConstants.kTurningMultiplier, DriveConstants.kTurningPowerMultiplier);
 		}
 		m_driveSubsystem.arcadeDrive(speedStraight, speedLeft, speedRight);
 	}

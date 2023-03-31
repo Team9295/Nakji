@@ -53,7 +53,7 @@ public final class Constants {
 		public static final boolean kMasterLeftInvert = true;
 		public static final int kFollowerLeftPort = 2; // left motor 2
 		public static final boolean kFollowerLeftOppose = true;
-		public static final double kFineTurningSpeed = 0.1;
+		public static final double kFineTurningSpeed = 0.025;
 		public static final int kMasterRightPort = 3; // right motor 3
 		public static final boolean kMasterRightInvert = false;
 		public static final int kFollowerRightPort = 4; // right motor 4
@@ -61,6 +61,8 @@ public final class Constants {
 
 		public static final double kSpeedLimitFactor = .7;
 		public static final double kTurningMultiplier = .7;
+		public static final double kSpeedPowerMultiplier = 3;
+		public static final double kTurningPowerMultiplier = 2;
   }
 
   public static final class TurretConstants {
@@ -110,11 +112,12 @@ public final class Constants {
 	public static final int kSuctionRelayPort = 0;
 	public static final boolean kSuctionInvert = false;
 	public static final double kSuctionSpeed = .5;
+	public static final double kParkSuctionSpeed = 1;
   }
   public static final class WristRotateConstants {
 	public static final int kWristRotatePort = 7;
 	public static final boolean kWristRotateInvert = false;
-	public static final double kSpeedLimitFactor = 1;
+	public static final double kSpeedLimitFactor = .2;
 	public static final int kPIDSlot = 0; 
 	public static final double kP = .1;
 	public static final double kI = 0;
