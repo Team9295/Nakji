@@ -26,18 +26,22 @@ public class ShoulderPositionCommand extends CommandBase{
 
     public void execute() {
         System.out.println("VALUE IS "+m_thresh.get());
+        double holdPos=0;
         if(m_thresh.get() <= -0.1){
             m_shoulderSubsystem.setPosition(m_position);
+            holdPos=m_shoulderSubsystem.getPosition();
         }
         else if(m_thresh.get() >= 0.1){
             m_shoulderSubsystem.setPosition(-10);
+            holdPos=m_shoulderSubsystem.getPosition();
         }
         else if(m_thresh.get() <= 0.1 && m_thresh.get() >= -0.1){
-            m_shoulderSubsystem.setSpeed(0);
+            m_shoulderSubsystem.setPosition(holdPos);
         }
     }
 
     public void end(boolean interrupted) {
-        m_shoulderSubsystem.setSpeed(0);
+        double target=m_shoulderSubsystem.getPosition();
+        m_shoulderSubsystem.setPosition(target);
     }
 }
