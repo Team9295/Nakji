@@ -128,6 +128,8 @@ public final class Constants {
   }
   public static final class WristBendConstants {
 	public static final int kWristBendChannel = 9;
+	public static final int kWristServo1Channel = 8;
+	public static final int kWristServo2Channel = 7;
 	public static final boolean kWristBendInvert = false;
 	public static final int kForwardDirection = 1;
 	public static final int kBackwardDirection = -1;
