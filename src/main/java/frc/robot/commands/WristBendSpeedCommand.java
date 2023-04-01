@@ -2,6 +2,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.WristBendSubsystem;
+import frc.robot.Constants.WristBendConstants;
 
 public class WristBendSpeedCommand extends CommandBase{
     private final WristBendSubsystem m_wristBendSubsystem;
@@ -16,7 +17,7 @@ public class WristBendSpeedCommand extends CommandBase{
     public void initialize() {
         double position = m_wristBendSubsystem.getPosition(); 
         while(position <= 1 && position >= 0){
-            position += .1*m_direction;
+            position += WristBendConstants.kWristBendSpeed*m_direction;
             m_wristBendSubsystem.setPosition(position);
         }
     }

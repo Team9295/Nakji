@@ -25,9 +25,22 @@ public class DriveSubsystem extends SubsystemBase {
     public void periodic() {
     }
 
+    // Returns sign of double
+    public int getSign(double num) {
+      if(num>0) {return 1;}
+      else if(num==0) {return 0;}
+      else if(num<0) {return -1;}
+      else {return 1/0;}
+    }
+
+    // Multiplying nth power times sign to get same sign as before
+    // public void arcadeDrive(double straight, double left, double right) {
+    //   tankDrive(Math.pow(DriveConstants.kSpeedLimitFactor * (straight + left - right), DriveConstants.kSpeedPowerMultiplier) * getSign(straight + left - right),
+    //             Math.pow(DriveConstants.kSpeedLimitFactor * (straight - left + right), DriveConstants.kSpeedPowerMultiplier) * getSign(straight - left + right));
+    // }
+
     public void arcadeDrive(double straight, double left, double right) {
-      tankDrive(Math.pow(DriveConstants.kSpeedLimitFactor * (straight + left - right), DriveConstants.kSpeedPowerMultiplier),
-                Math.pow(DriveConstants.kSpeedLimitFactor * (straight - left + right), DriveConstants.kSpeedPowerMultiplier));
+      tankDrive(DriveConstants.kSpeedLimitFactor * (straight + left - right), DriveConstants.kSpeedLimitFactor * (straight - left + right));
     }
 
   /**

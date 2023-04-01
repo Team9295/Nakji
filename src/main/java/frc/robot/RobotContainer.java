@@ -45,6 +45,10 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
+import edu.wpi.first.wpilibj.Relay;
+
+
+
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -99,7 +103,14 @@ public class RobotContainer {
     new JoystickButton(m_driverController, Button.kLeftBumper).whileTrue(new ArcadeDriveCommand(m_driveSubsystem,
       () -> 0.0, () -> DriveConstants.kFineTurningSpeed,
       () -> -DriveConstants.kFineTurningSpeed));
+
     new POVButton(m_driverController, DPad.kLeft).toggleOnTrue(new SuctionCommand(m_suctionSubsystem));
+
+    // Driver direct slow shoulder control to do
+
+    // Driver direct slow turret control to do
+
+    
 
     /* =========================================
      * |           OPERATOR CONTROLS           |
@@ -107,10 +118,10 @@ public class RobotContainer {
      */
     //move shoulder up and down
     m_shoulderSubsystem.setDefaultCommand(
-      new ShoulderPositionCommand(m_shoulderSubsystem, () -> m_operatorController.getRawAxis(Axis.kRightY), -ShoulderConstants.kMaxPosition));
+      new ShoulderPositionCommand(m_shoulderSubsystem, () -> -m_operatorController.getRawAxis(Axis.kRightY), -ShoulderConstants.kMaxPosition));
       
       new JoystickButton(m_operatorController, Button.kRightTriggerButton).whileTrue(
-        new ShoulderSpeedCommand(m_shoulderSubsystem, () -> m_operatorController.getRawAxis(Axis.kRightY)));
+        new ShoulderSpeedCommand(m_shoulderSubsystem, () -> m_operatorController.getRawAxis(Axis.kRightY)/2));
       // m_shoulderSubsystem.setDefaultCommand(
       // new ShoulderSpeedCommand(m_shoulderSubsystem, () -> m_operatorController.getRawAxis(Axis.kRightY)));
       //arm extend arm retract

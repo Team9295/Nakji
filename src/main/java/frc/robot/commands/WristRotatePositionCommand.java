@@ -15,6 +15,7 @@ public class WristRotatePositionCommand extends CommandBase{
 
     public void execute() {
         m_wristRotationSubsystem.setPosition(m_position);
+        System.out.println(m_wristRotationSubsystem.getPosition());
     }
 
     public void end(boolean interrupted) {

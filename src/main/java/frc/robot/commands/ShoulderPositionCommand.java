@@ -4,11 +4,13 @@ import java.util.function.Supplier;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ShoulderSubsystem;
+import frc.robot.Constants.ShoulderConstants;
 
 public class ShoulderPositionCommand extends CommandBase{
     private final ShoulderSubsystem m_shoulderSubsystem;
     private final double m_position;
     private final Supplier<Double> m_thresh;
+    private double holdPos=0;
 
     public ShoulderPositionCommand(ShoulderSubsystem shoulderSubsystem, double position) {
         m_shoulderSubsystem = shoulderSubsystem;
@@ -24,20 +26,25 @@ public class ShoulderPositionCommand extends CommandBase{
         addRequirements(m_shoulderSubsystem);
     }
 
+    public void initialize() {
+        holdPos = -ShoulderConstants.kMinPosition;
+        m_shoulderSubsystem.setPosition(holdPos);
+    }
+
     public void execute() {
-        System.out.println("VALUE IS "+m_thresh.get());
-        double holdPos=0;
-        if(m_thresh.get() <= -0.1){
-            m_shoulderSubsystem.setPosition(m_position);
-            holdPos=m_shoulderSubsystem.getPosition();
-        }
-        else if(m_thresh.get() >= 0.1){
-            m_shoulderSubsystem.setPosition(-10);
-            holdPos=m_shoulderSubsystem.getPosition();
-        }
-        else if(m_thresh.get() <= 0.1 && m_thresh.get() >= -0.1){
+        // System.out.println("holdPos: "+holdPos);
+        // System.out.println("Current pos: " + m_shoulderSubsystem.getPosition());
+        if(m_thresh.get() >= 0.1){
+            holdPos = holdPos >= m_position ? holdPos + -m_thresh.get() * ShoulderConstants.kStepSize: holdPos;
             m_shoulderSubsystem.setPosition(holdPos);
         }
+        else if(m_thresh.get() <= -0.1){
+            holdPos = holdPos <= -ShoulderConstants.kMinPosition ? holdPos + -m_thresh.get() * ShoulderConstants.kStepSize : holdPos;
+            m_shoulderSubsystem.setPosition(holdPos);
+        }
+        // else if(m_thresh.get() <= 0.1 && m_thresh.get() >= -0.1){
+        //     m_shoulderSubsystem.setPosition(holdPos);
+        // }
     }
 
     public void end(boolean interrupted) {
