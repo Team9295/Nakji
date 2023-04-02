@@ -61,14 +61,14 @@ public final class Constants {
 
 		public static final double kSpeedLimitFactor = .7;
 		public static final double kTurningMultiplier = 1;
-		public static final double kSpeedPowerMultiplier = 2;
-		public static final double kTurningPowerMultiplier = 2;
+		public static final double kSpeedPowerMultiplier = 1;
+		public static final double kTurningPowerMultiplier = 1;
   }
 
   public static final class TurretConstants {
 	public static final int kTurretPort = 5;
 	public static final boolean kTurretInvert = true;
-	public static final double kSpeedLimitFactor = 1;
+	public static final double kSpeedLimitFactor = .4;
 	public static final int kPIDSlot = 0;
 	public static final double kP = .01;
 	public static final double kI = 0;
@@ -90,6 +90,10 @@ public final class Constants {
 	public static final double kMaxPosition = 57;
 	public static final double kMinPosition = 10;
 	public static final double kStepSize = 1;
+	public static final double kBasePos = 56.5;
+	public static final double kMidPos = 35;
+	public static final double kTopPos = 20;
+	public static final double kRapidSpeed = 0.5;
   }
   public static final class TelescopeConstants {
 	public static final int kTelescopePort = 6;
@@ -121,12 +125,12 @@ public final class Constants {
 	public static final boolean kWristRotateInvert = false;
 	public static final double kSpeedLimitFactor = .5;
 	public static final int kPIDSlot = 0; 
-	public static final double kP = .1;
+	public static final double kP = .03;
 	public static final double kI = 0;
 	public static final double kD = 0;
 	public static final double kFF = 0;
 	public static final double kIz = 0;
-	public static final double kMaxPosition = 50;
+	public static final double kMaxPosition = .25;
   }
   public static final class WristBendConstants {
 	public static final int kWristBendChannel = 9;

@@ -9,6 +9,7 @@ import com.revrobotics.SparkMaxRelativeEncoder.Type;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.WristRotateConstants;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class WristRotateSubsystem extends SubsystemBase {
   private final CANSparkMax m_motor = new CANSparkMax(WristRotateConstants.kWristRotatePort, MotorType.kBrushed);
@@ -37,7 +38,7 @@ public class WristRotateSubsystem extends SubsystemBase {
       m_pidController.setReference(position, ControlType.kPosition, WristRotateConstants.kPIDSlot);
     }
     public double getPosition(){
-     return m_motor.get(); 
+     return m_encoder.getPosition(); 
     }
     public void resetEncoder() {
         m_encoder.setPosition(0);

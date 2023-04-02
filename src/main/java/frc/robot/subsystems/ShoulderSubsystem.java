@@ -15,6 +15,8 @@ public class ShoulderSubsystem extends SubsystemBase {
   private final RelativeEncoder m_encoder = m_motor.getEncoder();
   private final SparkMaxPIDController m_pidController = m_motor.getPIDController();
 
+  private double m_setPoint;
+
   public ShoulderSubsystem() {
     m_motor.restoreFactoryDefaults();
     m_motor.setInverted(ShoulderConstants.kShoulderInvert);
@@ -26,18 +28,28 @@ public class ShoulderSubsystem extends SubsystemBase {
     m_pidController.setD(ShoulderConstants.kD);
     m_pidController.setFF(ShoulderConstants.kFF);
     resetEncoder();
+
+    setPosition(-ShoulderConstants.kMinPosition); 
   }
     public void periodic() {
     }
     public void setSpeed(double speed) {
         m_motor.set(speed);
     }
+    public void setMaxSpeed(double maxSpeed) {
+      m_pidController.setOutputRange(-maxSpeed, maxSpeed);
+    }
     public void setLevel(double level) {
       m_pidController.setReference(level, ControlType.kPosition, ShoulderConstants.kPIDSlot);
     }
 
     public void setPosition(double position) {
+      // System.out.println("setpoint: " + position);
+      m_setPoint = position;
       m_pidController.setReference(position, ControlType.kPosition, ShoulderConstants.kPIDSlot);
+    }
+    public double getReference() {
+      return m_setPoint;
     }
     public double getPosition(){
      return m_encoder.getPosition(); 

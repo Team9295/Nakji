@@ -118,7 +118,7 @@ public class RobotContainer {
      */
     //move shoulder up and down
     m_shoulderSubsystem.setDefaultCommand(
-      new ShoulderPositionCommand(m_shoulderSubsystem, () -> -m_operatorController.getRawAxis(Axis.kRightY), -ShoulderConstants.kMaxPosition));
+      new ShoulderPositionCommand(m_shoulderSubsystem, () -> -m_operatorController.getRawAxis(Axis.kRightY)));
       
       new JoystickButton(m_operatorController, Button.kRightTriggerButton).whileTrue(
         new ShoulderSpeedCommand(m_shoulderSubsystem, () -> m_operatorController.getRawAxis(Axis.kRightY)/2));
@@ -145,12 +145,18 @@ public class RobotContainer {
       new JoystickButton(m_operatorController, Button.kRightMenu).whileTrue(new WristRotateSpeedCommand(m_wristRotateSubsystem, -WristRotateConstants.kSpeedLimitFactor)); 
       
       //POSITION CONTROL
-      // new JoystickButton(m_operatorController, DPad.kLeft).whileTrue(new WristRotatePositionCommand(m_wristRotateSubsystem, WristRotateConstants.kMaxPosition)); 
-      // new JoystickButton(m_operatorController, DPad.kRight).whileTrue(new WristRotatePositionCommand(m_wristRotateSubsystem, -WristRotateConstants.kMaxPosition)); 
+      // new JoystickButton(m_operatorController, Button.kLeftMenu).whileTrue(new WristRotatePositionCommand(m_wristRotateSubsystem, WristRotateConstants.kMaxPosition)); 
+      // new JoystickButton(m_operatorController, Button.kRightMenu).whileTrue(new WristRotatePositionCommand(m_wristRotateSubsystem, -WristRotateConstants.kMaxPosition)); 
       
       //bend wrist up bend wrist down
       new POVButton(m_operatorController, DPad.kUp).whileTrue(new WristBendSpeedCommand(m_wristBendSubsystem, 1));
       new POVButton(m_operatorController, DPad.kDown).whileTrue(new WristBendSpeedCommand(m_wristBendSubsystem, -1));
+
+      //preset position for shoulder
+      new JoystickButton(m_operatorController, Button.kA).onTrue(new ShoulderPositionCommand(m_shoulderSubsystem, -ShoulderConstants.kBasePos));
+      new JoystickButton(m_operatorController, Button.kX).onTrue(new ShoulderPositionCommand(m_shoulderSubsystem, -ShoulderConstants.kMidPos));
+      new JoystickButton(m_operatorController, Button.kY).onTrue(new ShoulderPositionCommand(m_shoulderSubsystem, -ShoulderConstants.kTopPos));
+      new JoystickButton(m_operatorController, Button.kB).onTrue(new ShoulderPositionCommand(m_shoulderSubsystem, -ShoulderConstants.kMinPosition));
 
      
       // new JoystickButton(m_operatorController, Button.kA).whileTrue(new ExtendLevelCommand(m_telescopeSubsystem, ArmExtendConstants.kPIDSlot) && new ArmUpLevelCommand(m_shoulderSubsystem, ArmUpContants.kPIDSlot)); 

@@ -5,12 +5,15 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import frc.robot.Constants.DriveConstants;
+import frc.robot.Constants.ControllerConstants;
 
 public class DriveSubsystem extends SubsystemBase {
   private final TalonSRX m_masterLeft = new TalonSRX(DriveConstants.kMasterLeftPort);
   private final TalonSRX m_followerLeft = new TalonSRX(DriveConstants.kFollowerLeftPort);
   private final TalonSRX m_masterRight = new TalonSRX(DriveConstants.kMasterRightPort);
   private final TalonSRX m_followerRight = new TalonSRX(DriveConstants.kFollowerRightPort);
+  private double leftDriveSpeed;
+  private double rightDriveSpeed;
 
   public DriveSubsystem() {
     m_masterLeft.configFactoryDefault();
@@ -40,7 +43,15 @@ public class DriveSubsystem extends SubsystemBase {
     // }
 
     public void arcadeDrive(double straight, double left, double right) {
-      tankDrive(DriveConstants.kSpeedLimitFactor * (straight + left - right), DriveConstants.kSpeedLimitFactor * (straight - left + right));
+      leftDriveSpeed = DriveConstants.kSpeedLimitFactor * (straight + left - right) / (1-ControllerConstants.kDeadzone);
+      rightDriveSpeed = DriveConstants.kSpeedLimitFactor * (straight - left + right) / (1-ControllerConstants.kDeadzone);
+
+      if(DriveConstants.kSpeedPowerMultiplier != 1) {
+        leftDriveSpeed = Math.pow(leftDriveSpeed, DriveConstants.kSpeedPowerMultiplier);
+        rightDriveSpeed = Math.pow(rightDriveSpeed, DriveConstants.kSpeedPowerMultiplier);
+      }
+
+      tankDrive(leftDriveSpeed, rightDriveSpeed);
     }
 
   /**

@@ -23,7 +23,7 @@ public class WristBendSubsystem extends SubsystemBase {
         m_motor.set(position);
         m_Servo1.set(position);
         m_Servo2.set(position);
-        System.out.println("Pos: " + position);
+        // System.out.println("Pos: " + position);
     }
     public double getPosition(){
       return m_motor.get(); 
