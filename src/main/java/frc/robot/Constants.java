@@ -61,14 +61,14 @@ public final class Constants {
 
 		public static final double kSpeedLimitFactor = .7;
 		public static final double kTurningMultiplier = 1;
-		public static final double kSpeedPowerMultiplier = 1;
-		public static final double kTurningPowerMultiplier = 1;
+		public static final double kSpeedPowerMultiplier = 1; // Not working rn - keep at 1
+		public static final double kTurningPowerMultiplier = 1; // Not working rn - keep at 1
   }
 
   public static final class TurretConstants {
 	public static final int kTurretPort = 5;
 	public static final boolean kTurretInvert = true;
-	public static final double kSpeedLimitFactor = .4;
+	public static final double kSpeedLimitFactor = 1;
 	public static final int kPIDSlot = 0;
 	public static final double kP = .01;
 	public static final double kI = 0;
@@ -93,6 +93,7 @@ public final class Constants {
 	public static final double kBasePos = 56.5;
 	public static final double kMidPos = 35;
 	public static final double kTopPos = 20;
+	public static final double kRetractPos = 5;
 	public static final double kRapidSpeed = 0.5;
   }
   public static final class TelescopeConstants {

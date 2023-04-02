@@ -156,7 +156,7 @@ public class RobotContainer {
       new JoystickButton(m_operatorController, Button.kA).onTrue(new ShoulderPositionCommand(m_shoulderSubsystem, -ShoulderConstants.kBasePos));
       new JoystickButton(m_operatorController, Button.kX).onTrue(new ShoulderPositionCommand(m_shoulderSubsystem, -ShoulderConstants.kMidPos));
       new JoystickButton(m_operatorController, Button.kY).onTrue(new ShoulderPositionCommand(m_shoulderSubsystem, -ShoulderConstants.kTopPos));
-      new JoystickButton(m_operatorController, Button.kB).onTrue(new ShoulderPositionCommand(m_shoulderSubsystem, -ShoulderConstants.kMinPosition));
+      new JoystickButton(m_operatorController, Button.kB).onTrue(new ShoulderPositionCommand(m_shoulderSubsystem, -ShoulderConstants.kRetractPos));
 
      
       // new JoystickButton(m_operatorController, Button.kA).whileTrue(new ExtendLevelCommand(m_telescopeSubsystem, ArmExtendConstants.kPIDSlot) && new ArmUpLevelCommand(m_shoulderSubsystem, ArmUpContants.kPIDSlot)); 
