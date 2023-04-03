@@ -90,6 +90,7 @@ public final class Constants {
 	public static final double kMaxPosition = 57;
 	public static final double kMinPosition = 10;
 	public static final double kStepSize = 1;
+	public static final double kDriverStepSize = .5;
 	public static final double kBasePos = 56.5;
 	public static final double kMidPos = 35;
 	public static final double kTopPos = 20;

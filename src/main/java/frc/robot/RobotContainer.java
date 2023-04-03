@@ -118,7 +118,7 @@ public class RobotContainer {
      */
     //move shoulder up and down
     m_shoulderSubsystem.setDefaultCommand(
-      new ShoulderPositionCommand(m_shoulderSubsystem, () -> -m_operatorController.getRawAxis(Axis.kRightY)));
+      new ShoulderPositionCommand(m_shoulderSubsystem, () -> -m_operatorController.getRawAxis(Axis.kRightY), () -> -m_driverController.getRawAxis(Axis.kLeftY)));
       
       new JoystickButton(m_operatorController, Button.kRightTriggerButton).whileTrue(
         new ShoulderSpeedCommand(m_shoulderSubsystem, () -> m_operatorController.getRawAxis(Axis.kRightY)/2));

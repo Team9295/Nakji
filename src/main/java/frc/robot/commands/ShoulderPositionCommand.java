@@ -11,20 +11,23 @@ public class ShoulderPositionCommand extends CommandBase{
     private final ShoulderSubsystem m_shoulderSubsystem;
     private final double m_position;
     private final Supplier<Double> m_thresh;
+    private final Supplier<Double> m_thresh2;
     private final boolean m_fixedPosition;
 
     public ShoulderPositionCommand(ShoulderSubsystem shoulderSubsystem, double position) {
         m_shoulderSubsystem = shoulderSubsystem;
         m_position = position;
         m_thresh = () -> 0.0;
+        m_thresh2 = () -> 0.0;
         m_fixedPosition = true;
         addRequirements(m_shoulderSubsystem);
     }
 
-    public ShoulderPositionCommand(ShoulderSubsystem shoulderSubsystem, Supplier<Double> thresh) {
+    public ShoulderPositionCommand(ShoulderSubsystem shoulderSubsystem, Supplier<Double> thresh, Supplier<Double> thresh2) {
         m_shoulderSubsystem = shoulderSubsystem;
         m_position = m_shoulderSubsystem.getReference();
         m_thresh = thresh;
+        m_thresh2 = thresh2;
         m_fixedPosition = false;
         addRequirements(m_shoulderSubsystem);
     }
@@ -41,12 +44,19 @@ public class ShoulderPositionCommand extends CommandBase{
     public void execute() {
         // System.out.println("holdPos: "+holdPos);
         // System.out.println("Current pos: " + m_shoulderSubsystem.getPosition());
-        if(m_thresh.get() >= 0.1){
+        if(m_thresh2.get() >= 0.1) {
+            double currPosition = m_shoulderSubsystem.getReference();
+            double newPosition = currPosition >= -ShoulderConstants.kMaxPosition ? currPosition + -m_thresh.get() * ShoulderConstants.kDriverStepSize: currPosition;
+            m_shoulderSubsystem.setPosition(newPosition);
+        } else if(m_thresh2.get() <= -0.1) {
+            double currPosition = m_shoulderSubsystem.getReference();
+            double newPosition = currPosition >= -ShoulderConstants.kMaxPosition ? currPosition + -m_thresh.get() * ShoulderConstants.kDriverStepSize: currPosition;
+            m_shoulderSubsystem.setPosition(newPosition);
+        } else if(m_thresh.get() >= 0.1) {
             double currPosition = m_shoulderSubsystem.getReference();
             double newPosition = currPosition >= -ShoulderConstants.kMaxPosition ? currPosition + -m_thresh.get() * ShoulderConstants.kStepSize: currPosition;
             m_shoulderSubsystem.setPosition(newPosition);
-        }
-        else if(m_thresh.get() <= -0.1){
+        } else if(m_thresh.get() <= -0.1) {
             double currPosition = m_shoulderSubsystem.getReference();
             double newPosition = currPosition <= -ShoulderConstants.kMinPosition ? currPosition + -m_thresh.get() * ShoulderConstants.kStepSize: currPosition;
             m_shoulderSubsystem.setPosition(newPosition);
