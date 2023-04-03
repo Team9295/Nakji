@@ -157,17 +157,26 @@ public class RobotContainer {
       //base
       new JoystickButton(m_operatorController, Button.kA).onTrue(new ParallelCommandGroup(
         new ShoulderPositionCommand(m_shoulderSubsystem, -ShoulderConstants.kBasePos),
-        new TelescopePositionCommand(m_telescopeSubsystem, () -> m_operatorController.getRawAxis(Axis.kLeftY), TelescopeConstants.kBasePos)
+        new TelescopePositionCommand(m_telescopeSubsystem, () -> m_operatorController.getRawAxis(Axis.kLeftY), TelescopeConstants.kBasePos),
+        new WristRotatePositionCommand(m_wristRotateSubsystem, 0),
+        new WristBendPositionCommand(m_wristBendSubsystem, WristBendConstants.kBasePos),
+        new TurretPositionCommand(m_turretSubsystem, 0)
       ));
       //mid
       new JoystickButton(m_operatorController, Button.kX).onTrue(new ParallelCommandGroup(
         new ShoulderPositionCommand(m_shoulderSubsystem, -ShoulderConstants.kMidPos),
-        new TelescopePositionCommand(m_telescopeSubsystem, () -> m_operatorController.getRawAxis(Axis.kLeftY), TelescopeConstants.kMidPos)
+        new TelescopePositionCommand(m_telescopeSubsystem, () -> m_operatorController.getRawAxis(Axis.kLeftY), TelescopeConstants.kMidPos), 
+        new WristRotatePositionCommand(m_wristRotateSubsystem, 0),
+        new WristBendPositionCommand(m_wristBendSubsystem, WristBendConstants.kMidPos),
+        new TurretPositionCommand(m_turretSubsystem, 0)
       ));
       //top
       new JoystickButton(m_operatorController, Button.kY).onTrue(new ParallelCommandGroup(
         new ShoulderPositionCommand(m_shoulderSubsystem, -ShoulderConstants.kTopPos),
-        new TelescopePositionCommand(m_telescopeSubsystem, () -> m_operatorController.getRawAxis(Axis.kLeftY), TelescopeConstants.kTopPos)
+        new TelescopePositionCommand(m_telescopeSubsystem, () -> m_operatorController.getRawAxis(Axis.kLeftY), TelescopeConstants.kTopPos),
+        new WristRotatePositionCommand(m_wristRotateSubsystem, 0),
+        new WristBendPositionCommand(m_wristBendSubsystem, WristBendConstants.kTopPos),
+        new TurretPositionCommand(m_turretSubsystem, 0)
       ));
       //retract
       new JoystickButton(m_operatorController, Button.kB).onTrue(new ParallelCommandGroup(

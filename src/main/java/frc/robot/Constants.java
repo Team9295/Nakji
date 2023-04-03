@@ -148,5 +148,8 @@ public final class Constants {
 	public static final int kForwardDirection = 1;
 	public static final int kBackwardDirection = -1;
 	public static final double kWristBendSpeed = .00001;
+	public static final double kBasePos = 56.5;
+	public static final double kMidPos = 35;
+	public static final double kTopPos = 20;
   }
 }
