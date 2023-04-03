@@ -108,9 +108,10 @@ public final class Constants {
 	public static final double kFF = 0;
 	public static final double kIz = 0;
 	public static final double kMaxPosition = 190;
+	//The following are randomly chosen idk what they should actually be
 	public static final double kBasePos = 0;
-	public static final double kMidPos = 10;
-	public static final double kTopPos = 20;
+	public static final double kMidPos = 95;
+	public static final double kTopPos = 190;
 	public static final double kRetractPos = 0;
 	public static final double kRapidSpeed = kSpeedLimitFactor/2;
   }
