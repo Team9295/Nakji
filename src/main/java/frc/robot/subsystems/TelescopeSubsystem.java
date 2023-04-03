@@ -34,6 +34,9 @@ public class TelescopeSubsystem extends SubsystemBase {
     public void setDirection(double direction) {
       m_motor.set(direction);
     }
+    public double getPosition() {
+      return m_encoder.getPosition();
+    }
 
     public void setPosition(double position) {
       m_pidController.setReference(position, ControlType.kPosition, TelescopeConstants.kPIDSlot);

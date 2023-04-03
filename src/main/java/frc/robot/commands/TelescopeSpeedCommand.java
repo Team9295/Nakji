@@ -18,11 +18,23 @@ public class TelescopeSpeedCommand extends CommandBase {
         addRequirements(m_TelescopeSubsystem);
     }
 
+    public TelescopeSpeedCommand(TelescopeSubsystem TelescopeSubsystem, double position) {
+        m_TelescopeSubsystem = TelescopeSubsystem;
+        m_TelescopeSubsystem.setPosition(position);
+        // -1 and 1 may need to be reversed
+        if(m_TelescopeSubsystem.getPosition()-position>0)
+        {
+            m_speed = () -> -1.0;
+        } else {
+            m_speed = () -> 1.0;
+        }
+        
+    }
+
     public void execute() {
         double speed = Math.abs(m_speed.get()) > ControllerConstants.kDeadzone
         ? m_speed.get() : 0; 
         m_TelescopeSubsystem.setSpeed(speed*TelescopeConstants.kSpeedLimitFactor);
-        
     }
 
     public void end(boolean interrupted) {
