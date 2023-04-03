@@ -35,6 +35,9 @@ public class TurretSubsystem extends SubsystemBase {
     public void setPosition(double position) {
       m_pidController.setReference(position, ControlType.kPosition, TurretConstants.kPIDSlot);
     }
+    public double getPosition() {
+      return m_encoder.getPosition();
+    }
     public void resetEncoder() {
         m_encoder.setPosition(0);
         setPosition(0);

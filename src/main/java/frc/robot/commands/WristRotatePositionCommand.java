@@ -14,10 +14,14 @@ public class WristRotatePositionCommand extends CommandBase{
     }
 
     public void execute() {
+        // System.out.println("wrist target position: " + m_position);
+        // System.out.println("wrist actual position: " + m_wristRotationSubsystem.getPosition());
         m_wristRotationSubsystem.setPosition(m_position);
     }
 
     public void end(boolean interrupted) {
         m_wristRotationSubsystem.setSpeed(0);
     }
+
+
 }

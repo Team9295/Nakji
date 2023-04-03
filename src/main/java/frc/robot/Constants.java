@@ -53,41 +53,49 @@ public final class Constants {
 		public static final boolean kMasterLeftInvert = true;
 		public static final int kFollowerLeftPort = 2; // left motor 2
 		public static final boolean kFollowerLeftOppose = true;
-		public static final double kFineTurningSpeed = 0.025;
+		public static final double kFineTurningSpeed = 0.1;
 		public static final int kMasterRightPort = 3; // right motor 3
 		public static final boolean kMasterRightInvert = false;
 		public static final int kFollowerRightPort = 4; // right motor 4
 		public static final boolean kFollowerRightOppose = false;
 
 		public static final double kSpeedLimitFactor = .7;
-		public static final double kTurningMultiplier = .7;
-		public static final double kSpeedPowerMultiplier = 3;
-		public static final double kTurningPowerMultiplier = 2;
+		public static final double kTurningMultiplier = 1;
+		public static final double kSpeedPowerMultiplier = 1; // Not working rn - keep at 1
+		public static final double kTurningPowerMultiplier = 1; // Not working rn - keep at 1
   }
 
   public static final class TurretConstants {
 	public static final int kTurretPort = 5;
 	public static final boolean kTurretInvert = true;
-	public static final double kSpeedLimitFactor = .4;
+	public static final double kSpeedLimitFactor = 1;
 	public static final int kPIDSlot = 0;
 	public static final double kP = .01;
 	public static final double kI = 0;
 	public static final double kD = 0;
 	public static final double kFF = 0;
 	public static final double kIz = 0;
-	public static final double kMaxPosition = 8;
+	public static final double kMaxPosition = 3;
   }
   public static final class ShoulderConstants {
 	public static final int kShoulderPort = 8;
 	public static final boolean kShoulderInvert = true;
 	public static final double kSpeedLimitFactor = .5;
 	public static final int kPIDSlot = 0;
-	public static final double kP = .01;
-	public static final double kI = 0.00005;
+	public static final double kP = .06;
+	public static final double kI = 0.0000001;
 	public static final double kD = 0.00001249999968422344;// 0.000_03;
 	public static final double kIz = .1;
 	public static final double kFF = 0.00008040000102482736;// 0.000_193;
-	public static final double kMaxPosition = 55;
+	public static final double kMaxPosition = 57;
+	public static final double kMinPosition = 10;
+	public static final double kStepSize = 1;
+	public static final double kDriverStepSize = .5;
+	public static final double kBasePos = 56.5;
+	public static final double kMidPos = 35;
+	public static final double kTopPos = 20;
+	public static final double kRetractPos = 5;
+	public static final double kRapidSpeed = kSpeedLimitFactor;
   }
   public static final class TelescopeConstants {
 	public static final int kTelescopePort = 6;
@@ -100,6 +108,12 @@ public final class Constants {
 	public static final double kFF = 0;
 	public static final double kIz = 0;
 	public static final double kMaxPosition = 190;
+	//The following are randomly chosen idk what they should actually be
+	public static final double kBasePos = 0;
+	public static final double kMidPos = 95;
+	public static final double kTopPos = 190;
+	public static final double kRetractPos = 0;
+	public static final double kRapidSpeed = kSpeedLimitFactor/2;
   }
   public static final class ParkConstants {
 	public static final int kParkPort = 11; 
@@ -112,24 +126,27 @@ public final class Constants {
 	public static final int kSuctionRelayPort = 0;
 	public static final boolean kSuctionInvert = false;
 	public static final double kSuctionSpeed = .5;
-	public static final double kParkSuctionSpeed = 1;
+	public static final double kParkSuctionSpeed = .5;
   }
   public static final class WristRotateConstants {
 	public static final int kWristRotatePort = 7;
 	public static final boolean kWristRotateInvert = false;
-	public static final double kSpeedLimitFactor = .2;
+	public static final double kSpeedLimitFactor = .5;
 	public static final int kPIDSlot = 0; 
-	public static final double kP = .1;
+	public static final double kP = .03;
 	public static final double kI = 0;
 	public static final double kD = 0;
 	public static final double kFF = 0;
 	public static final double kIz = 0;
-	public static final double kMaxPosition = 50;
+	public static final double kMaxPosition = .25;
   }
   public static final class WristBendConstants {
 	public static final int kWristBendChannel = 9;
+	public static final int kWristServo1Channel = 8;
+	public static final int kWristServo2Channel = 7;
 	public static final boolean kWristBendInvert = false;
 	public static final int kForwardDirection = 1;
 	public static final int kBackwardDirection = -1;
+	public static final double kWristBendSpeed = .00001;
   }
 }

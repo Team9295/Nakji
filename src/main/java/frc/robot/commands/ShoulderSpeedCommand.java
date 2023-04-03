@@ -24,5 +24,6 @@ public class ShoulderSpeedCommand extends CommandBase {
 
     public void end(boolean interrupted) {
         m_ShoulderSubsystem.setSpeed(0);
+        m_ShoulderSubsystem.setPosition(m_ShoulderSubsystem.getPosition());
     }
 }

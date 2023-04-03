@@ -11,6 +11,7 @@ public class WristRotateSpeedCommand extends CommandBase{
         m_WristRotateSubsystem = wristRotateSubsystem; 
         m_speed = speed; 
         addRequirements(m_WristRotateSubsystem);
+        // System.out.println("TEST" + m_WristRotateSubsystem.getPosition());
     }
 
     public void initialize() {

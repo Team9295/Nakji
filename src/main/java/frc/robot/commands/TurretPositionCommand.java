@@ -15,6 +15,7 @@ public class TurretPositionCommand extends CommandBase {
 
     public void execute() {
         m_TurretSubsystem.setPosition(m_position);
+        // System.out.println(m_TurretSubsystem.getPosition());
     }
 
     public void end(boolean interrupted) {
