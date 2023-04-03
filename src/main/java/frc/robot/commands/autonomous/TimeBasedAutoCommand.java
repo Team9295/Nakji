@@ -20,7 +20,7 @@ public class TimeBasedAutoCommand extends CommandBase {
 
     public void execute() {
         if(m_timer.get() < m_seconds) {
-            m_driveSubsystem.tankDrive(1, 1);
+            m_driveSubsystem.tankDrive(0.5, 0.5);
         } 
     }
 
