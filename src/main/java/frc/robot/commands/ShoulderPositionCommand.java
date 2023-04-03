@@ -35,7 +35,7 @@ public class ShoulderPositionCommand extends CommandBase{
             m_shoulderSubsystem.setPosition(-10);
             holdPos=m_shoulderSubsystem.getPosition();
         }
-        else if(m_thresh.get() <= 0.1 && m_thresh.get() >= -0.1){
+        else if(m_thresh.get() <= 0.1 && m_thresh.get() >= -0.1){ //if this doesn't work
             m_shoulderSubsystem.setPosition(holdPos);
         }
     }
