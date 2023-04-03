@@ -40,6 +40,7 @@ import frc.robot.Constants.ControllerConstants.Axis;
 import frc.robot.Constants.ControllerConstants.Button;
 import frc.robot.Constants.ControllerConstants.DPad;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
@@ -154,27 +155,24 @@ public class RobotContainer {
 
       //preset positions
       //base
-      new JoystickButton(m_operatorController, Button.kA).onTrue(new ShoulderPositionCommand(m_shoulderSubsystem, -ShoulderConstants.kBasePos));
-      new JoystickButton(m_operatorController, Button.kA).onTrue(new TelescopePositionCommand(m_telescopeSubsystem, () -> m_operatorController.getRawAxis(Axis.kLeftY), TelescopeConstants.kBasePos));
-      
+      new JoystickButton(m_operatorController, Button.kA).onTrue(new ParallelCommandGroup(
+        new ShoulderPositionCommand(m_shoulderSubsystem, -ShoulderConstants.kBasePos),
+        new TelescopePositionCommand(m_telescopeSubsystem, () -> m_operatorController.getRawAxis(Axis.kLeftY), TelescopeConstants.kBasePos)
+      ));
       //mid
-      new JoystickButton(m_operatorController, Button.kX).onTrue(new ShoulderPositionCommand(m_shoulderSubsystem, -ShoulderConstants.kMidPos));
-      new JoystickButton(m_operatorController, Button.kX).onTrue(new TelescopePositionCommand(m_telescopeSubsystem, () -> m_operatorController.getRawAxis(Axis.kLeftY), TelescopeConstants.kMidPos));
-
+      new JoystickButton(m_operatorController, Button.kX).onTrue(new ParallelCommandGroup(
+        new ShoulderPositionCommand(m_shoulderSubsystem, -ShoulderConstants.kMidPos),
+        new TelescopePositionCommand(m_telescopeSubsystem, () -> m_operatorController.getRawAxis(Axis.kLeftY), TelescopeConstants.kMidPos)
+      ));
       //top
-      new JoystickButton(m_operatorController, Button.kY).onTrue(new ShoulderPositionCommand(m_shoulderSubsystem, -ShoulderConstants.kTopPos));
-      new JoystickButton(m_operatorController, Button.kY).onTrue(new TelescopePositionCommand(m_telescopeSubsystem, () -> m_operatorController.getRawAxis(Axis.kLeftY), TelescopeConstants.kTopPos));
-
+      new JoystickButton(m_operatorController, Button.kY).onTrue(new ParallelCommandGroup(
+        new ShoulderPositionCommand(m_shoulderSubsystem, -ShoulderConstants.kTopPos),
+        new TelescopePositionCommand(m_telescopeSubsystem, () -> m_operatorController.getRawAxis(Axis.kLeftY), TelescopeConstants.kTopPos)
+      ));
       //retract
-      new JoystickButton(m_operatorController, Button.kB).onTrue(new ShoulderPositionCommand(m_shoulderSubsystem, -ShoulderConstants.kRetractPos));
-      new JoystickButton(m_operatorController, Button.kB).onTrue(new TelescopePositionCommand(m_telescopeSubsystem, () -> m_operatorController.getRawAxis(Axis.kLeftY), TelescopeConstants.kRetractPos));
-
-      // new JoystickButton(m_operatorController, Button.kA).whileTrue(new ExtendLevelCommand(m_telescopeSubsystem, ArmExtendConstants.kPIDSlot) && new ArmUpLevelCommand(m_shoulderSubsystem, ArmUpContants.kPIDSlot)); 
-      // new JoystickButton(m_operatorController, Button.kX).whileTrue(new ExtendLevelCommand(m_telescopeSubsystem, ArmExtendConstants.kPIDSlot) && new ArmUpLevelCommand(m_shoulderSubsystem, ArmUpContants.kPIDSlot));
-      // new JoystickButton(m_operatorController, Button.kY).whileTrue(new ExtendLevelCommand(m_telescopeSubsystem, ArmExtendConstants.kPIDSlot) && new ArmUpLevelCommand(m_shoulderSubsystem, ArmUpContants.kPIDSlot));
-
+      new JoystickButton(m_operatorController, Button.kB).onTrue(new ParallelCommandGroup(
+        new ShoulderPositionCommand(m_shoulderSubsystem, -ShoulderConstants.kRetractPos),
+        new TelescopePositionCommand(m_telescopeSubsystem, () -> m_operatorController.getRawAxis(Axis.kLeftY), TelescopeConstants.kRetractPos)
+      ));
   }
-
-
-
 }
