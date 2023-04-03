@@ -2,7 +2,11 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.revrobotics.CANSparkMax.ControlType;
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
+import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.ControllerConstants;
@@ -18,12 +22,16 @@ public class DriveSubsystem extends SubsystemBase {
   public DriveSubsystem() {
     m_masterLeft.configFactoryDefault();
     m_masterLeft.setInverted(DriveConstants.kMasterLeftInvert);
+    m_masterLeft.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, DriveConstants.kSlotID, 10); 
     m_followerLeft.configFactoryDefault();
     m_followerLeft.setInverted(DriveConstants.kFollowerLeftOppose);
+    m_followerLeft.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, DriveConstants.kSlotID, 10); 
     m_masterRight.configFactoryDefault();
     m_masterRight.setInverted(DriveConstants.kMasterRightInvert);
+    m_masterRight.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, DriveConstants.kSlotID, 10); 
     m_followerRight.configFactoryDefault();
     m_followerRight.setInverted(DriveConstants.kFollowerRightOppose);
+    m_followerRight.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, DriveConstants.kSlotID, 10); 
   }
     public void periodic() {
     }
@@ -70,5 +78,10 @@ public class DriveSubsystem extends SubsystemBase {
       // m_followerLeft.setVoltage(m_masterLeft.getMotorOutputVoltage());
       // m_followerRight.setVoltage(m_masterRight.getMotorOutputVoltage());
   }
+  
+  public void setPosition(double position) {
+  }
+  
+  
 
 }

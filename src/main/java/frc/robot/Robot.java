@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
+import frc.robot.commands.autonomous.TimeBasedAutoCommand;
+import frc.robot.subsystems.DriveSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -17,7 +19,8 @@ import edu.wpi.first.cscore.UsbCamera;
  * project.
  */
 public class Robot extends TimedRobot {
-  private Command m_autonomousCommand;
+  private final DriveSubsystem m_driveSubsystem = new DriveSubsystem(); 
+  private Command m_timeBasedAutoCommand = new TimeBasedAutoCommand(m_driveSubsystem, 1);
 
   private RobotContainer m_robotContainer;
   UsbCamera camera0;
@@ -65,8 +68,8 @@ public class Robot extends TimedRobot {
     // m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
     // schedule the autonomous command (example)
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.schedule();
+    if (m_timeBasedAutoCommand != null) {
+      m_timeBasedAutoCommand.schedule();
     }
   }
 
@@ -80,8 +83,8 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.cancel();
+    if (m_timeBasedAutoCommand != null) {
+      m_timeBasedAutoCommand.cancel();
     }
   }
 

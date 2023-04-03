@@ -5,7 +5,6 @@ import frc.robot.subsystems.DriveSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class simple extends CommandBase{
-    private DriveSubsystem drivetrain; 
-    private double travel; 
+    
 
 }

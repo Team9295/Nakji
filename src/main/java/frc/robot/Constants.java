@@ -58,7 +58,7 @@ public final class Constants {
 		public static final boolean kMasterRightInvert = false;
 		public static final int kFollowerRightPort = 4; // right motor 4
 		public static final boolean kFollowerRightOppose = false;
-
+		public static final int kSlotID = 0; 
 		public static final double kSpeedLimitFactor = .7;
 		public static final double kTurningMultiplier = 1;
 		public static final double kSpeedPowerMultiplier = 1; // Not working rn - keep at 1
