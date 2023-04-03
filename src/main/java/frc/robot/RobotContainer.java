@@ -15,16 +15,16 @@ import frc.robot.Constants.DriveConstants;
 import frc.robot.commands.autonomous.autoBalance;
 import frc.robot.commands.autonomous.simple;
 import frc.robot.commands.ArcadeDriveCommand;
-import frc.robot.commands.TelescopePositionCommand;
-import frc.robot.commands.TelescopeSpeedCommand;
-import frc.robot.commands.ShoulderPositionCommand;
-import frc.robot.commands.ShoulderSpeedCommand;
-import frc.robot.commands.TurretPositionCommand;
-import frc.robot.commands.TurretSpeedCommand;
-import frc.robot.commands.WristRotatePositionCommand;
-import frc.robot.commands.WristRotateSpeedCommand;
-import frc.robot.commands.WristBendPositionCommand;
-import frc.robot.commands.WristBendSpeedCommand;
+import frc.robot.commands.ShoulderCommands.ShoulderPositionCommand;
+import frc.robot.commands.ShoulderCommands.ShoulderSpeedCommand;
+import frc.robot.commands.TelescopeCommands.TelescopePositionCommand;
+import frc.robot.commands.TelescopeCommands.TelescopeSpeedCommand;
+import frc.robot.commands.TurretCommands.TurretPositionCommand;
+import frc.robot.commands.TurretCommands.TurretSpeedCommand;
+import frc.robot.commands.WristBendCommands.WristBendPositionCommand;
+import frc.robot.commands.WristBendCommands.WristBendSpeedCommand;
+import frc.robot.commands.WristRotateCommands.WristRotatePositionCommand;
+import frc.robot.commands.WristRotateCommands.WristRotateSpeedCommand;
 import frc.robot.commands.SuctionCommand; 
 
 
