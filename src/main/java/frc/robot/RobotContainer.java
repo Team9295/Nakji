@@ -152,13 +152,23 @@ public class RobotContainer {
       new POVButton(m_operatorController, DPad.kUp).whileTrue(new WristBendSpeedCommand(m_wristBendSubsystem, 1));
       new POVButton(m_operatorController, DPad.kDown).whileTrue(new WristBendSpeedCommand(m_wristBendSubsystem, -1));
 
-      //preset position for shoulder
+      //preset positions
+      //base
       new JoystickButton(m_operatorController, Button.kA).onTrue(new ShoulderPositionCommand(m_shoulderSubsystem, -ShoulderConstants.kBasePos));
+      new JoystickButton(m_operatorController, Button.kA).onTrue(new TelescopePositionCommand(m_telescopeSubsystem, () -> m_operatorController.getRawAxis(Axis.kLeftY), TelescopeConstants.kBasePos));
+      
+      //mid
       new JoystickButton(m_operatorController, Button.kX).onTrue(new ShoulderPositionCommand(m_shoulderSubsystem, -ShoulderConstants.kMidPos));
-      new JoystickButton(m_operatorController, Button.kY).onTrue(new ShoulderPositionCommand(m_shoulderSubsystem, -ShoulderConstants.kTopPos));
-      new JoystickButton(m_operatorController, Button.kB).onTrue(new ShoulderPositionCommand(m_shoulderSubsystem, -ShoulderConstants.kRetractPos));
+      new JoystickButton(m_operatorController, Button.kX).onTrue(new TelescopePositionCommand(m_telescopeSubsystem, () -> m_operatorController.getRawAxis(Axis.kLeftY), TelescopeConstants.kMidPos));
 
-     
+      //top
+      new JoystickButton(m_operatorController, Button.kY).onTrue(new ShoulderPositionCommand(m_shoulderSubsystem, -ShoulderConstants.kTopPos));
+      new JoystickButton(m_operatorController, Button.kY).onTrue(new TelescopePositionCommand(m_telescopeSubsystem, () -> m_operatorController.getRawAxis(Axis.kLeftY), TelescopeConstants.kTopPos));
+
+      //retract
+      new JoystickButton(m_operatorController, Button.kB).onTrue(new ShoulderPositionCommand(m_shoulderSubsystem, -ShoulderConstants.kRetractPos));
+      new JoystickButton(m_operatorController, Button.kB).onTrue(new TelescopePositionCommand(m_telescopeSubsystem, () -> m_operatorController.getRawAxis(Axis.kLeftY), TelescopeConstants.kRetractPos));
+
       // new JoystickButton(m_operatorController, Button.kA).whileTrue(new ExtendLevelCommand(m_telescopeSubsystem, ArmExtendConstants.kPIDSlot) && new ArmUpLevelCommand(m_shoulderSubsystem, ArmUpContants.kPIDSlot)); 
       // new JoystickButton(m_operatorController, Button.kX).whileTrue(new ExtendLevelCommand(m_telescopeSubsystem, ArmExtendConstants.kPIDSlot) && new ArmUpLevelCommand(m_shoulderSubsystem, ArmUpContants.kPIDSlot));
       // new JoystickButton(m_operatorController, Button.kY).whileTrue(new ExtendLevelCommand(m_telescopeSubsystem, ArmExtendConstants.kPIDSlot) && new ArmUpLevelCommand(m_shoulderSubsystem, ArmUpContants.kPIDSlot));

@@ -95,7 +95,7 @@ public final class Constants {
 	public static final double kMidPos = 35;
 	public static final double kTopPos = 20;
 	public static final double kRetractPos = 5;
-	public static final double kRapidSpeed = 0.5;
+	public static final double kRapidSpeed = kSpeedLimitFactor;
   }
   public static final class TelescopeConstants {
 	public static final int kTelescopePort = 6;
@@ -108,6 +108,11 @@ public final class Constants {
 	public static final double kFF = 0;
 	public static final double kIz = 0;
 	public static final double kMaxPosition = 190;
+	public static final double kBasePos = 0;
+	public static final double kMidPos = 10;
+	public static final double kTopPos = 20;
+	public static final double kRetractPos = 0;
+	public static final double kRapidSpeed = kSpeedLimitFactor/2;
   }
   public static final class ParkConstants {
 	public static final int kParkPort = 11; 
