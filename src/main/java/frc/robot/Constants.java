@@ -99,7 +99,7 @@ public final class Constants {
   }
   public static final class TelescopeConstants {
 	public static final int kTelescopePort = 6;
-	public static final boolean kTelescopeInvert = false;
+	public static final boolean kTelescopeInvert = true;
 	public static final double kSpeedLimitFactor = 1;
 	public static final int kPIDSlot = 0; 
 	public static final double kP = .09;
