@@ -3,7 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot;
-
+import frc.robot.Constants.LoggingConstants;
 import frc.robot.Constants.TelescopeConstants;
 import frc.robot.Constants.ControllerConstants;
 import frc.robot.Constants.ShoulderConstants;
@@ -11,7 +11,7 @@ import frc.robot.Constants.WristBendConstants;
 import frc.robot.Constants.TurretConstants;
 import frc.robot.Constants.WristRotateConstants;
 import frc.robot.Constants.DriveConstants;
-
+import frc.robot.commands.autonomous.TimeBasedAutoCommand;
 import frc.robot.commands.autonomous.autoBalance;
 import frc.robot.commands.autonomous.simple;
 import frc.robot.commands.ArcadeDriveCommand;
@@ -26,7 +26,8 @@ import frc.robot.commands.WristBendCommands.WristBendSpeedCommand;
 import frc.robot.commands.WristRotateCommands.WristRotatePositionCommand;
 import frc.robot.commands.WristRotateCommands.WristRotateSpeedCommand;
 import frc.robot.commands.SuctionCommand; 
-
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.subsystems.TelescopeSubsystem;
 import frc.robot.subsystems.SuctionSubsystem;
@@ -40,6 +41,7 @@ import frc.robot.Constants.ControllerConstants.Axis;
 import frc.robot.Constants.ControllerConstants.Button;
 import frc.robot.Constants.ControllerConstants.DPad;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -47,6 +49,7 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 import edu.wpi.first.wpilibj.Relay;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 
 
 
@@ -67,15 +70,21 @@ public class RobotContainer {
   private final SuctionSubsystem m_suctionSubsystem = new SuctionSubsystem();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
-  private final Joystick m_driverController =
-      new Joystick(ControllerConstants.kDriverControllerPort);
+  private final Joystick m_driverController = new Joystick(ControllerConstants.kDriverControllerPort);
+  private final Joystick m_operatorController = new Joystick(ControllerConstants.kOperatorControllerPort); 
+      
+  private final SendableChooser<Command> m_autoChooser = new SendableChooser<>();
 
-  private final Joystick m_operatorController = 
-      new Joystick(ControllerConstants.kOperatorControllerPort); 
+  private final ShuffleboardLogging[] m_subsystems = {m_driveSubsystem,m_shoulderSubsystem, m_suctionSubsystem, m_telescopeSubsystem, m_turretSubsystem, m_wristBendSubsystem, m_wristRotateSubsystem};
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
+
+    configureShuffleboard();
+    m_autoChooser.addOption("Drive Auto", new ParallelCommandGroup(new TimeBasedAutoCommand(m_driveSubsystem, 2, -.3), new TimeBasedAutoCommand(m_driveSubsystem, 4, .3)));
+    SmartDashboard.putData(m_autoChooser);
   }
 
   
@@ -90,6 +99,7 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
+
     /* =========================================
      * |            DRIVER CONTROLS            |
      * ========================================= 
@@ -189,4 +199,16 @@ public class RobotContainer {
         new TurretPositionCommand(m_turretSubsystem, 0)
       ));
   }
+  
+  public void configureShuffleboard() {
+    for (int i = 0; i < m_subsystems.length; i++) {
+            if (LoggingConstants.kSubsystems[i]) {
+                    m_subsystems[i].configureShuffleboard(true);
+            }
+    }
+}
+
+  public Command getAutonomousCommand() {
+		return m_autoChooser.getSelected();
+	}
 }

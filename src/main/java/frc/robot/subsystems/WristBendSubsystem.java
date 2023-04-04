@@ -4,8 +4,15 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.Servo;
 import frc.robot.Constants.WristBendConstants;
 
-public class WristBendSubsystem extends SubsystemBase {
-  private final Servo m_motor = new Servo(WristBendConstants.kWristBendChannel);
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.ShuffleboardLogging;
+
+public class WristBendSubsystem extends SubsystemBase implements ShuffleboardLogging {
+  private final Servo m_motor = new Servo(WristBendConstants.kMotorPort);
   private final Servo m_Servo1 = new Servo(WristBendConstants.kWristServo1Channel);
   private final Servo m_Servo2 = new Servo(WristBendConstants.kWristServo2Channel);
 
@@ -29,4 +36,9 @@ public class WristBendSubsystem extends SubsystemBase {
       return m_motor.get(); 
     }
 
+    public void configureShuffleboard(boolean inCompetitionMode) {
+      if(!inCompetitionMode){
+              ShuffleboardTab shuffleboardTab = Shuffleboard.getTab("Drive");
+      }
+    }
 }

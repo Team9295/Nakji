@@ -11,8 +11,15 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.WristRotateConstants;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class WristRotateSubsystem extends SubsystemBase {
-  private final CANSparkMax m_motor = new CANSparkMax(WristRotateConstants.kWristRotatePort, MotorType.kBrushed);
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.ShuffleboardLogging;
+
+public class WristRotateSubsystem extends SubsystemBase implements ShuffleboardLogging {
+  private final CANSparkMax m_motor = new CANSparkMax(WristRotateConstants.kMotorPort, MotorType.kBrushed);
   private final RelativeEncoder m_encoder = m_motor.getEncoder(Type.kQuadrature, 1680);
   private final SparkMaxPIDController m_pidController = m_motor.getPIDController();
 
@@ -45,6 +52,11 @@ public class WristRotateSubsystem extends SubsystemBase {
         setPosition(0);
     }
 
-    
+    public void configureShuffleboard(boolean inCompetitionMode) {
+      if(!inCompetitionMode){
+              ShuffleboardTab shuffleboardTab = Shuffleboard.getTab("Drive");
+      }
+
+}
 
 }

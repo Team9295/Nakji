@@ -19,12 +19,13 @@ import frc.robot.subsystems.DriveSubsystem;
  * project.
  */
 public class Robot extends TimedRobot {
-  private final DriveSubsystem m_driveSubsystem = new DriveSubsystem(); 
-  private Command m_timeBasedAutoCommand = new TimeBasedAutoCommand(m_driveSubsystem, 1);
+  // private final DriveSubsystem m_driveSubsystem = new DriveSubsystem(); 
+  // private Command m_timeBasedAutoCommand = new TimeBasedAutoCommand(m_driveSubsystem, 1);
 
   private RobotContainer m_robotContainer;
+  private Command m_aCommand;
   UsbCamera camera0;
-  UsbCamera camera1;
+  // UsbCamera camera1;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -35,7 +36,7 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
-    camera0 = CameraServer.startAutomaticCapture(0);
+    CameraServer.startAutomaticCapture();
     // camera1 = CameraServer.startAutomaticCapture(1);
   }
 
@@ -65,11 +66,11 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-    // m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    m_aCommand = m_robotContainer.getAutonomousCommand();
 
     // schedule the autonomous command (example)
-    if (m_timeBasedAutoCommand != null) {
-      m_timeBasedAutoCommand.schedule();
+    if (m_aCommand != null) {
+      m_aCommand.schedule();
     }
   }
 
@@ -83,8 +84,8 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    if (m_timeBasedAutoCommand != null) {
-      m_timeBasedAutoCommand.cancel();
+    if (m_aCommand != null) {
+      m_aCommand.cancel();
     }
   }
 

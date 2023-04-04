@@ -9,8 +9,15 @@ import com.revrobotics.SparkMaxPIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ShoulderConstants;
 
-public class ShoulderSubsystem extends SubsystemBase {
-  private final CANSparkMax m_motor = new CANSparkMax(ShoulderConstants.kShoulderPort, MotorType.kBrushless);
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.ShuffleboardLogging;
+
+public class ShoulderSubsystem extends SubsystemBase implements ShuffleboardLogging{
+  private final CANSparkMax m_motor = new CANSparkMax(ShoulderConstants.kMotorPort, MotorType.kBrushless);
 
   private final RelativeEncoder m_encoder = m_motor.getEncoder();
   private final SparkMaxPIDController m_pidController = m_motor.getPIDController();
@@ -59,4 +66,9 @@ public class ShoulderSubsystem extends SubsystemBase {
         setPosition(0);
     }
 
+    public void configureShuffleboard(boolean inCompetitionMode) {
+      if(!inCompetitionMode){
+              ShuffleboardTab shuffleboardTab = Shuffleboard.getTab("Drive");
+      }
+    }
 }

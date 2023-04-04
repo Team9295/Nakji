@@ -11,7 +11,14 @@ import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.ControllerConstants;
 
-public class DriveSubsystem extends SubsystemBase {
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.ShuffleboardLogging;
+
+public class DriveSubsystem extends SubsystemBase implements ShuffleboardLogging {
   private final TalonSRX m_masterLeft = new TalonSRX(DriveConstants.kMasterLeftPort);
   private final TalonSRX m_followerLeft = new TalonSRX(DriveConstants.kFollowerLeftPort);
   private final TalonSRX m_masterRight = new TalonSRX(DriveConstants.kMasterRightPort);
@@ -53,12 +60,6 @@ public class DriveSubsystem extends SubsystemBase {
     public void arcadeDrive(double straight, double left, double right) {
       leftDriveSpeed = DriveConstants.kSpeedLimitFactor * (straight + left - right) / (1-ControllerConstants.kDeadzone);
       rightDriveSpeed = DriveConstants.kSpeedLimitFactor * (straight - left + right) / (1-ControllerConstants.kDeadzone);
-
-      if(DriveConstants.kSpeedPowerMultiplier != 1) {
-        leftDriveSpeed = Math.pow(leftDriveSpeed, DriveConstants.kSpeedPowerMultiplier);
-        rightDriveSpeed = Math.pow(rightDriveSpeed, DriveConstants.kSpeedPowerMultiplier);
-      }
-
       tankDrive(leftDriveSpeed, rightDriveSpeed);
     }
 
@@ -70,18 +71,16 @@ public class DriveSubsystem extends SubsystemBase {
       m_masterLeft.set(ControlMode.PercentOutput, leftSpeed);
       m_masterRight.set(ControlMode.PercentOutput, rightSpeed);
 
-      //one option using output percents
       m_followerLeft.set(ControlMode.PercentOutput, m_masterLeft.getMotorOutputPercent());
       m_followerRight.set(ControlMode.PercentOutput, m_masterRight.getMotorOutputPercent());
-
-      //another option using voltage
-      // m_followerLeft.setVoltage(m_masterLeft.getMotorOutputVoltage());
-      // m_followerRight.setVoltage(m_masterRight.getMotorOutputVoltage());
   }
   
   public void setPosition(double position) {
   }
   
-  
-
+  public void configureShuffleboard(boolean inCompetitionMode) {
+    if(!inCompetitionMode){
+            ShuffleboardTab shuffleboardTab = Shuffleboard.getTab("Drive");
+    }
+  }
 }

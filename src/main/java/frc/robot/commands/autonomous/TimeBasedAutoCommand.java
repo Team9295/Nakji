@@ -6,12 +6,14 @@ import edu.wpi.first.wpilibj.Timer;
 
 public class TimeBasedAutoCommand extends CommandBase {
     private final DriveSubsystem m_driveSubsystem; 
-    private final int m_seconds; 
+    private final double m_seconds; 
+    private final double m_speed;
     private final Timer m_timer = new Timer(); 
 
-    public TimeBasedAutoCommand(DriveSubsystem driveSubsystem, int seconds) {
+    public TimeBasedAutoCommand(DriveSubsystem driveSubsystem, double seconds, double speed) {
         m_driveSubsystem = driveSubsystem; 
         m_seconds = seconds; 
+        m_speed=speed;
     } 
 
     public void initalize() {
@@ -19,8 +21,8 @@ public class TimeBasedAutoCommand extends CommandBase {
     }
 
     public void execute() {
-        if(m_timer.get() < m_seconds) {
-            m_driveSubsystem.tankDrive(0.5, 0.5);
+        while(m_timer.get() < m_seconds) {
+            m_driveSubsystem.tankDrive(m_speed, m_speed);
         } 
     }
 
