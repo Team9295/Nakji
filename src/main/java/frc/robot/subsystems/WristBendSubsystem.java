@@ -29,6 +29,10 @@ public class WristBendSubsystem extends SubsystemBase implements ShuffleboardLog
   public void periodic() {
   }
 
+  public void setSpeed(double speed) {
+    m_servo.set(speed *WristBendConstants.kWristBendSpeed);
+  }
+
   public void setPosition(double position) {
     m_servo.set(position);
     m_Servo1.set(position);
@@ -38,6 +42,10 @@ public class WristBendSubsystem extends SubsystemBase implements ShuffleboardLog
 
   public double getPosition() {
     return m_servo.get();
+  }
+
+  public double getVelocity() {
+    return m_servo.get(); 
   }
 
   public void configureShuffleboard(boolean inCompetitionMode) {
