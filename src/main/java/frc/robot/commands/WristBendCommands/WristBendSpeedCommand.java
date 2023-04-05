@@ -16,12 +16,10 @@ public class WristBendSpeedCommand extends CommandBase {
 
     public void execute() {
         double position = m_wristBendSubsystem.getPosition();
-        if (position <= 1 && position >= 0) {
-            position += WristBendConstants.kWristBendSpeed * m_direction;
-            m_wristBendSubsystem.setPosition(position);
-        }
+        System.out.println("SERVO POSITION IS " + position);
+        position += WristBendConstants.kWristBendSpeed * m_direction;
+        m_wristBendSubsystem.setPosition(position);
     }
-
     public void end(boolean interrupted) {
         m_wristBendSubsystem.setSpeed(0);
     }
