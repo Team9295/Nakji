@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.ShuffleboardLogging;
 
 public class WristBendSubsystem extends SubsystemBase implements ShuffleboardLogging {
-  private final Servo m_servo = new Servo(WristBendConstants.kMotorPort);
+  private final Servo m_servo = new Servo(WristBendConstants.kServoPort);
   private final Servo m_Servo1 = new Servo(WristBendConstants.kWristServo1Channel);
   private final Servo m_Servo2 = new Servo(WristBendConstants.kWristServo2Channel);
 

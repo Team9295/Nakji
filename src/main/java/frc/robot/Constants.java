@@ -159,7 +159,7 @@ public final class Constants {
 	}
 
 	public static final class WristBendConstants {
-		public static final int kMotorPort = 9;
+		public static final int kServoPort = 9;
 		public static final int kWristServo1Channel = 8;
 		public static final int kWristServo2Channel = 7;
 		public static final boolean kWristBendInvert = false;
