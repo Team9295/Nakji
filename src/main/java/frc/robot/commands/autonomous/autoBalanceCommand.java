@@ -11,7 +11,7 @@ import java.lang.Math;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class autoBalanceCommand extends CommandBase{
+public class AutoBalanceCommand extends CommandBase{
       private BuiltInAccelerometer mRioAccel; 
       private int state; 
       private int debounceCount; 
@@ -23,7 +23,7 @@ public class autoBalanceCommand extends CommandBase{
         private double singleTapTime;
         private double scoringBackUpTime; 
 
-    public autoBalanceCommand() {
+    public AutoBalanceCommand() {
         mRioAccel = new BuiltInAccelerometer(); 
         state = 0; 
         debounceCount = 0;
@@ -60,6 +60,7 @@ public class autoBalanceCommand extends CommandBase{
         }
 
         public double autoBalanceRoutine() {
+            System.out.println("AUTO BALANCE IS RUNNING");
             switch (state) {
                 case 0: 
                     if(getTilt() > onChargeStationDegree) {
@@ -160,6 +161,9 @@ public class autoBalanceCommand extends CommandBase{
                 
         }
         return 0; 
+    }
+    public void execute() {
+        autoBalanceRoutine();
     }
 
 }

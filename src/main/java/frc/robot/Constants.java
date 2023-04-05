@@ -102,6 +102,7 @@ public final class Constants {
 		public static final double kBasePos = 56.5;
 		public static final double kMidPos = 35;
 		public static final double kTopPos = 20;
+		public static final double kHumanPlayerPos = 20;
 		public static final double kRetractPos = 2;
 		public static final double kRapidSpeed = kSpeedLimitFactor;
 	}
@@ -123,6 +124,7 @@ public final class Constants {
 		public static final double kMidPos = 95;
 		public static final double kTopPos = 190;
 		public static final double kRetractPos = 0;
+		public static final double kHumanPlayerPos = 95;
 		public static final double kRapidSpeed = kSpeedLimitFactor / 2;
 	}
 
@@ -167,6 +169,7 @@ public final class Constants {
 		public static final double kBasePos = 56.5;
 		public static final double kMidPos = 35;
 		public static final double kTopPos = 20;
+		public static final double kHumanPlayerPos = 20;
 	}
 
 	public static final class LoggingConstants {
