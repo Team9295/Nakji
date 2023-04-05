@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveSubsystem;
 
-public class AutoBalanceCommand extends CommandBase{
+public class autoBalanceCommand extends CommandBase{
     private final DriveSubsystem m_driveSubsystem;
       private BuiltInAccelerometer mRioAccel; 
       private int state; 
@@ -25,7 +25,7 @@ public class AutoBalanceCommand extends CommandBase{
         private double singleTapTime;
         private double scoringBackUpTime; 
 
-    public AutoBalanceCommand(DriveSubsystem driveSubsystem) {
+    public autoBalanceCommand(DriveSubsystem driveSubsystem) {
         m_driveSubsystem = driveSubsystem;
         mRioAccel = new BuiltInAccelerometer(); 
         state = 0; 
@@ -175,8 +175,10 @@ public class AutoBalanceCommand extends CommandBase{
         return 0; 
     }
     public void execute() {
-        double motorOutput = autoBalanceRoutine();
-        m_driveSubsystem.tankDrive(motorOutput, motorOutput); 
+        // double motorOutput = autoBalanceRoutine();
+        // m_driveSubsystem.tankDrive(motorOutput, motorOutput); 
     }
+    public void end(){
 
+    }
 }
