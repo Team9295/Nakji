@@ -14,9 +14,9 @@ public class WristBendSpeedCommand extends CommandBase {
         addRequirements(m_wristBendSubsystem);
     }
 
-    public void initialize() {
+    public void execute() {
         double position = m_wristBendSubsystem.getPosition();
-        while (position <= 1 && position >= 0) {
+        if (position <= 1 && position >= 0) {
             position += WristBendConstants.kWristBendSpeed * m_direction;
             m_wristBendSubsystem.setPosition(position);
         }
