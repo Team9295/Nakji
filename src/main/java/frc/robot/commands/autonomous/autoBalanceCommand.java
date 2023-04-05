@@ -43,8 +43,10 @@ public class AutoBalanceCommand extends CommandBase{
 
     }
         public double getPitch() {
-            System.out.println("AUTO RUNNING");
+            double pitch = Math.atan2((-mRioAccel.getX()) , Math.sqrt(mRioAccel.getY() * mRioAccel.getY() + mRioAccel.getZ() * mRioAccel.getZ())) *57.3; 
+            System.out.println("pitch is" + pitch); 
             return Math.atan2((-mRioAccel.getX()) , Math.sqrt(mRioAccel.getY() * mRioAccel.getY() + mRioAccel.getZ() * mRioAccel.getZ())) *57.3; 
+        
         }
 
         public double getRoll() {
