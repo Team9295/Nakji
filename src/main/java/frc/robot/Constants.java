@@ -81,7 +81,7 @@ public final class Constants {
 		public static final double kFF = 0;
 		public static final double kIz = 0;
 		public static final double kMaxPosition = 3;
-		public static final double kPositionTolerance = .8;
+		public static final double kPositionTolerance = .3;
 	}
 
 	public static final class ShoulderConstants {
