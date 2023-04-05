@@ -152,7 +152,8 @@ public final class Constants {
 		public static final double kD = 0;
 		public static final double kFF = 0;
 		public static final double kIz = 0;
-		public static final double kMaxPosition = .25;
+		public static final double kMaxPosition = 1;
+		public static final double kPositionTolerance=0.1;
 	}
 
 	public static final class WristBendConstants {

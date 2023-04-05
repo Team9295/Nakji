@@ -23,6 +23,7 @@ public class WristRotateSubsystem extends SubsystemBase implements ShuffleboardL
   private final RelativeEncoder m_encoder = m_motor.getEncoder(Type.kQuadrature, 1680);
   private final SparkMaxPIDController m_pidController = m_motor.getPIDController();
 
+  private double m_setPoint;
   public WristRotateSubsystem() {
     m_motor.restoreFactoryDefaults();
     m_motor.setInverted(WristRotateConstants.kWristRotateInvert);
@@ -44,9 +45,12 @@ public class WristRotateSubsystem extends SubsystemBase implements ShuffleboardL
   }
 
   public void setPosition(double position) {
-    m_pidController.setReference(position, ControlType.kPosition, WristRotateConstants.kPIDSlot);
+    m_setPoint = position;
+    m_pidController.setReference(m_setPoint, ControlType.kPosition, WristRotateConstants.kPIDSlot);
   }
-
+  public double getReference() {
+    return m_setPoint;
+  }
   public double getPosition() {
     return m_encoder.getPosition();
   }
@@ -56,11 +60,22 @@ public class WristRotateSubsystem extends SubsystemBase implements ShuffleboardL
     setPosition(0);
   }
 
+  public double getVelocity() {
+    return m_encoder.getVelocity();
+}
+public boolean atSetpoint() {
+  return (Math.abs(m_setPoint - getPosition()) <= WristRotateConstants.kPositionTolerance);
+}
   public void configureShuffleboard(boolean inCompetitionMode) {
     if (!inCompetitionMode) {
-      ShuffleboardTab shuffleboardTab = Shuffleboard.getTab("Drive");
+      ShuffleboardTab shuffleboardTab = Shuffleboard.getTab("Wrist Rotate");
+      shuffleboardTab.addNumber("Encoder Position", () -> getPosition()).withSize(4, 2).withPosition(0, 0)
+      .withWidget(BuiltInWidgets.kGraph);
+shuffleboardTab.addNumber("Encoder Velocity", () -> getVelocity()).withSize(4, 2).withPosition(4, 0)
+      .withWidget(BuiltInWidgets.kGraph);
+shuffleboardTab.addBoolean("At setpoint", () -> atSetpoint()).withSize(1, 1).withPosition(0, 2)
+      .withWidget(BuiltInWidgets.kBooleanBox);
     }
-
   }
 
 }

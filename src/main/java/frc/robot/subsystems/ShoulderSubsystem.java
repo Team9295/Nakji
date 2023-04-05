@@ -57,7 +57,7 @@ public class ShoulderSubsystem extends SubsystemBase implements ShuffleboardLogg
   public void setPosition(double position) {
     // System.out.println("setpoint: " + position);
     m_setPoint = position;
-    m_pidController.setReference(position, ControlType.kPosition, ShoulderConstants.kPIDSlot);
+    m_pidController.setReference(m_setPoint, ControlType.kPosition, ShoulderConstants.kPIDSlot);
   }
 
   public double getReference() {
@@ -72,10 +72,22 @@ public class ShoulderSubsystem extends SubsystemBase implements ShuffleboardLogg
     m_encoder.setPosition(0);
     setPosition(0);
   }
-
+  
+  public double getVelocity() {
+    return m_encoder.getVelocity();
+}
+public boolean atSetpoint() {
+  return (Math.abs(m_setPoint - getPosition()) <= ShoulderConstants.kPositionTolerance);
+}
   public void configureShuffleboard(boolean inCompetitionMode) {
     if (!inCompetitionMode) {
-      ShuffleboardTab shuffleboardTab = Shuffleboard.getTab("Drive");
+      ShuffleboardTab shuffleboardTab = Shuffleboard.getTab("Shoulder");
+      shuffleboardTab.addNumber("Encoder Position", () -> getPosition()).withSize(4, 2).withPosition(0, 0)
+      .withWidget(BuiltInWidgets.kGraph);
+shuffleboardTab.addNumber("Encoder Velocity", () -> getVelocity()).withSize(4, 2).withPosition(4, 0)
+      .withWidget(BuiltInWidgets.kGraph);
+shuffleboardTab.addBoolean("At setpoint", () -> atSetpoint()).withSize(1, 1).withPosition(0, 2)
+      .withWidget(BuiltInWidgets.kBooleanBox);
     }
   }
 }

@@ -22,6 +22,8 @@ public class TurretSubsystem extends SubsystemBase implements ShuffleboardLoggin
   private final RelativeEncoder m_encoder = m_motor.getEncoder();
   private final SparkMaxPIDController m_pidController = m_motor.getPIDController();
 
+  private double m_setPoint;
+
   public TurretSubsystem() {
     m_motor.restoreFactoryDefaults();
     m_motor.setInverted(TurretConstants.kTurretInvert);
@@ -43,9 +45,13 @@ public class TurretSubsystem extends SubsystemBase implements ShuffleboardLoggin
   }
 
   public void setPosition(double position) {
-    m_pidController.setReference(position, ControlType.kPosition, TurretConstants.kPIDSlot);
+    m_setPoint = position;
+    m_pidController.setReference(m_setPoint, ControlType.kPosition, TurretConstants.kPIDSlot);
   }
 
+  public double getReference() {
+    return m_setPoint;
+  }
   public double getPosition() {
     return m_encoder.getPosition();
   }
@@ -55,9 +61,21 @@ public class TurretSubsystem extends SubsystemBase implements ShuffleboardLoggin
     setPosition(0);
   }
 
+  public double getVelocity() {
+    return m_encoder.getVelocity();
+}
+public boolean atSetpoint() {
+  return (Math.abs(m_setPoint - getPosition()) <= TurretConstants.kPositionTolerance);
+}
   public void configureShuffleboard(boolean inCompetitionMode) {
     if (!inCompetitionMode) {
-      ShuffleboardTab shuffleboardTab = Shuffleboard.getTab("Drive");
+      ShuffleboardTab shuffleboardTab = Shuffleboard.getTab("Turret");
+      shuffleboardTab.addNumber("Encoder Position", () -> getPosition()).withSize(4, 2).withPosition(0, 0)
+      .withWidget(BuiltInWidgets.kGraph);
+shuffleboardTab.addNumber("Encoder Velocity", () -> getVelocity()).withSize(4, 2).withPosition(4, 0)
+      .withWidget(BuiltInWidgets.kGraph);
+shuffleboardTab.addBoolean("At setpoint", () -> atSetpoint()).withSize(1, 1).withPosition(0, 2)
+      .withWidget(BuiltInWidgets.kBooleanBox);
     }
   }
 }
