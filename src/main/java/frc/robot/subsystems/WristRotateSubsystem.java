@@ -35,28 +35,32 @@ public class WristRotateSubsystem extends SubsystemBase implements ShuffleboardL
     m_pidController.setFF(WristRotateConstants.kFF);
     resetEncoder();
   }
-    public void periodic() {
-    }
-    public void setSpeed(double speed) {
-      m_motor.set(speed*WristRotateConstants.kSpeedLimitFactor);
+
+  public void periodic() {
+  }
+
+  public void setSpeed(double speed) {
+    m_motor.set(speed * WristRotateConstants.kSpeedLimitFactor);
+  }
+
+  public void setPosition(double position) {
+    m_pidController.setReference(position, ControlType.kPosition, WristRotateConstants.kPIDSlot);
+  }
+
+  public double getPosition() {
+    return m_encoder.getPosition();
+  }
+
+  public void resetEncoder() {
+    m_encoder.setPosition(0);
+    setPosition(0);
+  }
+
+  public void configureShuffleboard(boolean inCompetitionMode) {
+    if (!inCompetitionMode) {
+      ShuffleboardTab shuffleboardTab = Shuffleboard.getTab("Drive");
     }
 
-    public void setPosition(double position) {
-      m_pidController.setReference(position, ControlType.kPosition, WristRotateConstants.kPIDSlot);
-    }
-    public double getPosition(){
-     return m_encoder.getPosition(); 
-    }
-    public void resetEncoder() {
-        m_encoder.setPosition(0);
-        setPosition(0);
-    }
-
-    public void configureShuffleboard(boolean inCompetitionMode) {
-      if(!inCompetitionMode){
-              ShuffleboardTab shuffleboardTab = Shuffleboard.getTab("Drive");
-      }
-
-}
+  }
 
 }
