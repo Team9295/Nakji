@@ -77,13 +77,17 @@ public class ShoulderPositionCommand extends CommandBase {
     }
 
     public void end(boolean interrupted) {
+        System.out.println("SHOULDER DONE");
+
         double target = m_shoulderSubsystem.getPosition();
         m_shoulderSubsystem.setPosition(target);
     }
 
     public boolean isFinished() {
+        // System.out.println("shoulder POS IS "+m_shoulderSubsystem.getPosition());
+        // System.out.println("TARGET POS IS "+m_position);
         if (m_fixedPosition) {
-            return Math.abs(m_shoulderSubsystem.getPosition() - m_position) <= 1;
+            return Math.abs(m_shoulderSubsystem.getPosition() - m_position) <= ShoulderConstants.kPositionTolerance;
         } else {
             return false;
         }

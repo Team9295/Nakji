@@ -142,7 +142,7 @@ public class RobotContainer {
      */
     // move shoulder up and down
     m_shoulderSubsystem.setDefaultCommand(
-        new ShoulderPositionCommand(m_shoulderSubsystem, () -> -m_operatorController.getRawAxis(Axis.kRightY),
+        new ShoulderPositionCommand(m_shoulderSubsystem, () -> m_operatorController.getRawAxis(Axis.kRightY),
             () -> -m_driverController.getRawAxis(Axis.kLeftY)));
 
     new JoystickButton(m_operatorController, Button.kRightTriggerButton).whileTrue(
@@ -194,7 +194,7 @@ public class RobotContainer {
     // base
     new JoystickButton(m_operatorController, Button.kA).onTrue(new ParallelCommandGroup(
         new ShoulderPositionCommand(m_shoulderSubsystem, -ShoulderConstants.kBasePos),
-        new TelescopePositionCommand(m_telescopeSubsystem, () -> m_operatorController.getRawAxis(Axis.kLeftY),
+        new TelescopePositionCommand(m_telescopeSubsystem, () -> -1.0,
             TelescopeConstants.kBasePos),
         // new WristRotatePositionCommand(m_wristRotateSubsystem, 0),
         new WristBendPositionCommand(m_wristBendSubsystem, WristBendConstants.kBasePos),
@@ -202,7 +202,7 @@ public class RobotContainer {
     // mid
     new JoystickButton(m_operatorController, Button.kX).onTrue(new ParallelCommandGroup(
         new ShoulderPositionCommand(m_shoulderSubsystem, -ShoulderConstants.kMidPos),
-        new TelescopePositionCommand(m_telescopeSubsystem, () -> m_operatorController.getRawAxis(Axis.kLeftY),
+        new TelescopePositionCommand(m_telescopeSubsystem, () -> -1.0,
             TelescopeConstants.kMidPos),
         // new WristRotatePositionCommand(m_wristRotateSubsystem, 0),
         new WristBendPositionCommand(m_wristBendSubsystem, WristBendConstants.kMidPos),
@@ -210,7 +210,7 @@ public class RobotContainer {
     // top
     new JoystickButton(m_operatorController, Button.kY).onTrue(new ParallelCommandGroup(
         new ShoulderPositionCommand(m_shoulderSubsystem, -ShoulderConstants.kTopPos),
-        new TelescopePositionCommand(m_telescopeSubsystem, () -> m_operatorController.getRawAxis(Axis.kLeftY),
+        new TelescopePositionCommand(m_telescopeSubsystem, () -> -1.0,
             TelescopeConstants.kTopPos),
         // new WristRotatePositionCommand(m_wristRotateSubsystem, 0),
         new WristBendPositionCommand(m_wristBendSubsystem, WristBendConstants.kTopPos),
@@ -218,7 +218,7 @@ public class RobotContainer {
     // retract
     new JoystickButton(m_operatorController, Button.kB).onTrue(new ParallelCommandGroup(
         new ShoulderPositionCommand(m_shoulderSubsystem, -ShoulderConstants.kRetractPos),
-        new TelescopePositionCommand(m_telescopeSubsystem, () -> m_operatorController.getRawAxis(Axis.kLeftY),
+        new TelescopePositionCommand(m_telescopeSubsystem, () -> 1.0,
             TelescopeConstants.kRetractPos),
         // new WristRotatePositionCommand(m_wristRotateSubsystem, 0),
         new WristBendPositionCommand(m_wristBendSubsystem, 0),

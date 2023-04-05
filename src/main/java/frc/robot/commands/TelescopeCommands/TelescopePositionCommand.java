@@ -3,6 +3,7 @@ package frc.robot.commands.TelescopeCommands;
 import java.util.function.Supplier;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants.TelescopeConstants;
 import frc.robot.subsystems.TelescopeSubsystem;
 
 public class TelescopePositionCommand extends CommandBase {
@@ -34,7 +35,13 @@ public class TelescopePositionCommand extends CommandBase {
         }
     }
 
+    public boolean isFinished() {
+        // System.out.println("TELESCOPE POS IS "+m_telescopeSubsystem.getPosition());
+        // System.out.println("TELESCOPE TARGET POS IS "+m_position);
+        return Math.abs(m_telescopeSubsystem.getPosition() - m_position) <= TelescopeConstants.kPositionTolerance;
+    }
     public void end(boolean interrupted) {
+        System.out.println("TELESCOPE DONE");
         m_telescopeSubsystem.setSpeed(0);
     }
 }
