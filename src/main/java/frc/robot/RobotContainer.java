@@ -171,9 +171,9 @@ public class RobotContainer {
         .whileTrue(new TurretPositionCommand(m_turretSubsystem, -TurretConstants.kMaxPosition));
 
     // rotate wrist left rotate wrist right
-    new JoystickButton(m_operatorController, Button.kLeftMenu)
+    new POVButton(m_operatorController, DPad.kLeft)
         .whileTrue(new WristRotateSpeedCommand(m_wristRotateSubsystem, WristRotateConstants.kSpeedLimitFactor));
-    new JoystickButton(m_operatorController, Button.kRightMenu)
+    new POVButton(m_operatorController, DPad.kRight)
         .whileTrue(new WristRotateSpeedCommand(m_wristRotateSubsystem, -WristRotateConstants.kSpeedLimitFactor));
 
     // POSITION CONTROL
