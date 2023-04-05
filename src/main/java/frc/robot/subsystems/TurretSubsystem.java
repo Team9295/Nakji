@@ -69,6 +69,10 @@ public boolean atSetpoint() {
 }
   public void configureShuffleboard(boolean inCompetitionMode) {
     if (!inCompetitionMode) {
+      ShuffleboardTab posTab = Shuffleboard.getTab("posTab");
+      posTab.addBoolean("Turret at setpoint", () -> atSetpoint()).withSize(1, 1).withPosition(0, 2)
+      .withWidget(BuiltInWidgets.kBooleanBox);
+      
       ShuffleboardTab shuffleboardTab = Shuffleboard.getTab("Turret");
       shuffleboardTab.addNumber("Encoder Position", () -> getPosition()).withSize(4, 2).withPosition(0, 0)
       .withWidget(BuiltInWidgets.kGraph);

@@ -13,14 +13,16 @@ public class ShoulderPositionCommand extends CommandBase {
     private final Supplier<Double> m_operatorThresh;
     private final Supplier<Double> m_driverThresh;
     private final boolean m_fixedPosition;
+    private double m_currPos;
 
     public ShoulderPositionCommand(ShoulderSubsystem shoulderSubsystem, double position) {
         m_shoulderSubsystem = shoulderSubsystem;
-        m_position = -position;
-        m_operatorThresh = () -> -1.0;
-        m_driverThresh = () -> -1.0;
+        m_position = position;
+        m_operatorThresh = () -> 1.0;
+        m_driverThresh = () -> 1.0;
         m_fixedPosition = true;
         addRequirements(m_shoulderSubsystem);
+        m_currPos=0;
     }
 
     public ShoulderPositionCommand(ShoulderSubsystem shoulderSubsystem, Supplier<Double> operatorThresh,
@@ -30,6 +32,7 @@ public class ShoulderPositionCommand extends CommandBase {
         m_operatorThresh = operatorThresh;
         m_driverThresh = driverThresh;
         m_fixedPosition = false;
+        m_currPos=0;
         addRequirements(m_shoulderSubsystem);
     }
 
@@ -45,6 +48,7 @@ public class ShoulderPositionCommand extends CommandBase {
     public void execute() {
         // System.out.println("holdPos: "+holdPos);
         // System.out.println("Current pos: " + m_shoulderSubsystem.getPosition());
+        m_currPos=m_shoulderSubsystem.getPosition();
         if (m_operatorThresh.get() >= 0.1) {
             // double currPosition = m_shoulderSubsystem.getReference();
             // double newPosition = currPosition >= -ShoulderConstants.kMaxPosition
@@ -71,7 +75,8 @@ public class ShoulderPositionCommand extends CommandBase {
             m_shoulderSubsystem.setPosition(-m_position);
         }
         else{
-            m_shoulderSubsystem.setPosition(m_shoulderSubsystem.getPosition());
+            System.out.println("HOLDING POSITION SHOULDER");
+            m_shoulderSubsystem.setPosition(m_currPos-1);
         }
 
         // else if(m_thresh.get() <= 0.1 && m_thresh.get() >= -0.1){
@@ -82,8 +87,9 @@ public class ShoulderPositionCommand extends CommandBase {
     public void end(boolean interrupted) {
         System.out.println("SHOULDER DONE");
 
-        double target = m_shoulderSubsystem.getPosition();
-        m_shoulderSubsystem.setPosition(target);
+        // double target = m_shoulderSubsystem.getPosition();
+        m_shoulderSubsystem.setSpeed(0);
+        // m_shoulderSubsystem.setPosition(m_currPos);
     }
 
     public boolean isFinished() {

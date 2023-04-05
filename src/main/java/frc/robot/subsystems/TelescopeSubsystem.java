@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.ControlType;
+import com.revrobotics.CANSparkMax.SoftLimitDirection;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
@@ -73,6 +74,10 @@ public boolean atSetpoint() {
 }
   public void configureShuffleboard(boolean inCompetitionMode) {
     if (!inCompetitionMode) {
+      ShuffleboardTab posTab = Shuffleboard.getTab("posTab");
+      posTab.addBoolean("Telescope at setpoint", () -> atSetpoint()).withSize(1, 1).withPosition(0, 2)
+      .withWidget(BuiltInWidgets.kBooleanBox);
+    
       ShuffleboardTab shuffleboardTab = Shuffleboard.getTab("Telescope");
       shuffleboardTab.addNumber("Encoder Position", () -> getPosition()).withSize(4, 2).withPosition(0, 0)
       .withWidget(BuiltInWidgets.kGraph);

@@ -23,7 +23,8 @@ public class AutoBalanceCommand extends CommandBase{
         private double singleTapTime;
         private double scoringBackUpTime; 
 
-    public AutoBalanceCommand() {
+    public AutoBalanceCommand(DriveSubsystem driveSubsystem) {
+        m_driveSubsystem = driveSubsystem;
         mRioAccel = new BuiltInAccelerometer(); 
         state = 0; 
         debounceCount = 0;
