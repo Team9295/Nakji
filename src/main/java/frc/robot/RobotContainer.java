@@ -13,6 +13,7 @@ import frc.robot.Constants.WristRotateConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.commands.autonomous.TimeBasedAutoCommand;
 import frc.robot.commands.autonomous.autoBalance;
+import frc.robot.commands.autonomous.autoBalanceCommand;
 import frc.robot.commands.autonomous.simple;
 import frc.robot.commands.ArcadeDriveCommand;
 import frc.robot.commands.ShoulderCommands.ShoulderPositionCommand;
@@ -84,6 +85,7 @@ public class RobotContainer {
 
     configureShuffleboard();
     m_autoChooser.addOption("Drive Auto", new ParallelCommandGroup(new TimeBasedAutoCommand(m_driveSubsystem, 2, -.3), new TimeBasedAutoCommand(m_driveSubsystem, 4, .3)));
+    m_autoChooser.addOption("autoBalance", new autoBalanceCommand());
     SmartDashboard.putData(m_autoChooser);
   }
 
