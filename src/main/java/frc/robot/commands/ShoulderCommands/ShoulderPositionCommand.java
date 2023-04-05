@@ -10,25 +10,25 @@ import frc.robot.Constants.ShoulderConstants;
 public class ShoulderPositionCommand extends CommandBase {
     private final ShoulderSubsystem m_shoulderSubsystem;
     private final double m_position;
-    private final Supplier<Double> m_thresh;
-    private final Supplier<Double> m_thresh2;
+    private final Supplier<Double> m_operatorThresh;
+    private final Supplier<Double> m_driverThresh;
     private final boolean m_fixedPosition;
 
     public ShoulderPositionCommand(ShoulderSubsystem shoulderSubsystem, double position) {
         m_shoulderSubsystem = shoulderSubsystem;
-        m_position = position;
-        m_thresh = () -> 0.0;
-        m_thresh2 = () -> 0.0;
+        m_position = -position;
+        m_operatorThresh = () -> -1.0;
+        m_driverThresh = () -> -1.0;
         m_fixedPosition = true;
         addRequirements(m_shoulderSubsystem);
     }
 
-    public ShoulderPositionCommand(ShoulderSubsystem shoulderSubsystem, Supplier<Double> thresh,
-            Supplier<Double> thresh2) {
+    public ShoulderPositionCommand(ShoulderSubsystem shoulderSubsystem, Supplier<Double> operatorThresh,
+            Supplier<Double> driverThresh) { //manual move
         m_shoulderSubsystem = shoulderSubsystem;
-        m_position = m_shoulderSubsystem.getReference();
-        m_thresh = thresh;
-        m_thresh2 = thresh2;
+        m_position = ShoulderConstants.kMaxPosition;
+        m_operatorThresh = operatorThresh;
+        m_driverThresh = driverThresh;
         m_fixedPosition = false;
         addRequirements(m_shoulderSubsystem);
     }
@@ -45,30 +45,33 @@ public class ShoulderPositionCommand extends CommandBase {
     public void execute() {
         // System.out.println("holdPos: "+holdPos);
         // System.out.println("Current pos: " + m_shoulderSubsystem.getPosition());
-        if (m_thresh2.get() >= 0.1) {
-            double currPosition = m_shoulderSubsystem.getReference();
-            double newPosition = currPosition >= -ShoulderConstants.kMaxPosition
-                    ? currPosition + -m_thresh.get() * ShoulderConstants.kDriverStepSize
-                    : currPosition;
-            m_shoulderSubsystem.setPosition(newPosition);
-        } else if (m_thresh2.get() <= -0.1) {
-            double currPosition = m_shoulderSubsystem.getReference();
-            double newPosition = currPosition >= -ShoulderConstants.kMaxPosition
-                    ? currPosition + -m_thresh.get() * ShoulderConstants.kDriverStepSize
-                    : currPosition;
-            m_shoulderSubsystem.setPosition(newPosition);
-        } else if (m_thresh.get() >= 0.1) {
-            double currPosition = m_shoulderSubsystem.getReference();
-            double newPosition = currPosition >= -ShoulderConstants.kMaxPosition
-                    ? currPosition + -m_thresh.get() * ShoulderConstants.kStepSize
-                    : currPosition;
-            m_shoulderSubsystem.setPosition(newPosition);
-        } else if (m_thresh.get() <= -0.1) {
-            double currPosition = m_shoulderSubsystem.getReference();
-            double newPosition = currPosition <= -ShoulderConstants.kMinPosition
-                    ? currPosition + -m_thresh.get() * ShoulderConstants.kStepSize
-                    : currPosition;
-            m_shoulderSubsystem.setPosition(newPosition);
+        if (m_operatorThresh.get() >= 0.1) {
+            // double currPosition = m_shoulderSubsystem.getReference();
+            // double newPosition = currPosition >= -ShoulderConstants.kMaxPosition
+            //         ? currPosition + -m_thresh.get() * ShoulderConstants.kDriverStepSize
+            //         : currPosition;
+            m_shoulderSubsystem.setPosition(-m_position);
+        } else if (m_operatorThresh.get() <= -0.1) {
+            // double currPosition = m_shoulderSubsystem.getReference();
+            // double newPosition = currPosition >= -ShoulderConstants.kMaxPosition
+            //         ? currPosition + -m_thresh.get() * ShoulderConstants.kDriverStepSize
+            //         : currPosition;
+            m_shoulderSubsystem.setPosition(0);
+        } else if (m_driverThresh.get() >= 0.1) {
+            // double currPosition = m_shoulderSubsystem.getReference();
+            // double newPosition = currPosition >= -ShoulderConstants.kMaxPosition
+            //         ? currPosition + -m_thresh.get() * ShoulderConstants.kStepSize
+            //         : currPosition;
+            m_shoulderSubsystem.setPosition(0);
+        } else if (m_driverThresh.get() <= -0.1) {
+            // double currPosition = m_shoulderSubsystem.getReference();
+            // double newPosition = currPosition <= -ShoulderConstants.kMinPosition
+            //         ? currPosition + -m_thresh.get() * ShoulderConstants.kStepSize
+            //         : currPosition;
+            m_shoulderSubsystem.setPosition(-m_position);
+        }
+        else{
+            m_shoulderSubsystem.setPosition(m_shoulderSubsystem.getPosition());
         }
 
         // else if(m_thresh.get() <= 0.1 && m_thresh.get() >= -0.1){
@@ -86,6 +89,11 @@ public class ShoulderPositionCommand extends CommandBase {
     public boolean isFinished() {
         // System.out.println("shoulder POS IS "+m_shoulderSubsystem.getPosition());
         // System.out.println("TARGET POS IS "+m_position);
+        if(m_fixedPosition){
             return m_shoulderSubsystem.atSetpoint();
+        }
+        else{
+            return m_driverThresh.get() <= 0.1 && m_driverThresh.get() >= -0.1 && m_operatorThresh.get() <= 0.1 && m_operatorThresh.get() >= -0.1;
+        }
     }
 }

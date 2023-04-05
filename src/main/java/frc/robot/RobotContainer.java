@@ -141,10 +141,10 @@ public class RobotContainer {
     // move shoulder up and down
     m_shoulderSubsystem.setDefaultCommand(
         new ShoulderPositionCommand(m_shoulderSubsystem, () -> m_operatorController.getRawAxis(Axis.kRightY),
-            () -> -m_driverController.getRawAxis(Axis.kLeftY)));
+            () -> m_driverController.getRawAxis(Axis.kLeftY)));
 
     new JoystickButton(m_operatorController, Button.kRightTriggerButton).whileTrue(
-        new ShoulderSpeedCommand(m_shoulderSubsystem, () -> m_operatorController.getRawAxis(Axis.kRightY) / 2));
+        new ShoulderSpeedCommand(m_shoulderSubsystem, () -> -m_operatorController.getRawAxis(Axis.kRightY) / 2));
     // m_shoulderSubsystem.setDefaultCommand(
     // new ShoulderSpeedCommand(m_shoulderSubsystem, () ->
     // m_operatorController.getRawAxis(Axis.kRightY)));
@@ -213,14 +213,23 @@ public class RobotContainer {
         // new WristRotatePositionCommand(m_wristRotateSubsystem, 0),
         new WristBendPositionCommand(m_wristBendSubsystem, WristBendConstants.kTopPos),
         new TurretPositionCommand(m_turretSubsystem, 0)));
-    // retract
-    new JoystickButton(m_operatorController, Button.kB).onTrue(new ParallelCommandGroup(
+    // retract (ON DRIVER)
+    new JoystickButton(m_driverController, Button.kB).onTrue(new ParallelCommandGroup(
         new ShoulderPositionCommand(m_shoulderSubsystem, -ShoulderConstants.kRetractPos),
         new TelescopePositionCommand(m_telescopeSubsystem, () -> 1.0,
             TelescopeConstants.kRetractPos),
         // new WristRotatePositionCommand(m_wristRotateSubsystem, 0),
         new WristBendPositionCommand(m_wristBendSubsystem, 0),
         new TurretPositionCommand(m_turretSubsystem, 0)));
+    
+        //human player position
+    new JoystickButton(m_operatorController, Button.kB).onTrue(new ParallelCommandGroup(
+          new ShoulderPositionCommand(m_shoulderSubsystem, -ShoulderConstants.kHumanPlayerPos),
+          new TelescopePositionCommand(m_telescopeSubsystem, () -> 1.0,
+              TelescopeConstants.kHumanPlayerPos),
+          // new WristRotatePositionCommand(m_wristRotateSubsystem, 0),
+          new WristBendPositionCommand(m_wristBendSubsystem, 0),
+          new TurretPositionCommand(m_turretSubsystem, 0)));
   }
 
   public void configureShuffleboard() {

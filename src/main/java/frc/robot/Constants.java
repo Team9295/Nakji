@@ -89,10 +89,10 @@ public final class Constants {
 		public static final boolean kShoulderInvert = true;
 		public static final double kSpeedLimitFactor = .5;
 		public static final int kPIDSlot = 0;
-		public static final double kP = .06;
+		public static final double kP = .01;
 		public static final double kI = 0.0000001;
 		public static final double kD = 0.00001249999968422344;// 0.000_03;
-		public static final double kIz = .1;
+		public static final double kIz = .05;
 		public static final double kFF = 0.00008040000102482736;// 0.000_193;
 		public static final double kMaxPosition = 57;
 		public static final double kMinPosition = 5;
@@ -117,7 +117,7 @@ public final class Constants {
 		public static final double kD = 0;
 		public static final double kFF = 0;
 		public static final double kIz = 0;
-		public static final double kMaxPosition = 190;
+		public static final double kMaxPosition = 170;
 		public static final double kPositionTolerance = 5;
 		// The following are randomly chosen idk what they should actually be
 		public static final double kBasePos = 0;
