@@ -23,5 +23,6 @@ public class WristBendSpeedCommand extends CommandBase {
     }
 
     public void end(boolean interrupted) {
+        m_wristBendSubsystem.setSpeed(0);
     }
 }
