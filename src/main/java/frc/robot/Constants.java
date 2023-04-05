@@ -75,7 +75,7 @@ public final class Constants {
 		public static final boolean kTurretInvert = true;
 		public static final double kSpeedLimitFactor = 1;
 		public static final int kPIDSlot = 0;
-		public static final double kP = .02;
+		public static final double kP = .03;
 		public static final double kI = 0;
 		public static final double kD = 0;
 		public static final double kFF = 0;
@@ -89,11 +89,11 @@ public final class Constants {
 		public static final boolean kShoulderInvert = true;
 		public static final double kSpeedLimitFactor = .5;
 		public static final int kPIDSlot = 0;
-		public static final double kP = .01;
-		public static final double kI = 0.0000001;
-		public static final double kD = 0.00001249999968422344;// 0.000_03;
-		public static final double kIz = .05;
-		public static final double kFF = 0.00008040000102482736;// 0.000_193;
+		public static final double kP = 0.015;//.02;
+		public static final double kI = 0.000000001;//0.0000001;
+		public static final double kD = 0.0000001;//0.00001249999968422344;// 0.000_03;
+		public static final double kIz = 0.0001;//.07;
+		public static final double kFF = 0.001;//0.00008040000102482736;// 0.000_193;
 		public static final double kMaxPosition = 57;
 		public static final double kMinPosition = 5;
 		public static final double kPositionTolerance = 1;
@@ -115,7 +115,7 @@ public final class Constants {
 		public static final double kP = .09;
 		public static final double kI = 0;
 		public static final double kD = 0;
-		public static final double kFF = 0;
+		public static final double kFF = 0.000001;
 		public static final double kIz = 0;
 		public static final double kMaxPosition = 170;
 		public static final double kPositionTolerance = 5;

@@ -44,5 +44,6 @@ public class TelescopePositionCommand extends CommandBase {
     public void end(boolean interrupted) {
         System.out.println("TELESCOPE DONE");
         m_telescopeSubsystem.setSpeed(0);
+        m_telescopeSubsystem.setPosition(m_telescopeSubsystem.getPosition());
     }
 }

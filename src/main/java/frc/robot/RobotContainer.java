@@ -191,51 +191,51 @@ public class RobotContainer {
     // preset positions
     // base
     new JoystickButton(m_operatorController, Button.kA).onTrue(new ParallelCommandGroup(
-        new ShoulderPositionCommand(m_shoulderSubsystem, -ShoulderConstants.kBasePos),
-        new TelescopePositionCommand(m_telescopeSubsystem, () -> -1.0,
+        new ShoulderPositionCommand(m_shoulderSubsystem, ShoulderConstants.kBasePos),
+        new TelescopePositionCommand(m_telescopeSubsystem,
             TelescopeConstants.kBasePos),
         // new WristRotatePositionCommand(m_wristRotateSubsystem, 0),
-        new WristBendPositionCommand(m_wristBendSubsystem, WristBendConstants.kBasePos),
+        // new WristBendPositionCommand(m_wristBendSubsystem, WristBendConstants.kBasePos),
         new TurretPositionCommand(m_turretSubsystem, 0)));
     // mid
     new JoystickButton(m_operatorController, Button.kX).onTrue(new ParallelCommandGroup(
-        new ShoulderPositionCommand(m_shoulderSubsystem, -ShoulderConstants.kMidPos),
-        new TelescopePositionCommand(m_telescopeSubsystem, () -> -1.0,
+        new ShoulderPositionCommand(m_shoulderSubsystem, ShoulderConstants.kMidPos),
+        new TelescopePositionCommand(m_telescopeSubsystem,
             TelescopeConstants.kMidPos),
         // new WristRotatePositionCommand(m_wristRotateSubsystem, 0),
-        new WristBendPositionCommand(m_wristBendSubsystem, WristBendConstants.kMidPos),
+        // new WristBendPositionCommand(m_wristBendSubsystem, WristBendConstants.kMidPos),
         new TurretPositionCommand(m_turretSubsystem, 0)));
     // top
     new JoystickButton(m_operatorController, Button.kY).onTrue(new ParallelCommandGroup(
-        new ShoulderPositionCommand(m_shoulderSubsystem, -ShoulderConstants.kTopPos),
-        new TelescopePositionCommand(m_telescopeSubsystem, () -> -1.0,
+        new ShoulderPositionCommand(m_shoulderSubsystem, ShoulderConstants.kTopPos),
+        new TelescopePositionCommand(m_telescopeSubsystem,
             TelescopeConstants.kTopPos),
         // new WristRotatePositionCommand(m_wristRotateSubsystem, 0),
-        new WristBendPositionCommand(m_wristBendSubsystem, WristBendConstants.kTopPos),
+        // new WristBendPositionCommand(m_wristBendSubsystem, WristBendConstants.kTopPos),
         new TurretPositionCommand(m_turretSubsystem, 0)));
     // retract (ON DRIVER)
     new JoystickButton(m_driverController, Button.kB).onTrue(new ParallelCommandGroup(
-        new ShoulderPositionCommand(m_shoulderSubsystem, -ShoulderConstants.kRetractPos),
-        new TelescopePositionCommand(m_telescopeSubsystem, () -> 1.0,
+        new ShoulderPositionCommand(m_shoulderSubsystem, ShoulderConstants.kRetractPos),
+        new TelescopePositionCommand(m_telescopeSubsystem,
             TelescopeConstants.kRetractPos),
         // new WristRotatePositionCommand(m_wristRotateSubsystem, 0),
-        new WristBendPositionCommand(m_wristBendSubsystem, 0),
+        // new WristBendPositionCommand(m_wristBendSubsystem, 0),
         new TurretPositionCommand(m_turretSubsystem, 0)));
     
         //human player position
     new JoystickButton(m_operatorController, Button.kB).onTrue(new ParallelCommandGroup(
-          new ShoulderPositionCommand(m_shoulderSubsystem, -ShoulderConstants.kHumanPlayerPos),
-          new TelescopePositionCommand(m_telescopeSubsystem, () -> 1.0,
+          new ShoulderPositionCommand(m_shoulderSubsystem, ShoulderConstants.kHumanPlayerPos),
+          new TelescopePositionCommand(m_telescopeSubsystem,
               TelescopeConstants.kHumanPlayerPos),
           // new WristRotatePositionCommand(m_wristRotateSubsystem, 0),
-          new WristBendPositionCommand(m_wristBendSubsystem, 0),
+          // new WristBendPositionCommand(m_wristBendSubsystem, 0),
           new TurretPositionCommand(m_turretSubsystem, 0)));
   }
 
   public void configureShuffleboard() {
     for (int i = 0; i < m_subsystems.length; i++) {
       if (LoggingConstants.kSubsystems[i]) {
-        m_subsystems[i].configureShuffleboard(true);
+        m_subsystems[i].configureShuffleboard(false);
       }
     }
   }

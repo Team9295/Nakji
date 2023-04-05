@@ -5,6 +5,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.ControlType;
+import com.revrobotics.CANSparkMax.SoftLimitDirection;
 import com.revrobotics.SparkMaxRelativeEncoder.Type;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -35,6 +36,9 @@ public class WristRotateSubsystem extends SubsystemBase implements ShuffleboardL
     m_pidController.setD(WristRotateConstants.kD);
     m_pidController.setFF(WristRotateConstants.kFF);
     resetEncoder();
+    m_encoder.setPosition(0);
+    m_motor.setSoftLimit(SoftLimitDirection.kForward, (float).1);
+    m_motor.setSoftLimit(SoftLimitDirection.kReverse, (float).1);
   }
 
   public void periodic() {
@@ -68,6 +72,10 @@ public boolean atSetpoint() {
 }
   public void configureShuffleboard(boolean inCompetitionMode) {
     if (!inCompetitionMode) {
+      ShuffleboardTab posTab = Shuffleboard.getTab("posTab");
+      posTab.addBoolean("Wrist Rotate at setpoint", () -> atSetpoint()).withSize(1, 1).withPosition(0, 2)
+      .withWidget(BuiltInWidgets.kBooleanBox);
+      
       ShuffleboardTab shuffleboardTab = Shuffleboard.getTab("Wrist Rotate");
       shuffleboardTab.addNumber("Encoder Position", () -> getPosition()).withSize(4, 2).withPosition(0, 0)
       .withWidget(BuiltInWidgets.kGraph);

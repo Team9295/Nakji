@@ -32,7 +32,7 @@ public class TelescopeSpeedCommand extends CommandBase {
 
     public void execute() {
         double speed = Math.abs(m_speed.get()) > ControllerConstants.kDeadzone
-                ? m_speed.get()
+                ? -m_speed.get()
                 : 0;
         m_TelescopeSubsystem.setSpeed(speed * TelescopeConstants.kSpeedLimitFactor);
     }

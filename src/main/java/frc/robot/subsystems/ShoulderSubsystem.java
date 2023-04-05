@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.SparkMaxPIDController.AccelStrategy;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 
@@ -26,7 +27,7 @@ public class ShoulderSubsystem extends SubsystemBase implements ShuffleboardLogg
 
   public ShoulderSubsystem() {
     m_motor.restoreFactoryDefaults();
-    m_motor.setInverted(ShoulderConstants.kShoulderInvert);
+    m_motor.setInverted(false);
     m_motor.setIdleMode(CANSparkMax.IdleMode.kBrake);
     m_motor.enableVoltageCompensation(12);
     m_pidController.setP(ShoulderConstants.kP);
@@ -34,6 +35,7 @@ public class ShoulderSubsystem extends SubsystemBase implements ShuffleboardLogg
     m_pidController.setIZone(ShoulderConstants.kIz);
     m_pidController.setD(ShoulderConstants.kD);
     m_pidController.setFF(ShoulderConstants.kFF);
+    m_motor.burnFlash();
     resetEncoder();
 
     setPosition(-ShoulderConstants.kMinPosition);
@@ -59,7 +61,6 @@ public class ShoulderSubsystem extends SubsystemBase implements ShuffleboardLogg
     m_setPoint = position;
     m_pidController.setReference(m_setPoint, ControlType.kPosition, ShoulderConstants.kPIDSlot);
   }
-
   public double getReference() {
     return m_setPoint;
   }
@@ -81,6 +82,9 @@ public boolean atSetpoint() {
 }
   public void configureShuffleboard(boolean inCompetitionMode) {
     if (!inCompetitionMode) {
+      ShuffleboardTab posTab = Shuffleboard.getTab("posTab");
+      posTab.addBoolean("Shoulder at setpoint", () -> atSetpoint()).withSize(1, 1).withPosition(0, 2)
+      .withWidget(BuiltInWidgets.kBooleanBox);
       ShuffleboardTab shuffleboardTab = Shuffleboard.getTab("Shoulder");
       shuffleboardTab.addNumber("Encoder Position", () -> getPosition()).withSize(4, 2).withPosition(0, 0)
       .withWidget(BuiltInWidgets.kGraph);
