@@ -100,7 +100,7 @@ public final class Constants {
 		public static final double kBasePos = 56.5;
 		public static final double kMidPos = 35;
 		public static final double kTopPos = 20;
-		public static final double kRetractPos = 5;
+		public static final double kRetractPos = 2;
 		public static final double kRapidSpeed = kSpeedLimitFactor;
 	}
 
