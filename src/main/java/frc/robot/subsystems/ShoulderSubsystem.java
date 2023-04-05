@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.ShuffleboardLogging;
 
-public class ShoulderSubsystem extends SubsystemBase implements ShuffleboardLogging{
+public class ShoulderSubsystem extends SubsystemBase implements ShuffleboardLogging {
   private final CANSparkMax m_motor = new CANSparkMax(ShoulderConstants.kMotorPort, MotorType.kBrushless);
 
   private final RelativeEncoder m_encoder = m_motor.getEncoder();
@@ -36,39 +36,46 @@ public class ShoulderSubsystem extends SubsystemBase implements ShuffleboardLogg
     m_pidController.setFF(ShoulderConstants.kFF);
     resetEncoder();
 
-    setPosition(-ShoulderConstants.kMinPosition); 
+    setPosition(-ShoulderConstants.kMinPosition);
   }
-    public void periodic() {
-    }
-    public void setSpeed(double speed) {
-        m_motor.set(speed);
-    }
-    public void setMaxSpeed(double maxSpeed) {
-      m_pidController.setOutputRange(-maxSpeed, maxSpeed);
-    }
-    public void setLevel(double level) {
-      m_pidController.setReference(level, ControlType.kPosition, ShoulderConstants.kPIDSlot);
-    }
 
-    public void setPosition(double position) {
-      // System.out.println("setpoint: " + position);
-      m_setPoint = position;
-      m_pidController.setReference(position, ControlType.kPosition, ShoulderConstants.kPIDSlot);
-    }
-    public double getReference() {
-      return m_setPoint;
-    }
-    public double getPosition(){
-     return m_encoder.getPosition(); 
-    }
-    public void resetEncoder() {
-        m_encoder.setPosition(0);
-        setPosition(0);
-    }
+  public void periodic() {
+  }
 
-    public void configureShuffleboard(boolean inCompetitionMode) {
-      if(!inCompetitionMode){
-              ShuffleboardTab shuffleboardTab = Shuffleboard.getTab("Drive");
-      }
+  public void setSpeed(double speed) {
+    m_motor.set(speed);
+  }
+
+  public void setMaxSpeed(double maxSpeed) {
+    m_pidController.setOutputRange(-maxSpeed, maxSpeed);
+  }
+
+  public void setLevel(double level) {
+    m_pidController.setReference(level, ControlType.kPosition, ShoulderConstants.kPIDSlot);
+  }
+
+  public void setPosition(double position) {
+    // System.out.println("setpoint: " + position);
+    m_setPoint = position;
+    m_pidController.setReference(position, ControlType.kPosition, ShoulderConstants.kPIDSlot);
+  }
+
+  public double getReference() {
+    return m_setPoint;
+  }
+
+  public double getPosition() {
+    return m_encoder.getPosition();
+  }
+
+  public void resetEncoder() {
+    m_encoder.setPosition(0);
+    setPosition(0);
+  }
+
+  public void configureShuffleboard(boolean inCompetitionMode) {
+    if (!inCompetitionMode) {
+      ShuffleboardTab shuffleboardTab = Shuffleboard.getTab("Drive");
     }
+  }
 }

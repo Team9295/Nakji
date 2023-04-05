@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.ShuffleboardLogging;
 
-public class TurretSubsystem extends SubsystemBase implements ShuffleboardLogging{
+public class TurretSubsystem extends SubsystemBase implements ShuffleboardLogging {
   private final CANSparkMax m_motor = new CANSparkMax(TurretConstants.kMotorPort, MotorType.kBrushless);
 
   private final RelativeEncoder m_encoder = m_motor.getEncoder();
@@ -34,25 +34,30 @@ public class TurretSubsystem extends SubsystemBase implements ShuffleboardLoggin
     m_pidController.setFF(TurretConstants.kFF);
     resetEncoder();
   }
-    public void periodic() {
-    }
-    public void setSpeed(double speed) {
-        m_motor.set(speed);
-    }
-    public void setPosition(double position) {
-      m_pidController.setReference(position, ControlType.kPosition, TurretConstants.kPIDSlot);
-    }
-    public double getPosition() {
-      return m_encoder.getPosition();
-    }
-    public void resetEncoder() {
-        m_encoder.setPosition(0);
-        setPosition(0);
-    }
 
-    public void configureShuffleboard(boolean inCompetitionMode) {
-      if(!inCompetitionMode){
-              ShuffleboardTab shuffleboardTab = Shuffleboard.getTab("Drive");
-      }
+  public void periodic() {
+  }
+
+  public void setSpeed(double speed) {
+    m_motor.set(speed);
+  }
+
+  public void setPosition(double position) {
+    m_pidController.setReference(position, ControlType.kPosition, TurretConstants.kPIDSlot);
+  }
+
+  public double getPosition() {
+    return m_encoder.getPosition();
+  }
+
+  public void resetEncoder() {
+    m_encoder.setPosition(0);
+    setPosition(0);
+  }
+
+  public void configureShuffleboard(boolean inCompetitionMode) {
+    if (!inCompetitionMode) {
+      ShuffleboardTab shuffleboardTab = Shuffleboard.getTab("Drive");
     }
+  }
 }

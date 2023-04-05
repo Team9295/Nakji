@@ -33,15 +33,20 @@ public class ArcadeDriveCommand extends CommandBase {
 	 * Update the motor outputs
 	 */
 	public void execute() {
-		double speedStraight = Math.abs(m_speedStraight.get()) > ControllerConstants.kDeadzone ? m_speedStraight.get()+ControllerConstants.kDeadzone
+		double speedStraight = Math.abs(m_speedStraight.get()) > ControllerConstants.kDeadzone
+				? m_speedStraight.get() + ControllerConstants.kDeadzone
 				: 0;
-		double speedLeft = Math.abs(m_speedLeft.get()) > ControllerConstants.kTriggerDeadzone ? m_speedLeft.get()+ControllerConstants.kDeadzone
+		double speedLeft = Math.abs(m_speedLeft.get()) > ControllerConstants.kTriggerDeadzone
+				? m_speedLeft.get() + ControllerConstants.kDeadzone
 				: 0;
-		double speedRight = Math.abs(m_speedRight.get()) > ControllerConstants.kTriggerDeadzone ? m_speedRight.get()+ControllerConstants.kDeadzone
+		double speedRight = Math.abs(m_speedRight.get()) > ControllerConstants.kTriggerDeadzone
+				? m_speedRight.get() + ControllerConstants.kDeadzone
 				: 0;
 		// if (speedStraight != 0) {
-		// 	speedLeft = Math.pow(speedLeft * DriveConstants.kTurningMultiplier, DriveConstants.kTurningPowerMultiplier);
-		// 	speedRight = Math.pow(speedRight * DriveConstants.kTurningMultiplier, DriveConstants.kTurningPowerMultiplier);
+		// speedLeft = Math.pow(speedLeft * DriveConstants.kTurningMultiplier,
+		// DriveConstants.kTurningPowerMultiplier);
+		// speedRight = Math.pow(speedRight * DriveConstants.kTurningMultiplier,
+		// DriveConstants.kTurningPowerMultiplier);
 		// }
 		if (speedStraight != 0) {
 			speedLeft = speedLeft * DriveConstants.kTurningMultiplier;

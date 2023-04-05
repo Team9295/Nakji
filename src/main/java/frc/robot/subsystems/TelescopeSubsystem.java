@@ -16,10 +16,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.ShuffleboardLogging;
 
-public class TelescopeSubsystem extends SubsystemBase implements ShuffleboardLogging{
+public class TelescopeSubsystem extends SubsystemBase implements ShuffleboardLogging {
   private final CANSparkMax m_motor = new CANSparkMax(TelescopeConstants.kMotorPort, MotorType.kBrushless);
-  private final RelativeEncoder m_encoder = m_motor.getEncoder(); 
-  private final SparkMaxPIDController m_pidController = m_motor.getPIDController();  
+  private final RelativeEncoder m_encoder = m_motor.getEncoder();
+  private final SparkMaxPIDController m_pidController = m_motor.getPIDController();
 
   public TelescopeSubsystem() {
     m_motor.restoreFactoryDefaults();
@@ -33,30 +33,34 @@ public class TelescopeSubsystem extends SubsystemBase implements ShuffleboardLog
     m_pidController.setFF(TelescopeConstants.kFF);
     resetEncoder();
   }
-    public void periodic() {
-    }
-    public void setSpeed(double speed) {
-      m_motor.set(speed);
-    }
-    public void setDirection(double direction) {
-      m_motor.set(direction);
-    }
-    public double getPosition() {
-      return m_encoder.getPosition();
-    }
 
-    public void setPosition(double position) {
-      m_pidController.setReference(position, ControlType.kPosition, TelescopeConstants.kPIDSlot);
-    }
+  public void periodic() {
+  }
 
-    public void resetEncoder() {
-        m_encoder.setPosition(0);
-        setPosition(0);
-    }
+  public void setSpeed(double speed) {
+    m_motor.set(speed);
+  }
 
-    public void configureShuffleboard(boolean inCompetitionMode) {
-      if(!inCompetitionMode){
-              ShuffleboardTab shuffleboardTab = Shuffleboard.getTab("Drive");
-      }
+  public void setDirection(double direction) {
+    m_motor.set(direction);
+  }
+
+  public double getPosition() {
+    return m_encoder.getPosition();
+  }
+
+  public void setPosition(double position) {
+    m_pidController.setReference(position, ControlType.kPosition, TelescopeConstants.kPIDSlot);
+  }
+
+  public void resetEncoder() {
+    m_encoder.setPosition(0);
+    setPosition(0);
+  }
+
+  public void configureShuffleboard(boolean inCompetitionMode) {
+    if (!inCompetitionMode) {
+      ShuffleboardTab shuffleboardTab = Shuffleboard.getTab("Drive");
     }
+  }
 }

@@ -29,58 +29,68 @@ public class DriveSubsystem extends SubsystemBase implements ShuffleboardLogging
   public DriveSubsystem() {
     m_masterLeft.configFactoryDefault();
     m_masterLeft.setInverted(DriveConstants.kMasterLeftInvert);
-    m_masterLeft.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, DriveConstants.kSlotID, 10); 
+    m_masterLeft.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, DriveConstants.kSlotID, 10);
     m_followerLeft.configFactoryDefault();
     m_followerLeft.setInverted(DriveConstants.kFollowerLeftOppose);
-    m_followerLeft.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, DriveConstants.kSlotID, 10); 
+    m_followerLeft.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, DriveConstants.kSlotID, 10);
     m_masterRight.configFactoryDefault();
     m_masterRight.setInverted(DriveConstants.kMasterRightInvert);
-    m_masterRight.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, DriveConstants.kSlotID, 10); 
+    m_masterRight.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, DriveConstants.kSlotID, 10);
     m_followerRight.configFactoryDefault();
     m_followerRight.setInverted(DriveConstants.kFollowerRightOppose);
-    m_followerRight.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, DriveConstants.kSlotID, 10); 
+    m_followerRight.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, DriveConstants.kSlotID, 10);
   }
-    public void periodic() {
-    }
 
-    // Returns sign of double
-    public int getSign(double num) {
-      if(num>0) {return 1;}
-      else if(num==0) {return 0;}
-      else if(num<0) {return -1;}
-      else {return 1/0;}
-    }
+  public void periodic() {
+  }
 
-    // Multiplying nth power times sign to get same sign as before
-    // public void arcadeDrive(double straight, double left, double right) {
-    //   tankDrive(Math.pow(DriveConstants.kSpeedLimitFactor * (straight + left - right), DriveConstants.kSpeedPowerMultiplier) * getSign(straight + left - right),
-    //             Math.pow(DriveConstants.kSpeedLimitFactor * (straight - left + right), DriveConstants.kSpeedPowerMultiplier) * getSign(straight - left + right));
-    // }
-
-    public void arcadeDrive(double straight, double left, double right) {
-      leftDriveSpeed = DriveConstants.kSpeedLimitFactor * (straight + left - right) / (1-ControllerConstants.kDeadzone);
-      rightDriveSpeed = DriveConstants.kSpeedLimitFactor * (straight - left + right) / (1-ControllerConstants.kDeadzone);
-      tankDrive(leftDriveSpeed, rightDriveSpeed);
+  // Returns sign of double
+  public int getSign(double num) {
+    if (num > 0) {
+      return 1;
+    } else if (num == 0) {
+      return 0;
+    } else if (num < 0) {
+      return -1;
+    } else {
+      return 1 / 0;
     }
+  }
+
+  // Multiplying nth power times sign to get same sign as before
+  // public void arcadeDrive(double straight, double left, double right) {
+  // tankDrive(Math.pow(DriveConstants.kSpeedLimitFactor * (straight + left -
+  // right), DriveConstants.kSpeedPowerMultiplier) * getSign(straight + left -
+  // right),
+  // Math.pow(DriveConstants.kSpeedLimitFactor * (straight - left + right),
+  // DriveConstants.kSpeedPowerMultiplier) * getSign(straight - left + right));
+  // }
+
+  public void arcadeDrive(double straight, double left, double right) {
+    leftDriveSpeed = DriveConstants.kSpeedLimitFactor * (straight + left - right) / (1 - ControllerConstants.kDeadzone);
+    rightDriveSpeed = DriveConstants.kSpeedLimitFactor * (straight - left + right)
+        / (1 - ControllerConstants.kDeadzone);
+    tankDrive(leftDriveSpeed, rightDriveSpeed);
+  }
 
   /**
    * @param leftSpeed  Left motors percent output
    * @param rightSpeed Right motors percent output
    */
   public void tankDrive(double leftSpeed, double rightSpeed) {
-      m_masterLeft.set(ControlMode.PercentOutput, leftSpeed);
-      m_masterRight.set(ControlMode.PercentOutput, rightSpeed);
+    m_masterLeft.set(ControlMode.PercentOutput, leftSpeed);
+    m_masterRight.set(ControlMode.PercentOutput, rightSpeed);
 
-      m_followerLeft.set(ControlMode.PercentOutput, m_masterLeft.getMotorOutputPercent());
-      m_followerRight.set(ControlMode.PercentOutput, m_masterRight.getMotorOutputPercent());
+    m_followerLeft.set(ControlMode.PercentOutput, m_masterLeft.getMotorOutputPercent());
+    m_followerRight.set(ControlMode.PercentOutput, m_masterRight.getMotorOutputPercent());
   }
-  
+
   public void setPosition(double position) {
   }
-  
+
   public void configureShuffleboard(boolean inCompetitionMode) {
-    if(!inCompetitionMode){
-            ShuffleboardTab shuffleboardTab = Shuffleboard.getTab("Drive");
+    if (!inCompetitionMode) {
+      ShuffleboardTab shuffleboardTab = Shuffleboard.getTab("Drive");
     }
   }
 }

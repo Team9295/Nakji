@@ -15,7 +15,7 @@ public class TurretSpeedCommand extends CommandBase {
     }
 
     public void execute() {
-        m_TurretSubsystem.setSpeed(m_speed*TurretConstants.kSpeedLimitFactor);
+        m_TurretSubsystem.setSpeed(m_speed * TurretConstants.kSpeedLimitFactor);
     }
 
     public void end(boolean interrupted) {

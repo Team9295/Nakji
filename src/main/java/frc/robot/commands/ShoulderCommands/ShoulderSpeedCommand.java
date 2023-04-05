@@ -16,10 +16,12 @@ public class ShoulderSpeedCommand extends CommandBase {
         m_speed = speed;
         addRequirements(m_ShoulderSubsystem);
     }
+
     public void execute() {
         double speed = Math.abs(m_speed.get()) > ControllerConstants.kDeadzone
-        ? m_speed.get() : 0; 
-        m_ShoulderSubsystem.setSpeed(speed*ShoulderConstants.kSpeedLimitFactor);
+                ? m_speed.get()
+                : 0;
+        m_ShoulderSubsystem.setSpeed(speed * ShoulderConstants.kSpeedLimitFactor);
     }
 
     public void end(boolean interrupted) {

@@ -5,8 +5,9 @@ import edu.wpi.first.wpilibj.Relay;
 import frc.robot.Constants.SuctionConstants;
 import frc.robot.subsystems.SuctionSubsystem;
 
-public class SuctionCommand extends CommandBase{
-    private final SuctionSubsystem m_SuctionSubsystem; 
+public class SuctionCommand extends CommandBase {
+    private final SuctionSubsystem m_SuctionSubsystem;
+
     public SuctionCommand(SuctionSubsystem suctionSubsystem) {
         m_SuctionSubsystem = suctionSubsystem;
         addRequirements(m_SuctionSubsystem);

@@ -3,7 +3,7 @@ package frc.robot.commands.WristRotateCommands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.WristRotateSubsystem;
 
-public class WristRotatePositionCommand extends CommandBase{
+public class WristRotatePositionCommand extends CommandBase {
     private final WristRotateSubsystem m_wristRotationSubsystem;
     private final double m_position;
 
@@ -14,14 +14,11 @@ public class WristRotatePositionCommand extends CommandBase{
     }
 
     public void execute() {
-        // System.out.println("wrist target position: " + m_position);
-        // System.out.println("wrist actual position: " + m_wristRotationSubsystem.getPosition());
         m_wristRotationSubsystem.setPosition(m_position);
     }
 
     public void end(boolean interrupted) {
         m_wristRotationSubsystem.setSpeed(0);
     }
-
 
 }
