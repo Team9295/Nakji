@@ -10,8 +10,10 @@ import java.lang.Math;
 
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.DriveSubsystem;
 
 public class AutoBalanceCommand extends CommandBase{
+    private final DriveSubsystem m_driveSubsystem;
       private BuiltInAccelerometer mRioAccel; 
       private int state; 
       private int debounceCount; 
