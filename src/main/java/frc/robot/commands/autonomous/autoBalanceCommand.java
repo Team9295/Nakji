@@ -40,14 +40,17 @@ public class AutoBalanceCommand extends CommandBase{
 
     }
         public double getPitch() {
+            System.out.println("AUTO RUNNING");
             return Math.atan2((-mRioAccel.getX()) , Math.sqrt(mRioAccel.getY() * mRioAccel.getY() + mRioAccel.getZ() * mRioAccel.getZ())) *57.3; 
         }
 
         public double getRoll() {
+            System.out.println("AUTO RUNNING");
             return Math.atan2(mRioAccel.getY() , mRioAccel.getZ()) * 57.3; 
         }
 
         public double getTilt() {
+            System.out.println("AUTO RUNNING");
             if((getPitch() + getRoll()) >= 0) {
                 return Math.sqrt(getPitch()*getPitch() + getRoll()*getRoll());
             } else {
@@ -56,6 +59,7 @@ public class AutoBalanceCommand extends CommandBase{
         }
 
         public int secondsToTicks(double time) {
+            System.out.println("AUTO RUNNING");
             return(int)(time * 50);
         }
 
@@ -72,7 +76,6 @@ public class AutoBalanceCommand extends CommandBase{
                         return robotSpeedSlow; 
                     }
                     return robotSpeedFast;
-
                 case 1: 
                     if (getTilt() < levelDegree) {
                         debounceCount++; 
@@ -83,7 +86,7 @@ public class AutoBalanceCommand extends CommandBase{
                         return 0;
                     }
                     return robotSpeedSlow; 
-                
+
                 case 2:
                     if(Math.abs(getTilt()) <= levelDegree/2) {
                         debounceCount++; 
@@ -98,14 +101,17 @@ public class AutoBalanceCommand extends CommandBase{
                     } else if(getTilt() <= -levelDegree) {
                         return -0.1; 
                     }
-                
+                    System.out.println("AUTO RUNNING");
                 case 3:
                     return 0; 
+
             }
             return 0; 
+
         }
 
         public double scoreAndBalance() {
+            System.out.println("AUTO RUNNING");
             switch(state) {
                 case 0:
                     debounceCount++; 
