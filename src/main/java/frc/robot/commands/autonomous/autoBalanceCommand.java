@@ -115,6 +115,7 @@ public class AutoBalanceCommand extends CommandBase{
 
         }
 
+
         public double scoreAndBalance() {
             System.out.println("AUTO RUNNING");
             switch(state) {
@@ -174,7 +175,8 @@ public class AutoBalanceCommand extends CommandBase{
         return 0; 
     }
     public void execute() {
-        autoBalanceRoutine();
+        double motorOutput = autoBalanceRoutine();
+        m_driveSubsystem.tankDrive(motorOutput, motorOutput); 
     }
 
 }

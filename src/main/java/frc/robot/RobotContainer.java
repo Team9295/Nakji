@@ -89,7 +89,7 @@ public class RobotContainer {
     configureShuffleboard();
     m_autoChooser.addOption("Drive Auto", new ParallelCommandGroup(new TimeBasedAutoCommand(m_driveSubsystem, 2, -.3),
         new TimeBasedAutoCommand(m_driveSubsystem, 4, .3)));
-    m_autoChooser.addOption("Balance Auto", new AutoBalanceCommand());
+    m_autoChooser.addOption("Balance Auto", new AutoBalanceCommand(m_driveSubsystem));
     SmartDashboard.putData(m_autoChooser);
   }
 
