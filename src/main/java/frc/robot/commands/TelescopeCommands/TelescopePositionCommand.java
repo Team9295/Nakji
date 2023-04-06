@@ -32,7 +32,7 @@ public class TelescopePositionCommand extends CommandBase {
             m_telescopeSubsystem.setPosition(0);
         } else if (m_thresh.get() <= 0.1 && m_thresh.get() >= -0.1) {
             m_telescopeSubsystem.setSpeed(0);
-            m_telescopeSubsystem.setPosition(m_telescopeSubsystem.getPosition());
+            // m_telescopeSubsystem.setPosition(m_telescopeSubsystem.getPosition());
         }
     }
 
@@ -42,8 +42,7 @@ public class TelescopePositionCommand extends CommandBase {
         return Math.abs(m_telescopeSubsystem.getPosition() - m_position) <= TelescopeConstants.kPositionTolerance;
     }
     public void end(boolean interrupted) {
-        System.out.println("TELESCOPE DONE");
         m_telescopeSubsystem.setSpeed(0);
-        m_telescopeSubsystem.setPosition(m_telescopeSubsystem.getPosition());
+        // m_telescopeSubsystem.setPosition(m_telescopeSubsystem.getPosition());
     }
 }

@@ -50,12 +50,10 @@ public class autoBalanceCommand extends CommandBase{
         }
 
         public double getRoll() {
-            System.out.println("AUTO RUNNING");
             return Math.atan2(mRioAccel.getY() , mRioAccel.getZ()) * 57.3; 
         }
 
         public double getTilt() {
-            System.out.println("AUTO RUNNING");
             if((getPitch() + getRoll()) >= 0) {
                 return Math.sqrt(getPitch()*getPitch() + getRoll()*getRoll());
             } else {
@@ -64,12 +62,10 @@ public class autoBalanceCommand extends CommandBase{
         }
 
         public int secondsToTicks(double time) {
-            System.out.println("AUTO RUNNING");
             return(int)(time * 50);
         }
 
         public double autoBalanceRoutine() {
-            System.out.println("AUTO BALANCE IS RUNNING");
             switch (state) {
                 case 0: 
                     if(getTilt() > onChargeStationDegree) {
@@ -106,7 +102,6 @@ public class autoBalanceCommand extends CommandBase{
                     } else if(getTilt() <= -levelDegree) {
                         return -0.1; 
                     }
-                    System.out.println("AUTO RUNNING");
                 case 3:
                     return 0; 
 
@@ -117,7 +112,6 @@ public class autoBalanceCommand extends CommandBase{
 
 
         public double scoreAndBalance() {
-            System.out.println("AUTO RUNNING");
             switch(state) {
                 case 0:
                     debounceCount++; 

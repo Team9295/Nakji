@@ -17,7 +17,7 @@ public class WristBendSubsystem extends SubsystemBase implements ShuffleboardLog
   private final Servo m_Servo2 = new Servo(WristBendConstants.kWristServo2Channel);
 
   public WristBendSubsystem() {
-    m_servo.setBounds(1, 1.48, 1.5, 1.52, 2);
+    m_servo.setBounds(2, 1.48, 1.5, 1.48, 1);
     // Servo bounds: .7ms = 0deg, 2.3ms = 180deg
     m_Servo1.setBounds(2.3, 0, 1.5, 0, 0.7);
     m_Servo2.setBounds(.7, 0, 1.5, 0, 2.3);
@@ -30,7 +30,7 @@ public class WristBendSubsystem extends SubsystemBase implements ShuffleboardLog
   }
 
   public void setSpeed(double speed) {
-    m_servo.set(speed *WristBendConstants.kWristBendSpeed);
+    m_servo.setSpeed(speed *WristBendConstants.kWristBendSpeed);
   }
 
   public void setPosition(double position) {

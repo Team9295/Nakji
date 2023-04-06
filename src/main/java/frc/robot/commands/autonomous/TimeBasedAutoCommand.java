@@ -21,7 +21,6 @@ public class TimeBasedAutoCommand extends CommandBase {
     }
 
     public void execute() {
-        System.out.println("AUTO RUNNING");
         while (m_timer.get() < m_seconds) {
             m_driveSubsystem.tankDrive(m_speed, m_speed);
         }

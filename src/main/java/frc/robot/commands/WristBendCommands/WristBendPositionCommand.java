@@ -21,11 +21,9 @@ public class WristBendPositionCommand extends CommandBase {
     public boolean isFinished() {
         // System.out.println("Wrist BEND POS IS "+m_wristBendSubsystem.getPosition());
         // System.out.println("Wrist BEND TARGET POS IS "+m_position);
-        return Math.abs(m_wristBendSubsystem.getPosition() - m_position) <= 0.1;
+        return Math.abs(m_wristBendSubsystem.getPosition() - m_position) <= 0.01;
     }
 
     public void end(boolean interrupted) {
-        System.out.println("WRIST BEND DONE");
-
     }
 }

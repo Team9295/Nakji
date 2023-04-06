@@ -26,7 +26,6 @@ public class TurretPositionCommand extends CommandBase {
     }
 
     public void end(boolean interrupted) {
-        System.out.println("TURRET DONE");
 
         m_turretSubsystem.setSpeed(0);
     }

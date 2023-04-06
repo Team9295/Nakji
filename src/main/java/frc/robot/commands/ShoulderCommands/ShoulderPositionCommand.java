@@ -75,7 +75,6 @@ public class ShoulderPositionCommand extends CommandBase {
             m_shoulderSubsystem.setPosition(-m_position);
         }
         else{
-            System.out.println("HOLDING POSITION SHOULDER");
             m_shoulderSubsystem.setPosition(m_currPos-1);
         }
 
@@ -85,7 +84,6 @@ public class ShoulderPositionCommand extends CommandBase {
     }
 
     public void end(boolean interrupted) {
-        System.out.println("SHOULDER DONE");
 
         // double target = m_shoulderSubsystem.getPosition();
         m_shoulderSubsystem.setSpeed(0);

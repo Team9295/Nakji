@@ -44,6 +44,7 @@ import frc.robot.Constants.ControllerConstants.DPad;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
@@ -88,7 +89,7 @@ public class RobotContainer {
     configureBindings();
 
     configureShuffleboard();
-    m_autoChooser.addOption("Drive Auto", new ParallelCommandGroup(new TimeBasedAutoCommand(m_driveSubsystem, 2, -.3),
+    m_autoChooser.addOption("Drive Auto", new SequentialCommandGroup(new TimeBasedAutoCommand(m_driveSubsystem, 2, -.3),
         new TimeBasedAutoCommand(m_driveSubsystem, 4, .3)));
     m_autoChooser.addOption("Balance Auto", new autoBalanceCommand(m_driveSubsystem));
     SmartDashboard.putData(m_autoChooser);
@@ -195,16 +196,17 @@ public class RobotContainer {
         new ShoulderPositionCommand(m_shoulderSubsystem, ShoulderConstants.kBasePos),
         new TelescopePositionCommand(m_telescopeSubsystem,
             TelescopeConstants.kBasePos),
-        // new WristRotatePositionCommand(m_wristRotateSubsystem, 0),
-        // new WristBendPositionCommand(m_wristBendSubsystem, WristBendConstants.kBasePos),
-        new TurretPositionCommand(m_turretSubsystem, 0)));
+        new WristRotatePositionCommand(m_wristRotateSubsystem, 0),
+        new WristBendPositionCommand(m_wristBendSubsystem, WristBendConstants.kBasePos),
+        new TurretPositionCommand(m_turretSubsystem, 0)
+        ));
     // mid
     new JoystickButton(m_operatorController, Button.kX).onTrue(new ParallelCommandGroup(
         new ShoulderPositionCommand(m_shoulderSubsystem, ShoulderConstants.kMidPos),
         new TelescopePositionCommand(m_telescopeSubsystem,
             TelescopeConstants.kMidPos),
         // new WristRotatePositionCommand(m_wristRotateSubsystem, 0),
-        // new WristBendPositionCommand(m_wristBendSubsystem, WristBendConstants.kMidPos),
+        new WristBendPositionCommand(m_wristBendSubsystem, WristBendConstants.kMidPos),
         new TurretPositionCommand(m_turretSubsystem, 0)));
     // top
     new JoystickButton(m_operatorController, Button.kY).onTrue(new ParallelCommandGroup(
@@ -212,7 +214,7 @@ public class RobotContainer {
         new TelescopePositionCommand(m_telescopeSubsystem,
             TelescopeConstants.kTopPos),
         // new WristRotatePositionCommand(m_wristRotateSubsystem, 0),
-        // new WristBendPositionCommand(m_wristBendSubsystem, WristBendConstants.kTopPos),
+        new WristBendPositionCommand(m_wristBendSubsystem, WristBendConstants.kTopPos),
         new TurretPositionCommand(m_turretSubsystem, 0)));
     // retract (ON DRIVER)
     new JoystickButton(m_driverController, Button.kB).onTrue(new ParallelCommandGroup(
@@ -220,7 +222,7 @@ public class RobotContainer {
         new TelescopePositionCommand(m_telescopeSubsystem,
             TelescopeConstants.kRetractPos),
         // new WristRotatePositionCommand(m_wristRotateSubsystem, 0),
-        // new WristBendPositionCommand(m_wristBendSubsystem, 0),
+        new WristBendPositionCommand(m_wristBendSubsystem, WristBendConstants.kRetractPos),
         new TurretPositionCommand(m_turretSubsystem, 0)));
     
         //human player position

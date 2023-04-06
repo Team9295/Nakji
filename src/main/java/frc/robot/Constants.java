@@ -87,16 +87,16 @@ public final class Constants {
 	public static final class ShoulderConstants {
 		public static final int kMotorPort = 8;
 		public static final boolean kShoulderInvert = true;
-		public static final double kSpeedLimitFactor = .5;
+		public static final double kSpeedLimitFactor = 0.5;
 		public static final int kPIDSlot = 0;
-		public static final double kP = 0.015;//.02;
-		public static final double kI = 0.000000001;//0.0000001;
-		public static final double kD = 0.0000001;//0.00001249999968422344;// 0.000_03;
-		public static final double kIz = 0.0001;//.07;
-		public static final double kFF = 0.001;//0.00008040000102482736;// 0.000_193;
+		public static final double kP = .01;//0.015;//.02;
+		public static final double kI = .0000001;//0.000000001;//0.0000001;
+		public static final double kD = 0.1249999968422344;//0.0000001;//0.00001249999968422344;// 0.000_03;
+		public static final double kIz =0.1;//0.0001;//.07;
+		public static final double kFF = 0.0008040000102482736;//0.001;//0.00008040000102482736;// 0.000_193;
 		public static final double kMaxPosition = 57;
 		public static final double kMinPosition = 5;
-		public static final double kPositionTolerance = 1;
+		public static final double kPositionTolerance = 5;
 		public static final double kStepSize = 1;
 		public static final double kDriverStepSize = .5;
 		public static final double kBasePos = 56.5;
@@ -114,15 +114,15 @@ public final class Constants {
 		public static final int kPIDSlot = 0;
 		public static final double kP = .09;
 		public static final double kI = 0;
-		public static final double kD = 0;
+		public static final double kD = 0.0001;
 		public static final double kFF = 0.000001;
 		public static final double kIz = 0;
-		public static final double kMaxPosition = 170;
+		public static final double kMaxPosition = 190;
 		public static final double kPositionTolerance = 5;
 		// The following are randomly chosen idk what they should actually be
 		public static final double kBasePos = 0;
 		public static final double kMidPos = 95;
-		public static final double kTopPos = 190;
+		public static final double kTopPos = 160;
 		public static final double kRetractPos = 0;
 		public static final double kHumanPlayerPos = 95;
 		public static final double kRapidSpeed = kSpeedLimitFactor / 2;
@@ -165,11 +165,12 @@ public final class Constants {
 		public static final boolean kWristBendInvert = false;
 		public static final int kForwardDirection = 1;
 		public static final int kBackwardDirection = -1;
-		public static final double kWristBendSpeed = .01;
-		public static final double kBasePos = 56.5;
-		public static final double kMidPos = 35;
-		public static final double kTopPos = 20;
-		public static final double kHumanPlayerPos = 20;
+		public static final double kWristBendSpeed = 0.01;
+		public static final double kBasePos = 0;
+		public static final double kMidPos = .7;
+		public static final double kTopPos = 1;
+		public static final double kRetractPos = 0;
+		public static final double kHumanPlayerPos = .5;
 	}
 
 	public static final class LoggingConstants {

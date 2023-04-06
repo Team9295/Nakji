@@ -9,7 +9,8 @@ import com.revrobotics.SparkMaxPIDController;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ShoulderConstants;
-
+import edu.wpi.first.math.controller.ArmFeedforward;
+import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
@@ -22,7 +23,7 @@ public class ShoulderSubsystem extends SubsystemBase implements ShuffleboardLogg
 
   private final RelativeEncoder m_encoder = m_motor.getEncoder();
   private final SparkMaxPIDController m_pidController = m_motor.getPIDController();
-
+  private final ArmFeedforward feedForward = new ArmFeedforward(0, 0, 0); //static, gravity, velocity gain
   private double m_setPoint;
 
   public ShoulderSubsystem() {
@@ -47,19 +48,21 @@ public class ShoulderSubsystem extends SubsystemBase implements ShuffleboardLogg
   public void setSpeed(double speed) {
     m_motor.set(speed);
   }
-
   public void setMaxSpeed(double maxSpeed) {
     m_pidController.setOutputRange(-maxSpeed, maxSpeed);
-  }
-
-  public void setLevel(double level) {
-    m_pidController.setReference(level, ControlType.kPosition, ShoulderConstants.kPIDSlot);
   }
 
   public void setPosition(double position) {
     // System.out.println("setpoint: " + position);
     m_setPoint = position;
-    m_pidController.setReference(m_setPoint, ControlType.kPosition, ShoulderConstants.kPIDSlot);
+    m_pidController.setReference(m_setPoint, ControlType.kPosition, ShoulderConstants.kPIDSlot, getFeedForward());
+    // m_pidController.setReference(m_setPoint, ControlType.kPosition, ShoulderConstants.kPIDSlot);
+
+    // mMotor.getPIDController().setReference(
+    //             angle.getRadians(),
+    //             ControlType.kPosition,
+    //             0,
+    //             armFeedforward.calculate(angle.getRadians(), 0));
   }
   public double getReference() {
     return m_setPoint;
@@ -73,10 +76,16 @@ public class ShoulderSubsystem extends SubsystemBase implements ShuffleboardLogg
     m_encoder.setPosition(0);
     setPosition(0);
   }
-  
+  public double getRadians(){
+    return ((ShoulderConstants.kMaxPosition-getReference())/ShoulderConstants.kMaxPosition)*(Math.PI/2)*1.5;
+  }
   public double getVelocity() {
     return m_encoder.getVelocity();
 }
+public double getFeedForward(){
+  return feedForward.calculate(getRadians(), 2, .5);
+}
+
 public boolean atSetpoint() {
   return (Math.abs(m_setPoint - getPosition()) <= ShoulderConstants.kPositionTolerance);
 }

@@ -14,11 +14,12 @@ public class WristRotateSpeedCommand extends CommandBase {
         // System.out.println("TEST" + m_WristRotateSubsystem.getPosition());
     }
 
-    public void initialize() {
+    public void execute() {
         m_WristRotateSubsystem.setSpeed(m_speed);
     }
 
     public void end(boolean interrupted) {
+
         m_WristRotateSubsystem.setSpeed(0);
     }
 }
