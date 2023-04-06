@@ -87,9 +87,9 @@ public final class Constants {
 	public static final class ShoulderConstants {
 		public static final int kMotorPort = 8;
 		public static final boolean kShoulderInvert = true;
-		public static final double kSpeedLimitFactor = 0.5;
+		public static final double kSpeedLimitFactor = 1;
 		public static final int kPIDSlot = 0;
-		public static final double kP = .01;//0.015;//.02;
+		public static final double kP = .005;//0.015;//.02;
 		public static final double kI = .0000001;//0.000000001;//0.0000001;
 		public static final double kD = 0.1249999968422344;//0.0000001;//0.00001249999968422344;// 0.000_03;
 		public static final double kIz =0.1;//0.0001;//.07;

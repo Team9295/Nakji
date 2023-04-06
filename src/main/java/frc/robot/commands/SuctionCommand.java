@@ -15,11 +15,13 @@ public class SuctionCommand extends CommandBase {
 
     public void execute() {
         m_SuctionSubsystem.setSpeed(SuctionConstants.kSuctionSpeed);
+        System.out.println("SOLENOID CLOSED");
         m_SuctionSubsystem.closeValve();
     }
 
     public void end(boolean interrupted) {
         m_SuctionSubsystem.setSpeed(0);
+        System.out.println("SOLENOID RELEASED");
         m_SuctionSubsystem.openValve();
     }
 }

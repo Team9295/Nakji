@@ -5,6 +5,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.cameraserver.CameraServer;
@@ -22,13 +23,15 @@ import frc.robot.subsystems.DriveSubsystem;
  * project.
  */
 public class Robot extends TimedRobot {
-  // private final DriveSubsystem m_driveSubsystem = new DriveSubsystem();
+  private final DriveSubsystem m_driveSubsystem = new DriveSubsystem();
   // private Command m_timeBasedAutoCommand = new
   // TimeBasedAutoCommand(m_driveSubsystem, 1);
 
   private RobotContainer m_robotContainer;
   private Command m_aCommand;
   UsbCamera camera0;
+  Timer m_timer=new Timer();
+
   // UsbCamera camera1;
 
   /**
@@ -83,17 +86,25 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_aCommand = m_robotContainer.getAutonomousCommand();
-
+    // m_aCommand = m_robotContainer.getAutonomousCommand();
+    m_timer.reset();
+    m_timer.start();
     // schedule the autonomous command (example)
-    if (m_aCommand != null) {
-      m_aCommand.schedule();
-    }
+    // if (m_aCommand != null) {
+    //   m_aCommand.schedule();
+    // }
   }
 
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {
+    System.out.println("TIMER IS AT "+m_timer.get());
+    while(m_timer.get()<1.5 ){
+      m_driveSubsystem.tankDrive(-.3, -.3);
+    }
+    while(m_timer.get()>1.5 && m_timer.get()<7){
+      m_driveSubsystem.tankDrive(.5, .5);
+    }
   }
 
   @Override

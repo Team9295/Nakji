@@ -91,27 +91,28 @@ public class RobotContainer {
     configureBindings();
 
     configureShuffleboard();
-    m_autoChooser.addOption("Drive Forward Auto", new SequentialCommandGroup(new TimeBasedAutoForwardCommand(m_driveSubsystem, 2, -.3),
-        new TimeBasedAutoForwardCommand(m_driveSubsystem, 4, .3)));
-    m_autoChooser.addOption("Balance Auto", new autoBalanceCommand(m_driveSubsystem));
-    m_autoChooser.addOption("Drive and Balance P1", new SequentialCommandGroup(new TimeBasedAutoForwardCommand(m_driveSubsystem, 3, -.3), 
-        new TimeBasedAutoForwardCommand(m_driveSubsystem, 4, -.3), 
-        new TimeBasedAutoTurnCommand(m_driveSubsystem, 1, .2, -1), 
-        new TimeBasedAutoForwardCommand(m_driveSubsystem, 2, .3), 
-        new TimeBasedAutoTurnCommand(m_driveSubsystem, 1, .2, -1), 
-        new TimeBasedAutoForwardCommand(m_driveSubsystem, 1, 0.3), 
-        new autoBalanceCommand(m_driveSubsystem)));
-    m_autoChooser.addOption("Drive and Balance P2", new SequentialCommandGroup(new TimeBasedAutoForwardCommand(m_driveSubsystem, 3, -.3),
-        new TimeBasedAutoForwardCommand(m_driveSubsystem, 7, .3),
-        new TimeBasedAutoForwardCommand(m_driveSubsystem, 2, -.3),
-        new autoBalanceCommand(m_driveSubsystem)));
-    m_autoChooser.addOption("Drive and Balance P3", new SequentialCommandGroup(new TimeBasedAutoForwardCommand(m_driveSubsystem, 3, -.3), 
-        new TimeBasedAutoForwardCommand(m_driveSubsystem, 4, .3), 
-        new TimeBasedAutoTurnCommand(m_driveSubsystem, 1, .2, -1), 
-        new TimeBasedAutoForwardCommand(m_driveSubsystem, 2, .3), 
-        new TimeBasedAutoTurnCommand(m_driveSubsystem, 1, .2, 1), 
-        new TimeBasedAutoForwardCommand(m_driveSubsystem, 1, 0.3), 
-        new autoBalanceCommand(m_driveSubsystem)));
+    m_autoChooser.addOption("Simple Forward Auto", new TimeBasedAutoForwardCommand(m_driveSubsystem, 1, .25));
+    m_autoChooser.addOption("Drive Forward Auto", new SequentialCommandGroup(new TimeBasedAutoForwardCommand(m_driveSubsystem, 1, -.25),
+        new TimeBasedAutoForwardCommand(m_driveSubsystem, 4, .5)));
+    // m_autoChooser.addOption("Balance Auto", new autoBalanceCommand(m_driveSubsystem));
+    // m_autoChooser.addOption("Drive and Balance P1", new SequentialCommandGroup(new TimeBasedAutoForwardCommand(m_driveSubsystem, 3, -.2), 
+    //     new TimeBasedAutoForwardCommand(m_driveSubsystem, 4, -.3), 
+    //     new TimeBasedAutoTurnCommand(m_driveSubsystem, 1, .2, -1), 
+    //     new TimeBasedAutoForwardCommand(m_driveSubsystem, 2, .3), 
+    //     new TimeBasedAutoTurnCommand(m_driveSubsystem, 1, .2, -1), 
+    //     new TimeBasedAutoForwardCommand(m_driveSubsystem, 1, 0.3), 
+    //     new autoBalanceCommand(m_driveSubsystem)));
+    // m_autoChooser.addOption("Drive and Balance P2", new SequentialCommandGroup(new TimeBasedAutoForwardCommand(m_driveSubsystem, 3, -.3),
+    //     new TimeBasedAutoForwardCommand(m_driveSubsystem, 7, .3),
+    //     new TimeBasedAutoForwardCommand(m_driveSubsystem, 2, -.3),
+    //     new autoBalanceCommand(m_driveSubsystem)));
+    // m_autoChooser.addOption("Drive and Balance P3", new SequentialCommandGroup(new TimeBasedAutoForwardCommand(m_driveSubsystem, 3, -.3), 
+    //     new TimeBasedAutoForwardCommand(m_driveSubsystem, 4, .3), 
+    //     new TimeBasedAutoTurnCommand(m_driveSubsystem, 1, .2, -1), 
+    //     new TimeBasedAutoForwardCommand(m_driveSubsystem, 2, .3), 
+    //     new TimeBasedAutoTurnCommand(m_driveSubsystem, 1, .2, 1), 
+    //     new TimeBasedAutoForwardCommand(m_driveSubsystem, 1, 0.3), 
+    //     new autoBalanceCommand(m_driveSubsystem)));
     SmartDashboard.putData(m_autoChooser);
 
   }
@@ -259,7 +260,7 @@ public class RobotContainer {
   public void configureShuffleboard() {
     for (int i = 0; i < m_subsystems.length; i++) {
       if (LoggingConstants.kSubsystems[i]) {
-        m_subsystems[i].configureShuffleboard(false);
+        m_subsystems[i].configureShuffleboard(true);
       }
     }
   }

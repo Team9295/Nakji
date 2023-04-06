@@ -29,16 +29,16 @@ public class DriveSubsystem extends SubsystemBase implements ShuffleboardLogging
   public DriveSubsystem() {
     m_masterLeft.configFactoryDefault();
     m_masterLeft.setInverted(DriveConstants.kMasterLeftInvert);
-    m_masterLeft.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, DriveConstants.kSlotID, 10);
+    // m_masterLeft.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, DriveConstants.kSlotID, 10);
     m_followerLeft.configFactoryDefault();
     m_followerLeft.setInverted(DriveConstants.kFollowerLeftOppose);
-    m_followerLeft.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, DriveConstants.kSlotID, 10);
+    // m_followerLeft.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, DriveConstants.kSlotID, 10);
     m_masterRight.configFactoryDefault();
     m_masterRight.setInverted(DriveConstants.kMasterRightInvert);
-    m_masterRight.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, DriveConstants.kSlotID, 10);
+    // m_masterRight.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, DriveConstants.kSlotID, 10);
     m_followerRight.configFactoryDefault();
     m_followerRight.setInverted(DriveConstants.kFollowerRightOppose);
-    m_followerRight.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, DriveConstants.kSlotID, 10);
+    // m_followerRight.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, DriveConstants.kSlotID, 10);
   }
 
   public void periodic() {
