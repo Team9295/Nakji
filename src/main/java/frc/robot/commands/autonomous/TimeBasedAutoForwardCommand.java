@@ -4,13 +4,13 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveSubsystem;
 import edu.wpi.first.wpilibj.Timer;
 
-public class TimeBasedAutoCommand extends CommandBase {
+public class TimeBasedAutoForwardCommand extends CommandBase {
     private final DriveSubsystem m_driveSubsystem;
     private final double m_seconds;
     private final double m_speed;
     private final Timer m_timer = new Timer();
 
-    public TimeBasedAutoCommand(DriveSubsystem driveSubsystem, double seconds, double speed) {
+    public TimeBasedAutoForwardCommand(DriveSubsystem driveSubsystem, double seconds, double speed) {
         m_driveSubsystem = driveSubsystem;
         m_seconds = seconds;
         m_speed = speed;

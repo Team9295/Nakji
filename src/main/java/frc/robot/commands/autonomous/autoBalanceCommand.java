@@ -168,6 +168,7 @@ public class autoBalanceCommand extends CommandBase{
         }
         return 0; 
     }
+        
     public void execute() {
         double motorOutput = autoBalanceRoutine();
         m_driveSubsystem.tankDrive(motorOutput, motorOutput); 
