@@ -12,7 +12,8 @@ import frc.robot.Constants.WristBendConstants;
 import frc.robot.Constants.TurretConstants;
 import frc.robot.Constants.WristRotateConstants;
 import frc.robot.Constants.DriveConstants;
-import frc.robot.commands.autonomous.TimeBasedAutoCommand;
+import frc.robot.commands.autonomous.TimeBasedAutoForwardCommand;
+import frc.robot.commands.autonomous.TimeBasedAutoTurnCommand;
 import frc.robot.commands.autonomous.autoBalanceCommand;
 import frc.robot.commands.autonomous.autoBalanceCommand;
 import frc.robot.commands.ArcadeDriveCommand;
@@ -44,6 +45,7 @@ import frc.robot.Constants.ControllerConstants.DPad;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
@@ -88,10 +90,29 @@ public class RobotContainer {
     configureBindings();
 
     configureShuffleboard();
-    m_autoChooser.addOption("Drive Auto", new ParallelCommandGroup(new TimeBasedAutoCommand(m_driveSubsystem, 2, -.3),
-        new TimeBasedAutoCommand(m_driveSubsystem, 4, .3)));
+    m_autoChooser.addOption("Drive Forward Auto", new SequentialCommandGroup(new TimeBasedAutoForwardCommand(m_driveSubsystem, 2, -.3),
+        new TimeBasedAutoForwardCommand(m_driveSubsystem, 4, .3)));
     m_autoChooser.addOption("Balance Auto", new autoBalanceCommand(m_driveSubsystem));
+    m_autoChooser.addOption("Drive and Balance P1", new SequentialCommandGroup(new TimeBasedAutoForwardCommand(m_driveSubsystem, 3, -.3), 
+        new TimeBasedAutoForwardCommand(m_driveSubsystem, 4, -.3), 
+        new TimeBasedAutoTurnCommand(m_driveSubsystem, 1, .2, -1), 
+        new TimeBasedAutoForwardCommand(m_driveSubsystem, 2, .3), 
+        new TimeBasedAutoTurnCommand(m_driveSubsystem, 1, .2, -1), 
+        new TimeBasedAutoForwardCommand(m_driveSubsystem, 1, 0.3), 
+        new autoBalanceCommand(m_driveSubsystem)));
+    m_autoChooser.addOption("Drive and Balance P2", new SequentialCommandGroup(new TimeBasedAutoForwardCommand(m_driveSubsystem, 3, -.3),
+        new TimeBasedAutoForwardCommand(m_driveSubsystem, 7, .3),
+        new TimeBasedAutoForwardCommand(m_driveSubsystem, 2, -.3),
+        new autoBalanceCommand(m_driveSubsystem)));
+    m_autoChooser.addOption("Drive and Balance P3", new SequentialCommandGroup(new TimeBasedAutoForwardCommand(m_driveSubsystem, 3, -.3), 
+        new TimeBasedAutoForwardCommand(m_driveSubsystem, 4, .3), 
+        new TimeBasedAutoTurnCommand(m_driveSubsystem, 1, .2, -1), 
+        new TimeBasedAutoForwardCommand(m_driveSubsystem, 2, .3), 
+        new TimeBasedAutoTurnCommand(m_driveSubsystem, 1, .2, 1), 
+        new TimeBasedAutoForwardCommand(m_driveSubsystem, 1, 0.3), 
+        new autoBalanceCommand(m_driveSubsystem)));
     SmartDashboard.putData(m_autoChooser);
+
   }
 
   /**
