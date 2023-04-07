@@ -91,20 +91,27 @@ public class Robot extends TimedRobot {
     m_timer.start();
     // schedule the autonomous command (example)
     // if (m_aCommand != null) {
-    //   m_aCommand.schedule();
+    //   m_aCommand.schedule(); //COMMENT
     // }
   }
 
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {
-    System.out.println("TIMER IS AT "+m_timer.get());
+    System.out.println("TIMER IS AT "+m_timer.get()); //UNCOMMENT
     while(m_timer.get()<1.5 ){
       m_driveSubsystem.tankDrive(-.3, -.3);
     }
-    while(m_timer.get()>1.5 && m_timer.get()<7){
+    while(m_timer.get()>1.5 && m_timer.get()<4.5){
       m_driveSubsystem.tankDrive(.5, .5);
     }
+
+    // while(m_timer.get()<1 ){
+    //   m_driveSubsystem.tankDrive(.7, .7);
+    // }
+    // while(m_timer.get()>1 && m_timer.get()<3.5){
+    //   m_driveSubsystem.tankDrive(.2, .2);
+    // }
   }
 
   @Override

@@ -23,9 +23,9 @@ public class TimeBasedAutoForwardCommand extends CommandBase {
 
     public void execute() {
         System.out.println("CURRENT TIMER IS AT "+m_timer.get());
-        // if (m_timer.get() < m_seconds){
-        //     m_driveSubsystem.tankDrive(m_speed, m_speed);
-        // }
+        while (m_timer.get() < m_seconds){
+            m_driveSubsystem.tankDrive(m_speed, m_speed);
+        }
     }
 
     public boolean isFinished() {
@@ -37,7 +37,6 @@ public class TimeBasedAutoForwardCommand extends CommandBase {
     }
 
     public void end() {
-        System.out.println("TIMER AUTO END");
         m_driveSubsystem.tankDrive(0, 0);
     }
 }

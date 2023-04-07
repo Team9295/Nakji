@@ -41,10 +41,18 @@ public class SuctionSubsystem extends SubsystemBase implements ShuffleboardLoggi
   public void closeValve() {
     m_relay.set(Relay.Value.kOff);
   }
+  public boolean isOn(){
+    return m_motor.get()!=0;
+  }
 
   public void configureShuffleboard(boolean inCompetitionMode) {
     if (!inCompetitionMode) {
-      ShuffleboardTab shuffleboardTab = Shuffleboard.getTab("Drive");
+      ShuffleboardTab shuffleboardTab = Shuffleboard.getTab("Suction");
+    }
+    else{
+      ShuffleboardTab shuffleboardTab = Shuffleboard.getTab("Suction");
+      shuffleboardTab.addBoolean("Vacuum on", () -> isOn()).withSize(3, 3).withPosition(0, 2)
+      .withWidget(BuiltInWidgets.kBooleanBox);
     }
   }
 }

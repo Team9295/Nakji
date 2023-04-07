@@ -102,5 +102,9 @@ shuffleboardTab.addNumber("Encoder Velocity", () -> getVelocity()).withSize(4, 2
 shuffleboardTab.addBoolean("At setpoint", () -> atSetpoint()).withSize(1, 1).withPosition(0, 2)
       .withWidget(BuiltInWidgets.kBooleanBox);
     }
+    else{
+      ShuffleboardTab shuffleboardTab = Shuffleboard.getTab("Suction");
+      shuffleboardTab.addNumber("Shoulder Encoder Position", () -> getPosition()).withSize(4, 2).withPosition(0, 0);
+    }
   }
 }

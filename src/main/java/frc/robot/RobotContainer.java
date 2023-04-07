@@ -91,28 +91,31 @@ public class RobotContainer {
     configureBindings();
 
     configureShuffleboard();
+    m_autoChooser.addOption("TEST Drive and Balance", new SequentialCommandGroup(//new TimeBasedAutoForwardCommand(m_driveSubsystem, 1, -.3),
+        new TimeBasedAutoForwardCommand(m_driveSubsystem, .5, .6),
+        new autoBalanceCommand(m_driveSubsystem)));
     m_autoChooser.addOption("Simple Forward Auto", new TimeBasedAutoForwardCommand(m_driveSubsystem, 1, .25));
     m_autoChooser.addOption("Drive Forward Auto", new SequentialCommandGroup(new TimeBasedAutoForwardCommand(m_driveSubsystem, 1, -.25),
         new TimeBasedAutoForwardCommand(m_driveSubsystem, 3.75, .5)));
-    // m_autoChooser.addOption("Balance Auto", new autoBalanceCommand(m_driveSubsystem));
-    // m_autoChooser.addOption("Drive and Balance P1", new SequentialCommandGroup(new TimeBasedAutoForwardCommand(m_driveSubsystem, 3, -.2), 
-    //     new TimeBasedAutoForwardCommand(m_driveSubsystem, 4, -.3), 
-    //     new TimeBasedAutoTurnCommand(m_driveSubsystem, 1, .2, -1), 
-    //     new TimeBasedAutoForwardCommand(m_driveSubsystem, 2, .3), 
-    //     new TimeBasedAutoTurnCommand(m_driveSubsystem, 1, .2, -1), 
-    //     new TimeBasedAutoForwardCommand(m_driveSubsystem, 1, 0.3), 
-    //     new autoBalanceCommand(m_driveSubsystem)));
-    // m_autoChooser.addOption("Drive and Balance P2", new SequentialCommandGroup(new TimeBasedAutoForwardCommand(m_driveSubsystem, 3, -.3),
-    //     new TimeBasedAutoForwardCommand(m_driveSubsystem, 7, .3),
-    //     new TimeBasedAutoForwardCommand(m_driveSubsystem, 2, -.3),
-    //     new autoBalanceCommand(m_driveSubsystem)));
-    // m_autoChooser.addOption("Drive and Balance P3", new SequentialCommandGroup(new TimeBasedAutoForwardCommand(m_driveSubsystem, 3, -.3), 
-    //     new TimeBasedAutoForwardCommand(m_driveSubsystem, 4, .3), 
-    //     new TimeBasedAutoTurnCommand(m_driveSubsystem, 1, .2, -1), 
-    //     new TimeBasedAutoForwardCommand(m_driveSubsystem, 2, .3), 
-    //     new TimeBasedAutoTurnCommand(m_driveSubsystem, 1, .2, 1), 
-    //     new TimeBasedAutoForwardCommand(m_driveSubsystem, 1, 0.3), 
-    //     new autoBalanceCommand(m_driveSubsystem)));
+    m_autoChooser.addOption("TEST Balance Auto", new autoBalanceCommand(m_driveSubsystem));
+    m_autoChooser.addOption("Drive and Balance P1", new SequentialCommandGroup(new TimeBasedAutoForwardCommand(m_driveSubsystem, 3, -.2), 
+        new TimeBasedAutoForwardCommand(m_driveSubsystem, 4, -.3), 
+        new TimeBasedAutoTurnCommand(m_driveSubsystem, 1, .2, -1), 
+        new TimeBasedAutoForwardCommand(m_driveSubsystem, 2, .3), 
+        new TimeBasedAutoTurnCommand(m_driveSubsystem, 1, .2, -1), 
+        new TimeBasedAutoForwardCommand(m_driveSubsystem, 1, 0.3), 
+        new autoBalanceCommand(m_driveSubsystem)));
+    m_autoChooser.addOption("TDrive and Balance P2", new SequentialCommandGroup(new TimeBasedAutoForwardCommand(m_driveSubsystem, 1.5, -.3),
+        new TimeBasedAutoForwardCommand(m_driveSubsystem, 7, .5),
+        new TimeBasedAutoForwardCommand(m_driveSubsystem, 2, -.3),
+        new autoBalanceCommand(m_driveSubsystem)));
+    m_autoChooser.addOption("Drive and Balance P3", new SequentialCommandGroup(new TimeBasedAutoForwardCommand(m_driveSubsystem, 3, -.3), 
+        new TimeBasedAutoForwardCommand(m_driveSubsystem, 4, .3), 
+        new TimeBasedAutoTurnCommand(m_driveSubsystem, 1, .2, -1), 
+        new TimeBasedAutoForwardCommand(m_driveSubsystem, 2, .3), 
+        new TimeBasedAutoTurnCommand(m_driveSubsystem, 1, .2, 1), 
+        new TimeBasedAutoForwardCommand(m_driveSubsystem, 1, 0.3), 
+        new autoBalanceCommand(m_driveSubsystem)));
     SmartDashboard.putData(m_autoChooser);
 
   }
@@ -242,19 +245,23 @@ public class RobotContainer {
     new JoystickButton(m_driverController, Button.kB).onTrue(new ParallelCommandGroup(
         new ShoulderPositionCommand(m_shoulderSubsystem, ShoulderConstants.kRetractPos),
         new TelescopePositionCommand(m_telescopeSubsystem,
-            TelescopeConstants.kRetractPos),
+            TelescopeConstants.kRetractPos)));
         // new WristRotatePositionCommand(m_wristRotateSubsystem, 0),
-        new WristBendPositionCommand(m_wristBendSubsystem, WristBendConstants.kRetractPos),
-        new TurretPositionCommand(m_turretSubsystem, 0)));
+        // new WristBendPositionCommand(m_wristBendSubsystem, WristBendConstants.kRetractPos),
+        // new TurretPositionCommand(m_turretSubsystem, 0)));
     
         //human player position
+    // new JoystickButton(m_operatorController, Button.kB).onTrue(new ParallelCommandGroup(
+    //       new ShoulderPositionCommand(m_shoulderSubsystem, ShoulderConstants.kHumanPlayerPos),
+    //       new TelescopePositionCommand(m_telescopeSubsystem,
+    //           TelescopeConstants.kHumanPlayerPos),
+    //       // new WristRotatePositionCommand(m_wristRotateSubsystem, 0),
+    //       // new WristBendPositionCommand(m_wristBendSubsystem, 0),
+    //       new TurretPositionCommand(m_turretSubsystem, 0)));
     new JoystickButton(m_operatorController, Button.kB).onTrue(new ParallelCommandGroup(
-          new ShoulderPositionCommand(m_shoulderSubsystem, ShoulderConstants.kHumanPlayerPos),
-          new TelescopePositionCommand(m_telescopeSubsystem,
-              TelescopeConstants.kHumanPlayerPos),
-          // new WristRotatePositionCommand(m_wristRotateSubsystem, 0),
-          // new WristBendPositionCommand(m_wristBendSubsystem, 0),
-          new TurretPositionCommand(m_turretSubsystem, 0)));
+        new ShoulderPositionCommand(m_shoulderSubsystem, ShoulderConstants.kRetractPos),
+        new TelescopePositionCommand(m_telescopeSubsystem,
+            TelescopeConstants.kRetractPos)));
   }
 
   public void configureShuffleboard() {

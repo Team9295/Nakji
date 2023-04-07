@@ -58,7 +58,7 @@ public final class Constants {
 		public static final boolean kMasterLeftInvert = true;
 		public static final int kFollowerLeftPort = 2; // left motor 2
 		public static final boolean kFollowerLeftOppose = true;
-		public static final double kFineTurningSpeed = 0.1;
+		public static final double kFineTurningSpeed = 0.075;//0.1;
 		public static final int kMasterRightPort = 3; // right motor 3
 		public static final boolean kMasterRightInvert = false;
 		public static final int kFollowerRightPort = 4; // right motor 4
@@ -100,7 +100,7 @@ public final class Constants {
 		public static final double kStepSize = 1;
 		public static final double kDriverStepSize = .5;
 		public static final double kBasePos = 56.5;
-		public static final double kMidPos = 35;
+		public static final double kMidPos = 26;
 		public static final double kTopPos = 20;
 		public static final double kHumanPlayerPos = 20;
 		public static final double kRetractPos = 2;
@@ -121,7 +121,7 @@ public final class Constants {
 		public static final double kPositionTolerance = 5;
 		// The following are randomly chosen idk what they should actually be
 		public static final double kBasePos = 0;
-		public static final double kMidPos = 95;
+		public static final double kMidPos = 124;
 		public static final double kTopPos = 160;
 		public static final double kRetractPos = 0;
 		public static final double kHumanPlayerPos = 95;
@@ -141,7 +141,7 @@ public final class Constants {
 		public static final int kRelayPort = 0;
 		public static final boolean kSuctionInvert = false;
 		public static final double kSuctionSpeed = .5;
-		public static final double kParkSuctionSpeed = .5;
+		// public static final double kParkSuctionSpeed = .5;
 	}
 
 	public static final class WristRotateConstants {
