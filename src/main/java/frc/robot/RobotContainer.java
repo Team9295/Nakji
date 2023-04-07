@@ -93,7 +93,7 @@ public class RobotContainer {
     configureShuffleboard();
     m_autoChooser.addOption("Simple Forward Auto", new TimeBasedAutoForwardCommand(m_driveSubsystem, 1, .25));
     m_autoChooser.addOption("Drive Forward Auto", new SequentialCommandGroup(new TimeBasedAutoForwardCommand(m_driveSubsystem, 1, -.25),
-        new TimeBasedAutoForwardCommand(m_driveSubsystem, 4, .5)));
+        new TimeBasedAutoForwardCommand(m_driveSubsystem, 3.75, .5)));
     // m_autoChooser.addOption("Balance Auto", new autoBalanceCommand(m_driveSubsystem));
     // m_autoChooser.addOption("Drive and Balance P1", new SequentialCommandGroup(new TimeBasedAutoForwardCommand(m_driveSubsystem, 3, -.2), 
     //     new TimeBasedAutoForwardCommand(m_driveSubsystem, 4, -.3), 
