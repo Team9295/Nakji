@@ -102,7 +102,7 @@ public class Robot extends TimedRobot {
     while(m_timer.get()<1.5 ){
       m_driveSubsystem.tankDrive(-.3, -.3);
     }
-    while(m_timer.get()>1.5 && m_timer.get()<4.5){
+    while(m_timer.get()>1.5 && m_timer.get()<4){
       m_driveSubsystem.tankDrive(.5, .5);
     }
 

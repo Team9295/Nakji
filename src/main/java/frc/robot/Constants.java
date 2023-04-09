@@ -89,7 +89,7 @@ public final class Constants {
 		public static final boolean kShoulderInvert = true;
 		public static final double kSpeedLimitFactor = 1;
 		public static final int kPIDSlot = 0;
-		public static final double kP = .005;//0.015;//.02;
+		public static final double kP = .01;//0.015;//.02;
 		public static final double kI = .0000001;//0.000000001;//0.0000001;
 		public static final double kD = 0.1249999968422344;//0.0000001;//0.00001249999968422344;// 0.000_03;
 		public static final double kIz =0.1;//0.0001;//.07;
@@ -100,7 +100,7 @@ public final class Constants {
 		public static final double kStepSize = 1;
 		public static final double kDriverStepSize = .5;
 		public static final double kBasePos = 56.5;
-		public static final double kMidPos = 26;
+		public static final double kMidPos = 30;
 		public static final double kTopPos = 20;
 		public static final double kHumanPlayerPos = 20;
 		public static final double kRetractPos = 2;
@@ -121,7 +121,7 @@ public final class Constants {
 		public static final double kPositionTolerance = 5;
 		// The following are randomly chosen idk what they should actually be
 		public static final double kBasePos = 0;
-		public static final double kMidPos = 124;
+		public static final double kMidPos = 143.6;
 		public static final double kTopPos = 160;
 		public static final double kRetractPos = 0;
 		public static final double kHumanPlayerPos = 95;
